@@ -6,7 +6,7 @@ class Superhero
 {
     public:
         Superhero();
-
+    
     protected:
 
     private:
