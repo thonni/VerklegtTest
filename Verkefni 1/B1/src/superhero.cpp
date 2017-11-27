@@ -1,6 +1,6 @@
-#include "superhero.h"
+#include "Superhero.h"
 
-Superhero::Superhero()
+Superhero::Superhero(std::string name, int age, char superpower)
 {
     //ctor
 }
