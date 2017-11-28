@@ -43,13 +43,43 @@ int main()
         ofstream fout;
         fout.open("superheroes.txt", ios::app);
 
+        newHero.setVerbose(false);
         fout << newHero;
+        newHero.setVerbose(true);
 
         fout.close();
 
     }
 
-    /// \TODO: Read all superheroes from file and display them on screen
+    ifstream fin;
+    fin.open("superheroes.txt");
+
+    if(fin.is_open())
+    {
+        string name;
+        int age;
+        char superpower;
+
+        while(!fin.eof())
+        {
+            fin >> name;
+            fin >> age;
+            fin >> superpower;
+
+            Superhero tempHero(name, age, superpower);
+
+            cout << tempHero << endl;
+        }
+
+        fin.close();
+    }
+    else
+    {
+        cout << "ERROR: Could not open file" << endl;
+    }
+
+
+    cin >> addHero;
 
 
 
