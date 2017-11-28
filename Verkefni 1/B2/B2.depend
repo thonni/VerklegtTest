@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1511881769 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b2\main.cpp
+1511882550 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b2\main.cpp
 	<iostream>
 	<fstream>
 	"include/superhero.h"
