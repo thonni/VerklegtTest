@@ -58,7 +58,7 @@ ostream& operator <<(ostream &out, const Superhero &superhero)
     }
     else
     {
-        out << superhero.name << " " << superhero.age << " " << superhero.getSuperpower() << endl;
+        out << superhero.name << " " << superhero.age << " " << superhero.superpower << endl;
     }
 
     return out;
