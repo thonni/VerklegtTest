@@ -45,17 +45,13 @@ int main()
 
         fout << newHero;
 
-    }
-    else
-    {
+        fout.close();
 
     }
 
-    cout << "Please enter a superpower:" << endl;
-    cout << "Input f for Flying" << endl;
-    cout << "Input g for Giant" << endl;
-    cout << "Input h for Hacker" << endl;
-    cout << "Input n for None" << endl;
-    cout << "If other input, your superhero is a Weakling" << endl;
+    /// \TODO: Read all superheroes from file and display them on screen
+
+
+
     return 0;
 }
