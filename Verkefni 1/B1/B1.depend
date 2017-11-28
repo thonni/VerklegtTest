@@ -14,7 +14,7 @@
 	<iostream>
 	<string>
 
-1511875568 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\main.cpp
+1511878413 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\main.cpp
 	<iostream>
 	<fstream>
 	"include/superhero.h"
@@ -23,6 +23,6 @@
 	<iostream>
 	<string>
 
-1511874393 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\src\superhero.cpp
+1511878419 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\src\superhero.cpp
 	"../include/superhero.h"
 

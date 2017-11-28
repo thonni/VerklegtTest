@@ -68,12 +68,9 @@ int main()
         char superpower;
 
         //Loop until the file ends.
-        while(!fin.eof())
+        while(fin >> name && fin >> age && fin >> superpower)
         {
             //Fetch the data.
-            fin >> name;
-            fin >> age;
-            fin >> superpower;
 
             //Create a Superhero with the data
             Superhero tempHero(name, age, superpower);

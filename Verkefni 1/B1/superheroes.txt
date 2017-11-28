@@ -1,3 +1,2 @@
-Mommi (2): None
-Klara (32): Giant
-Galdur 20 Flying
+Mommi 2 n
+Klara 32 g
