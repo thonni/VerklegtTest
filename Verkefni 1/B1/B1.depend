@@ -14,15 +14,27 @@
 	<iostream>
 	<string>
 
+<<<<<<< HEAD
 1511874042 source:/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/main.cpp
+=======
+1511878413 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\main.cpp
+>>>>>>> 8a7d2464ec909b3b4e3a267879625d6282071a16
 	<iostream>
 	<fstream>
 	"include/superhero.h"
 
+<<<<<<< HEAD
 1511863314 /Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/include/superhero.h
 	<iostream>
 	<string>
 
 1511872503 source:/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/src/superhero.cpp
+=======
+1511874393 c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\include\superhero.h
+	<iostream>
+	<string>
+
+1511878419 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b1\src\superhero.cpp
+>>>>>>> 8a7d2464ec909b3b4e3a267879625d6282071a16
 	"../include/superhero.h"
 

@@ -1,2 +1,2 @@
-Mommi (2): None
-Klara (32): Giant
+Mommi 2 n
+Klara 32 g
