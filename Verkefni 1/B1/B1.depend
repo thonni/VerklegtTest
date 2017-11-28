@@ -14,3 +14,15 @@
 	<iostream>
 	<string>
 
+1511874042 source:/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/main.cpp
+	<iostream>
+	<fstream>
+	"include/superhero.h"
+
+1511863314 /Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/include/superhero.h
+	<iostream>
+	<string>
+
+1511872503 source:/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/VerklegtTest/Verkefni 1/B1/src/superhero.cpp
+	"../include/superhero.h"
+
