@@ -2,3 +2,15 @@
 1511813676 source:e:\users\thonn\desktop\forritunverk\verklegt 1\verklegttest\verkefni 1\b1\main.cpp
 	<iostream>
 
+1511871956 source:c:\users\thonn\desktop\verklegt 1\verklegttest\verkefni 1\b1\src\superhero.cpp
+	"../include/superhero.h"
+
+1511871932 source:c:\users\thonn\desktop\verklegt 1\verklegttest\verkefni 1\b1\main.cpp
+	<iostream>
+	<fstream>
+	"include/superhero.h"
+
+1511866677 c:\users\thonn\desktop\verklegt 1\verklegttest\verkefni 1\b1\include\superhero.h
+	<iostream>
+	<string>
+
