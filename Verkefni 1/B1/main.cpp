@@ -9,10 +9,13 @@ int main()
     char addHero = 'n';
 
     //Ask the user if he/she wants to add a hero.
-    cout << "Add hero? (Y/N): ";
-    cin >> addHero;
 
-    if(addHero == 'y' || addHero == 'Y')
+    do {
+        cout << "Add hero? (Y/N): ";
+        cin >> addHero;
+    } while (!(toupper(addHero) == 'N' || toupper(addHero) == 'Y'))
+
+    if(toupper(addHero) == 'Y')
     {
         string name = "";
         int age = 0;
