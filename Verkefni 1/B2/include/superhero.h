@@ -10,7 +10,7 @@ class Superhero
 {
     public:
         Superhero();
-        Superhero(string name, int age, char superpower);
+        Superhero(char name[], int age, char superpower);
 
         string getSuperpower() const;
         void setVerbose(bool v);

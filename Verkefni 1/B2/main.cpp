@@ -10,10 +10,13 @@ int main()
     cin >> hero;
 
     ofstream fout;
+
+    hero.setVerbose(false);
+
     fout.open ("superherofile.dat", ios::binary|ios::app);
+    fout.write((char*)(&hero), sizeof(Superhero));
 
-    fout << hero;
-
+    hero.setVerbose(true);
 
 
 
