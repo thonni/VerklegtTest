@@ -11,12 +11,9 @@ int main()
 
     ofstream fout;
 
-    hero.setVerbose(false);
-
     fout.open ("superherofile.dat", ios::binary|ios::app);
     fout.write((char*)(&hero), sizeof(Superhero));
 
-    hero.setVerbose(true);
     fout.close();
 
     ifstream fin;
@@ -34,7 +31,7 @@ int main()
     fin.close();
 
     for(int i = 0; i < records; i++) {
-        cout << hero1[i] << endl;
+        cout << hero1[i];
     }
 
     return 0;
