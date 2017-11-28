@@ -6,13 +6,19 @@ using namespace std;
 
 int main()
 {
-    Superhero hero;
-    cin >> hero;
+    int arrsize;
+    cout << "How many heroes do you want to enter? ";
+    cin >> arrsize;
+    Superhero hero[arrsize];
+    for(int i = 0; i < arrsize; i++) {
+        cin >> hero[i];
+        cout << endl;
+    }
 
     ofstream fout;
 
     fout.open ("superherofile.dat", ios::binary|ios::app);
-    fout.write((char*)(&hero), sizeof(Superhero));
+    fout.write((char*)hero, sizeof(Superhero) * arrsize);
 
     fout.close();
 
@@ -25,13 +31,13 @@ int main()
     fin.seekg(0, fin.beg);
 
     Superhero *hero1 = new Superhero[records];
-
     fin.read((char*)hero1, sizeof(Superhero) * records);
 
     fin.close();
 
     for(int i = 0; i < records; i++) {
         cout << hero1[i];
+        cout << endl;
     }
 
     return 0;

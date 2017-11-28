@@ -68,8 +68,11 @@ ostream& operator <<(ostream &out, const Superhero &superhero)
 
 istream& operator >>(istream &in, Superhero &superhero)
 {
+    cout << "Enter hero's name: ";
     in >> superhero.name;
+    cout << "Enter hero's age: ";
     in >> superhero.age;
+    cout << "Enter hero's superpower: ";
     in >> superhero.superpower;
 
     return in;
