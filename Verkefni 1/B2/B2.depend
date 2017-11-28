@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1511881258 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b2\main.cpp
+	<iostream>
+	<fstream>
+	"include/superhero.h"
+
+1511881258 c:\users\galdu\hr\haust2017\vln1\verklegttest\verkefni 1\b2\include\superhero.h
+	<iostream>
+	<string>
+

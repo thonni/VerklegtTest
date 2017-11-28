@@ -21,7 +21,7 @@ class Superhero
     protected:
 
     private:
-        string name;
+        char name[50];
         int age;
         char superpower;
         bool verbose;

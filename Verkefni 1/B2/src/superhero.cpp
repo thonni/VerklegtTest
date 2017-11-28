@@ -1,18 +1,19 @@
 #include "../include/superhero.h"
 
 
+
 Superhero::Superhero()
 {
-    this->name = "";
+    this->name[0] = '\0';
     this->age = 0;
     this->superpower = 'n';
     this->verbose = true;
 }
 
 
-Superhero::Superhero(string name, int age, char superpower)
+Superhero::Superhero(char name[], int age, char superpower)
 {
-    this->name = name;
+    this->name[49] = name[49];
     this->age = age;
     this->superpower = superpower;
     this->verbose = true;
