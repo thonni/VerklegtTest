@@ -67,15 +67,15 @@ ostream& operator <<(ostream &out, const Superhero &superhero)
     {
         out << "Flying" << endl;
     }
-    if (superhero.superpower == 'g')
+    else if (superhero.superpower == 'g')
     {
         out << "Giant" << endl;
     }
-    if (superhero.superpower == 'h')
+    else if (superhero.superpower == 'h')
     {
         out << "Hacker" << endl;
     }
-    if (superhero.superpower == 'n')
+    else if (superhero.superpower == 'n')
     {
         out << "None" << endl;
     }
@@ -102,10 +102,13 @@ int main()
     cin >> hero;
     
     ofstream fout;
-    fout.open ("/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/Assignments/Verk1B2/Verk1B2/superherofile.dat");
+    fout.open ("/Users/hjordissveinsdottir/Desktop/HR/3onn/VerklegtnamskeidI/Assignments/Verk1B2/Verk1B2/superherofile.dat", ios::binary|ios::app);
+    fout.write((char*)(&hero), sizeof(Superhero));
     
     fout << hero;
     
+
+    fout.close();
     /*char addHero = 'n';
     
     //Ask the user if he/she wants to add a hero.
