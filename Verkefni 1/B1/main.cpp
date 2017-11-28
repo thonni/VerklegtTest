@@ -13,7 +13,7 @@ int main()
     do {
         cout << "Add hero? (Y/N): ";
         cin >> addHero;
-    } while (!(toupper(addHero) == 'N' || toupper(addHero) == 'Y'))
+    } while (!(toupper(addHero) == 'N' || toupper(addHero) == 'Y'));
 
     if(toupper(addHero) == 'Y')
     {
