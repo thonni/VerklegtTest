@@ -28,6 +28,7 @@ class DataManager
         int getToppingRecord();
         int getPizzaRecord();
         int getOrderRecord();
+        int getExtraRecord();
 };
 
 #endif // DATAMANAGER_H
