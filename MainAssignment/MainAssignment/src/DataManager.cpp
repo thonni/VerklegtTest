@@ -35,6 +35,13 @@ void DataManager::addOrders(const Order *orders, const int arrsize) {
     fout.close();
 }
 
+void DataManager::addExtra(const Extra *extras, const int arrsize) {
+    fout.open ("extraMenu.dat", ios::binary|ios::app);
+    fout.write((char*)extras, sizeof(Order) * arrsize);
+
+    fout.close();
+}
+
 void DataManager::readToppings() {
     fin.open("toppingList.dat", ios::binary);
 
@@ -84,6 +91,23 @@ void DataManager::readCurrentOrders() {
         cout << endl;
     }
     delete[] orders;
+}
+
+void DataManager::readExtras() {
+    fin.open("extraMenu.dat", ios::binary);
+
+    int records = getOrderRecord();
+
+    Extra *extras = new Extra[records];
+    fin.read((char*)extras, sizeof(Extra) * records);
+
+    fin.close();
+
+    for(int i = 0; i < records; i++) {
+        cout << extras[i];
+        cout << endl;
+    }
+    delete[] extras;
 }
 
 void DataManager::moveOrders() {
