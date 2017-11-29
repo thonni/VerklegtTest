@@ -10,10 +10,14 @@ using namespace std;
 class Pizza
 {
     public:
-        Pizza(string name, int toppingsCount, Sizes pizzaSize);
+        Pizza();
+        Pizza(string name, int toppingsCount);
         virtual ~Pizza();
 
         void addToppings();
+
+        friend ostream& operator << (ostream& out, const Pizza& pizza);
+        friend istream& operator >> (istream& in, Pizza& pizza);
 
         enum Sizes
         {
