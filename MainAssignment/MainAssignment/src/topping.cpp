@@ -39,9 +39,3 @@ ostream& operator << (ostream& out, const Topping& topping)
 
     return out;
 }
-
-
-Topping::~Topping()
-{
-    //dtor
-}
