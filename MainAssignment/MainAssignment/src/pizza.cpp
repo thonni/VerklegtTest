@@ -49,7 +49,16 @@ void Pizza::addToppings()
 }
 
 
+ostream& operator << (ostream& out, const Pizza& pizza)
+{
+    return out;
+}
 
+
+istream& operator >> (istream& in, Pizza& pizza);
+{
+    return in;
+}
 
 
 Pizza::~Pizza()

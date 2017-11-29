@@ -3,6 +3,7 @@
 
 Topping::Topping()
 {
+    //Populate name and price with default values.
     this->name[0] = '\0';
     this->price = 0.0;
 }
