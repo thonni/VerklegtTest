@@ -11,6 +11,7 @@ int main()
     cin >> arrsize;
     Superhero *hero = new Superhero[arrsize];
     for(int i = 0; i < arrsize; i++) {
+        hero[i].setVerbose(false);
         cin >> hero[i];
         cout << endl;
     }
@@ -21,7 +22,7 @@ int main()
     fout.write((char*)hero, sizeof(Superhero) * arrsize);
 
     fout.close();
-    delete[] hero;
+    delete[]  hero;
     ifstream fin;
 
     fin.open("superherofile.dat", ios::binary);
@@ -36,6 +37,7 @@ int main()
     fin.close();
 
     for(int i = 0; i < records; i++) {
+        hero1[i].setVerbose(true);
         cout << hero1[i];
         cout << endl;
     }
