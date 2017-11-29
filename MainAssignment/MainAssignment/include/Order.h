@@ -9,6 +9,7 @@ class Order
     public:
         Order();
         virtual ~Order();
+        char getState();
 
     protected:
 

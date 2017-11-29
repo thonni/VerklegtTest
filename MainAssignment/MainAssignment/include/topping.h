@@ -14,7 +14,7 @@ class Topping
         virtual ~Topping();
 
         friend istream& operator >> (istream& in, Topping& topping);
-        friend ostream& operator << (ostream& out const Topping& topping);
+        friend ostream& operator << (ostream& out, const Topping& topping);
 
     protected:
 

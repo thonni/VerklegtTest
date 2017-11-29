@@ -9,3 +9,7 @@ Order::~Order()
 {
     //dtor
 }
+
+char Order::getState() {
+    return this->state;
+}

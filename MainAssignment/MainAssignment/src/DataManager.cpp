@@ -86,7 +86,44 @@ void DataManager::readCurrentOrders() {
     delete[] orders;
 }
 
+void DataManager::moveOrders() {
+    fin.open("currentOrders.dat", ios::binary);
 
+    int records = getOrderRecord();
+    int counter1 = 0, counter2 = 0;
+
+    Order *orders = new Order[records];
+    fin.read((char*)orders, sizeof(Order) * records);
+
+    fin.close();
+
+    Order *oldOrders = new Order[records];
+    Order *newOrders = new Order[records];
+
+    for(int i = 0; i < records; i++) {
+        if(orders[i].getState() == 'a') {
+            oldOrders[counter1] = orders[i];
+            counter1++;
+        }
+        else {
+            newOrders[counter2] = orders[i];
+            counter2++;
+        }
+    }
+
+    fout.open ("currentOrders.dat", ios::binary);
+    fout.write((char*)newOrders, sizeof(Order) * arrsize);
+
+    fout.close();
+
+    fout.open ("oldOrders.dat", ios::binary|ios::app);
+    fout.write((char*)oldOrders, sizeof(Order) * arrsize);
+
+    fout.close();
+    delete[] orders;
+    delete[] newOrders;
+    delete[] oldOrders;
+}
 
 
 int DataManager::getToppingRecord() {
