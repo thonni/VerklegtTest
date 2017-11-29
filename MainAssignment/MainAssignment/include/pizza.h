@@ -10,21 +10,22 @@ using namespace std;
 class Pizza
 {
     public:
+
+        enum Size
+        {
+            Small,
+            Medium,
+            Large
+        };
+
         Pizza();
-        Pizza(string name, int toppingsCount);
+        Pizza(string name, int toppingsCount, Pizza::Size pizzaSize);
         virtual ~Pizza();
 
         void addToppings();
 
         friend ostream& operator << (ostream& out, const Pizza& pizza);
         friend istream& operator >> (istream& in, Pizza& pizza);
-
-        enum Sizes
-        {
-            Small,
-            Medium,
-            Large
-        };
 
     protected:
 
@@ -33,7 +34,7 @@ class Pizza
         int toppingsCount;
         double price;
         char name[32];
-        Sizes pizzaSize;
+        Pizza::Size pizzaSize;
 };
 
 #endif // PIZZA_H

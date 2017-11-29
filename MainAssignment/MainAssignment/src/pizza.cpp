@@ -3,11 +3,15 @@
 
 Pizza::Pizza()
 {
-
+    this->name[0] = '\0';
+    this->pizzaSize = Small;
+    this->price = 0.0;
+    this->toppingsCount = 0;
+    this->toppings = NULL;
 }
 
 
-Pizza::Pizza(string name, int toppingsCount)
+Pizza::Pizza(string name, int toppingsCount, Pizza::Size pizzaSize = Small)
 {
 
     //Iterate trough the input string and put each character into the char array.
@@ -21,7 +25,6 @@ Pizza::Pizza(string name, int toppingsCount)
 
     //Put the input toppingsCount into toppingsCount.
     this->toppingsCount = toppingsCount;
-
     //Check if toppingsCount is more than 0, if so it creates the dynamic toppings array,
     //if it is 0 it sets the toppings array to NULL.
     if(toppingsCount != 0)
@@ -32,6 +35,9 @@ Pizza::Pizza(string name, int toppingsCount)
     {
         this->toppings = NULL;
     }
+
+    //Put the pizzaSize input in pizzaSize.
+    this->pizzaSize = pizzaSize;
 }
 
 
