@@ -10,17 +10,17 @@ using namespace std;
 class Pizza
 {
     public:
-        Pizza(string name, int toppingsCount);
+        Pizza(string name, int toppingsCount, Sizes pizzaSize);
         virtual ~Pizza();
 
         void addToppings();
 
-        /*enum sizes
+        enum Sizes
         {
-            Small = 1.0,
-            Medium = 1.2,
-            Large = 1.4
-        };*/
+            Small,
+            Medium,
+            Large
+        };
 
     protected:
 
@@ -29,6 +29,7 @@ class Pizza
         int toppingsCount;
         double price;
         char name[32];
+        Sizes pizzaSize;
 };
 
 #endif // PIZZA_H
