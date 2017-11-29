@@ -37,15 +37,15 @@ void MainUI::startUI()
     {
 
     }
-    if (selection == 's')
+    else if (selection == 's')
     {
 
     }
-    if (selection == 'b')
+    else if (selection == 'b')
     {
 
     }
-    if (selection == 'd')
+    else if (selection == 'd')
     {
 
     }
