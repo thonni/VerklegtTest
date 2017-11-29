@@ -112,12 +112,12 @@ void DataManager::moveOrders() {
     }
 
     fout.open ("currentOrders.dat", ios::binary);
-    fout.write((char*)newOrders, sizeof(Order) * arrsize);
+    fout.write((char*)newOrders, sizeof(Order) * counter1);
 
     fout.close();
 
     fout.open ("oldOrders.dat", ios::binary|ios::app);
-    fout.write((char*)oldOrders, sizeof(Order) * arrsize);
+    fout.write((char*)oldOrders, sizeof(Order) * counter2);
 
     fout.close();
     delete[] orders;

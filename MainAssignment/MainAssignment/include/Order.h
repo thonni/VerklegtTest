@@ -10,13 +10,19 @@ class Order
         Order();
         virtual ~Order();
         char getState();
+        int getPizzaAmt();
+        int getExtraAmt();
+
+        friend ostream& operator << (ostream& out, const Order& order);
 
     protected:
 
     private:
         char state;
         Pizza pizzas[];
+        int pizzaAmt;
         Extra extras[];
+        int extraAmt;
 };
 
 #endif // ORDER_H
