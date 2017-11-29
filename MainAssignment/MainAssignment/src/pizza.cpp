@@ -55,7 +55,7 @@ ostream& operator << (ostream& out, const Pizza& pizza)
 }
 
 
-istream& operator >> (istream& in, Pizza& pizza);
+istream& operator >> (istream& in, Pizza& pizza)
 {
     return in;
 }
