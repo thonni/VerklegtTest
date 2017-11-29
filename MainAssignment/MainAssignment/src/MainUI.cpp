@@ -9,3 +9,8 @@ MainUI::~MainUI()
 {
     //dtor
 }
+
+void MainUI::startUI()
+{
+
+}

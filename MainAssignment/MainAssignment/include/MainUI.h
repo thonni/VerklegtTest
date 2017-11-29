@@ -8,9 +8,12 @@ class MainUI
         MainUI();
         virtual ~MainUI();
 
+        void startUI();
+
     protected:
 
     private:
+
 };
 
 #endif // MAINUI_H
