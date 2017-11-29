@@ -9,7 +9,7 @@ int main()
     int arrsize;
     cout << "How many heroes do you want to enter? ";
     cin >> arrsize;
-    Superhero hero[arrsize];
+    Superhero *hero = new Superhero[arrsize];
     for(int i = 0; i < arrsize; i++) {
         cin >> hero[i];
         cout << endl;
@@ -21,7 +21,7 @@ int main()
     fout.write((char*)hero, sizeof(Superhero) * arrsize);
 
     fout.close();
-
+    delete[] hero;
     ifstream fin;
 
     fin.open("superherofile.dat", ios::binary);
@@ -39,6 +39,7 @@ int main()
         cout << hero1[i];
         cout << endl;
     }
+    delete[] hero1;
 
     return 0;
 }
