@@ -15,9 +15,11 @@ class DataManager
         void addToppings(const Topping *toppings, const int arrsize);
         void addPizzasToMenu(const Pizza *pizzas, const int arrsize);
         void addOrders(const Order *orders, const int arrsize);
+        void addExtra(const Extra *extras, const int arrsize);
         void readToppings();
         void readPizzaMenu();
         void readCurrentOrders();
+        void readExtras();
         void moveOrders();
 
     protected:
