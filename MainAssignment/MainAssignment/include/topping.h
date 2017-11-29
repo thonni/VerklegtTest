@@ -9,11 +9,30 @@ using namespace std;
 class Topping
 {
     public:
+        ///////////////////////////////////////////////////////////////////////
+        /// \brief Default constructor that sets variables to default values.
+        ///////////////////////////////////////////////////////////////////////
         Topping();
-        Topping(string name, double price);
-        virtual ~Topping();
 
+        ///////////////////////////////////////////////////////////////////////
+        /// \brief Constructor that takes name and price and puts those
+        ///        values in respected variables.
+        ///
+        /// \param name - The name of the topping, Will be changed to char.
+        /// \param price - The price of the topping.
+        ///////////////////////////////////////////////////////////////////////
+        Topping(string name, double price);
+
+        ///////////////////////////////////////////////////////////////////////
+        /// \brief Overwrites the istream operator,
+        ///        takes in name and price, in that order.
+        ///////////////////////////////////////////////////////////////////////
         friend istream& operator >> (istream& in, Topping& topping);
+
+        ///////////////////////////////////////////////////////////////////////
+        /// \brief Overwrites the ostream operator,
+        ///        returns name and price, in that order.
+        ///////////////////////////////////////////////////////////////////////
         friend ostream& operator << (ostream& out, const Topping& topping);
 
     protected:
