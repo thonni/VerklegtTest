@@ -1,4 +1,5 @@
 #include "UI_Manager.h"
+#include "DataManager.h"
 
 UI_Manager::UI_Manager()
 {
