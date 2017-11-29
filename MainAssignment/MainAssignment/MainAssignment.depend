@@ -1,5 +1,10 @@
 # depslib dependency file v1.0
-1511873842 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\mainassignment\mainassignment\main.cpp
+1511959522 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\mainassignment\mainassignment\main.cpp
 	<iostream>
 	<fstream>
+
+1511957198 source:c:\users\galdu\hr\haust2017\vln1\verklegttest\mainassignment\mainassignment\src\mainui.cpp
+	"MainUI.h"
+
+1511957198 c:\users\galdu\hr\haust2017\vln1\verklegttest\mainassignment\mainassignment\include\mainui.h
 
