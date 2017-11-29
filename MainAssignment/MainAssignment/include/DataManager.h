@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include "Topping.h"
-#include "Pizza.h"
 #include "Order.h"
 
 using namespace std;
