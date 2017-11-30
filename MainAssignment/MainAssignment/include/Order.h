@@ -19,9 +19,9 @@ class Order
 
     private:
         char state;
-        Pizza pizzas[];
+        Pizza *pizzas;
         int pizzaAmt;
-        Extra extras[];
+        Extra *extras;
         int extraAmt;
 };
 
