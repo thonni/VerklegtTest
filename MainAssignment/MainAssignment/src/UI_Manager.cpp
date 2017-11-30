@@ -64,8 +64,9 @@ void UI_Manager::addTopping()
         cin >> price;
 
         //Create a temporary instance of Topping.
-        Topping newTopping(name, price);
+        tempTopping = Topping(name, price);
 
+        //Add the temporary topping to the vector.
         toppingsToAdd.push_back(tempTopping);
 
         //Ask the user if he/she wants to add another topping.
@@ -74,5 +75,6 @@ void UI_Manager::addTopping()
 
     } while(toupper(continueToAdd) == 'Y');
 
+    //Run the addToppings from DataManager to save the topping to file.
     data.addToppings(toppingsToAdd);
 }
