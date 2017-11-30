@@ -17,6 +17,8 @@ class Order
         void addExtra(Extra extra);
         void removePizza(int i);
         void removeExtra(int i);
+        void listPizzas();
+        void listExtras();
 
         friend ostream& operator << (ostream& out, const Order& order);
 
