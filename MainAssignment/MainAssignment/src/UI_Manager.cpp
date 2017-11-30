@@ -32,12 +32,16 @@ void UI_Manager::addToMenu (){
         }
         else if (choice == 'p')
         {
-            //data.addPizzasToMenu();
+            //test = data.addPizzasToMenu();
         }
         else if (choice == 'e')
         {
             //data.addExtra();
-            data.readToppings();
+            toppingsToAdd = data.readToppings();
+            for(unsigned int i = 0; i < toppingsToAdd.size(); i++)
+            {
+                cout << toppingsToAdd.at(i);
+            }
         }
         else
         {
@@ -77,4 +81,6 @@ void UI_Manager::addTopping()
 
     //Run the addToppings from DataManager to save the topping to file.
     data.addToppings(toppingsToAdd);
+    //Clear the vector.
+    toppingsToAdd.clear();
 }
