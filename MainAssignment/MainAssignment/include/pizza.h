@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <string.h>
+#include <vector>
 #include "Topping.h"
 
 using namespace std;
@@ -19,19 +20,20 @@ class Pizza
         };
 
         Pizza();
-        Pizza(string name, int toppingsCount, Pizza::Size pizzaSize);
-        virtual ~Pizza();
+        Pizza(string name, Pizza::Size pizzaSize);
 
-        void addToppings();
+        void addTopping(Topping topping);
 
         friend ostream& operator << (ostream& out, const Pizza& pizza);
         friend istream& operator >> (istream& in, Pizza& pizza);
 
+        //Getters and setters
+        int getToppingCount();
+
     protected:
 
     private:
-        Topping* toppings;
-        int toppingsCount;
+        vector<Topping> toppings;
         double price;
         char name[32];
         Pizza::Size pizzaSize;
