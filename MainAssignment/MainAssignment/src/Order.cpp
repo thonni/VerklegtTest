@@ -14,22 +14,22 @@ char Order::getState() {
     return this->state;
 }
 
-int Order::getPizzaAmt() {
-    return this->pizzaAmt;
+void Order::addPizza(Pizza pizza) {
+    pizzas.push_back(pizza);
 }
 
-int Order::getExtraAmt() {
-    return this->extraAmt;
+void Order::addExtra(Extra extra) {
+    extras.push_back(extra);
 }
 
 ostream& operator << (ostream& out, const Order& order)
 {
-    out << order.state;
-    for(int i = 0; i < order.pizzaAmt; i++) {
-        out << " " << order.pizzas[i];
+    out << order.state << endl;
+    for(int i = 0; i < order.pizzas.size(); i++) {
+        out << order.pizzas.at(i);
     }
-    for(int i = 0; i < order.extraAmt; i++) {
-        out << " " << order.extras[i];
+    for(int i = 0; i < order.extras.size(); i++) {
+        out << order.extras.at(i);
     }
     out << endl;
 

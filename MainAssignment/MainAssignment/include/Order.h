@@ -1,6 +1,7 @@
 #ifndef ORDER_H
 #define ORDER_H
 
+#include <vector>
 #include "Pizza.h"
 #include "Extra.h"
 
@@ -10,8 +11,8 @@ class Order
         Order();
         virtual ~Order();
         char getState();
-        int getPizzaAmt();
-        int getExtraAmt();
+        void addPizza(Pizza pizza);
+        void addExtra(Extra extra);
 
         friend ostream& operator << (ostream& out, const Order& order);
 
@@ -19,10 +20,8 @@ class Order
 
     private:
         char state;
-        Pizza *pizzas;
-        int pizzaAmt;
-        Extra *extras;
-        int extraAmt;
+        vector<Pizza> pizzas;
+        vector<Extra> extras;
 };
 
 #endif // ORDER_H
