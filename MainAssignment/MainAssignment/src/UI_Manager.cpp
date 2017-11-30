@@ -39,12 +39,12 @@ void UI_Manager::addToMenu (){
                 cout << toppingsToAdd.at(i);
             }
         }
-        else
+        else if(toupper(choice) != 'Q')
         {
             cout << "Invalid input!" << endl;
         }
 
-    } while(choice != 'q');
+    } while(toupper(choice) != 'Q');
 }
 
 //This function creates new toppings using user input

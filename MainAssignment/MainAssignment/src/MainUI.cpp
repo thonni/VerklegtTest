@@ -27,7 +27,7 @@ void MainUI::startUI()
         cout << "Choose s for salesman" << endl;
         cout << "Choose b for baker" << endl;
         cout << "Choose d for delivery" << endl;
-        cout << "Choose b to go back" << endl;
+        cout << "Choose q to go back" << endl;
 
         //Asks the user who he/she is.
         cin >> selection;
@@ -50,6 +50,6 @@ void MainUI::startUI()
 
         }
 
-    //Loops if the selection is not b or B (Back).
-    } while(toupper(selection) != 'B');
+    //Loops if the selection is not q or Q (Quit).
+    } while(toupper(selection) != 'q');
 }
