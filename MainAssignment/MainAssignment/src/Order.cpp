@@ -1,5 +1,7 @@
 #include "Order.h"
 
+using namespace std;
+
 Order::Order()
 {
     //ctor
@@ -22,24 +24,30 @@ void Order::addExtra(Extra extra) {
     extras.push_back(extra);
 }
 
-void Order::removePizza(Pizza pizza) {
-
+void Order::removePizza(int i) {
+    int ssize = this->pizzas.size();
+    this->pizzas.at(i) = this->pizzas.back();
+    this->pizzas.pop_back();
 }
 
-void Order::removeExtra(Extra extra) {
-
+void Order::removeExtra(int i) {
+    int ssize = this->extras.size();
+    this->extras.at(i) = this->extras.back();
+    this->extras.pop_back();
 }
 
 ostream& operator << (ostream& out, const Order& order)
 {
-    /*out << order.state << endl;
-    for(int i = 0; i < order.pizzas.size(); i++) {
+    int ssize = order.pizzas.size();
+    out << order.state << endl;
+    for(int i = 0; i < ssize; i++) {
         out << order.pizzas.at(i);
     }
-    for(int i = 0; i < order.extras.size(); i++) {
+    ssize = order.extras.size();
+    for(int i = 0; i < ssize; i++) {
         out << order.extras.at(i);
     }
     out << endl;
-    */
+
     return out;
 }

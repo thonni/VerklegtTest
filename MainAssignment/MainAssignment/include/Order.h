@@ -5,6 +5,8 @@
 #include "Pizza.h"
 #include "Extra.h"
 
+using namespace std;
+
 class Order
 {
     public:
@@ -13,8 +15,8 @@ class Order
         char getState();
         void addPizza(Pizza pizza);
         void addExtra(Extra extra);
-        void removePizza(Pizza pizza);
-        void removeExtra(Extra extra);
+        void removePizza(int i);
+        void removeExtra(int i);
 
         friend ostream& operator << (ostream& out, const Order& order);
 
