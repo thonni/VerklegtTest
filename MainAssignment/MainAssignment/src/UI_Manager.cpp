@@ -23,11 +23,12 @@ void UI_Manager::addToMenu (){
         cout << "Choose q to quit" << endl;
         cin >> choice;
         if(choice == 't'){
-            Topping topping;
+            /*Topping topping;
             int arrsize = 0;
             cout <<
             cin >> topping;
-            //data.addToppings(topping, );
+            //data.addToppings(topping, );*/
+            this->addTopping();
         }
         else if (choice == 'p')
         {
@@ -36,11 +37,13 @@ void UI_Manager::addToMenu (){
         else if (choice == 'e')
         {
             //data.addExtra();
+            data.readToppings();
         }
-        else if (choice != 't' || choice != 'p' || choice != 'e')
+        else
         {
             cout << "Invalid input!" << endl;
         }
+
     } while(choice != 'q');
 }
 
@@ -49,15 +52,27 @@ void UI_Manager::addTopping()
 {
     string name;
     double price;
+    Topping tempTopping;
+    char continueToAdd = '\0';
 
-    cout << "Please enter the name of the topping: ";
-    cin >> name;
+    do
+    {
+        //Ask the user for a name and price for the new topping.
+        cout << "Please enter the name of the topping: ";
+        cin >> name;
+        cout << "Please enter the price of the topping: ";
+        cin >> price;
 
-    cout << "Please enter the price of the topping: ";
-    cin >> price;
+        //Create a temporary instance of Topping.
+        Topping newTopping(name, price);
 
-    //Create an instance of Topping.
-    Topping newTopping(name, price);
+        toppingsToAdd.push_back(tempTopping);
 
-    //data.addToppings(newTopping, 1);
+        //Ask the user if he/she wants to add another topping.
+        cout << "Add another topping? (Y/N): ";
+        cin >> continueToAdd;
+
+    } while(toupper(continueToAdd) == 'Y');
+
+    data.addToppings(toppingsToAdd);
 }

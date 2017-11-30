@@ -6,6 +6,7 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
+#include <vector>
 
 class UI_Manager
 {
@@ -19,6 +20,7 @@ class UI_Manager
 
     private:
         DataManager data;
+        vector<Topping> toppingsToAdd;
 
 };
 
