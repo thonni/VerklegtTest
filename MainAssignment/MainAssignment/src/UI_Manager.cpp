@@ -51,4 +51,9 @@ void UI_Manager::addTopping()
 
     cout << "Please enter the price of the topping: ";
     cin >> price;
+
+    //Create an instance of Topping.
+    Topping newTopping(name, price);
+
+    //data.addToppings(newTopping, 1);
 }
