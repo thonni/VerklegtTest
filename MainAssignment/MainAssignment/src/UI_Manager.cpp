@@ -23,7 +23,11 @@ void UI_Manager::addToMenu (){
         cout << "Choose q to quit" << endl;
         cin >> choice;
         if(choice == 't'){
-            //data.addToppings()
+            Topping topping;
+            int arrsize = 0;
+            cout <<
+            cin >> topping;
+            //data.addToppings(topping, );
         }
         else if (choice == 'p')
         {
