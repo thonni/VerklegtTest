@@ -12,11 +12,12 @@ class UI_Manager
     public:
         UI_Manager();
         virtual ~UI_Manager();
+        void addToMenu ();
 
     protected:
 
     private:
-
+        DataManager data;
 
 };
 
