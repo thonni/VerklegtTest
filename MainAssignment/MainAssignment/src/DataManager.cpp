@@ -5,6 +5,8 @@
 ofstream fout;
 ifstream fin;
 
+using namespace std;
+
 DataManager::DataManager()
 {
     //ctor
@@ -16,8 +18,13 @@ DataManager::~DataManager()
 }
 
 // Adds a dynamic array of toppings to the binary file toppingList.dat
-void DataManager::addToppings(const Topping *toppings, const int arrsize) {
+void DataManager::addToppings(const vector<Topping> topping) {
     // Opens the file that I want to write inn in binary mode with the append setting
+    int arrsize = topping.size();
+    Topping *toppings = new Topping[arrsize];
+    for(int i = 0; i < arrsize; i++) {
+        toppings[i] = topping[i];
+    }
     fout.open ("toppingList.dat", ios::binary|ios::app);
     // Writes the dynamic array into the file in one motion
     fout.write((char*)toppings, sizeof(Topping) * arrsize);

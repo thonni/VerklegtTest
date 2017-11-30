@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Order.h"
 
 using namespace std;
@@ -12,7 +13,7 @@ class DataManager
     public:
         DataManager();
         virtual ~DataManager();
-        void addToppings(const Topping *toppings, const int arrsize);
+        void addToppings(const vector<Topping> topping);
         void addPizzasToMenu(const Pizza *pizzas, const int arrsize);
         void addOrders(const Order *orders, const int arrsize);
         void addExtra(const Extra *extras, const int arrsize);
