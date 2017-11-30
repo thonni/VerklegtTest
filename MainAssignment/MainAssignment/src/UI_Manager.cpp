@@ -13,10 +13,10 @@ UI_Manager::~UI_Manager()
     //dtor
 }
 
-void addToMenu (){
+void UI_Manager::addToMenu (){
     char choice;
     do {
-        cout << "What would you like to add?" ;
+        cout << "What would you like to add?" << endl;
         cout << "Choose t for toppings" << endl;
         cout << "Choose p for pizzas on menu" << endl;
         cout << "Choose e for extras" << endl;
@@ -32,6 +32,10 @@ void addToMenu (){
         else if (choice == 'e')
         {
             //data.addExtra();
+        }
+        else if (choice != 't' || choice != 'p' || choice != 'e')
+        {
+            cout << "Invalid input!" << endl;
         }
     } while(choice != 'q');
 }

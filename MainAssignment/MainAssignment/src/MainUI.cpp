@@ -7,6 +7,7 @@
 
 using namespace std;
 
+UI_Manager manager;
 
 MainUI::MainUI()
 {
@@ -35,7 +36,7 @@ void MainUI::startUI()
     // Responds to who you are, and shows you the appropriate front page
     if (selection == 'm')
     {
-
+        manager.addToMenu();
     }
     else if (selection == 's')
     {
