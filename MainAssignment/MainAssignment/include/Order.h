@@ -13,6 +13,8 @@ class Order
         char getState();
         void addPizza(Pizza pizza);
         void addExtra(Extra extra);
+        void removePizza(Pizza pizza);
+        void removeExtra(Extra extra);
 
         friend ostream& operator << (ostream& out, const Order& order);
 
