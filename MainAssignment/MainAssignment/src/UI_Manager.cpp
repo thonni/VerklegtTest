@@ -1,7 +1,7 @@
 #include "UI_Manager.h"
 #include "DataManager.h"
 
-DataManager data;
+using namespace std;
 
 UI_Manager::UI_Manager()
 {
@@ -22,12 +22,8 @@ void UI_Manager::addToMenu (){
         cout << "Choose e for extras" << endl;
         cout << "Choose q to quit" << endl;
         cin >> choice;
-        if(choice == 't'){
-            /*Topping topping;
-            int arrsize = 0;
-            cout <<
-            cin >> topping;
-            //data.addToppings(topping, );*/
+        if(choice == 't')
+        {
             this->addTopping();
         }
         else if (choice == 'p')
@@ -36,7 +32,7 @@ void UI_Manager::addToMenu (){
         }
         else if (choice == 'e')
         {
-            //data.addExtra();
+            ///THIS IS TEMPORARY, IT READS AND DISPLAYS EVERYTHING IN THE TOPPING FILE.
             toppingsToAdd = data.readToppings();
             for(unsigned int i = 0; i < toppingsToAdd.size(); i++)
             {
@@ -51,7 +47,8 @@ void UI_Manager::addToMenu (){
     } while(choice != 'q');
 }
 
-
+//This function creates new toppings using user input
+//and uses DataManager to save them to toppingList.dat.
 void UI_Manager::addTopping()
 {
     string name;
@@ -63,8 +60,8 @@ void UI_Manager::addTopping()
     {
         //Ask the user for a name and price for the new topping.
         cout << "Please enter the name of the topping: ";
-        cin >> name;
         cout << "Please enter the price of the topping: ";
+        cin >> name;
         cin >> price;
 
         //Create a temporary instance of Topping.

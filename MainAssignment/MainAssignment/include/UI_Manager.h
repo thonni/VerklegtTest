@@ -1,12 +1,17 @@
 #ifndef UI_MANAGER_H
 #define UI_MANAGER_H
+
 #include <iostream>
+#include <vector>
+#include <string>
+
 #include "DataManager.h"
 #include "topping.h"
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
-#include <vector>
+
+using namespace std;
 
 class UI_Manager
 {

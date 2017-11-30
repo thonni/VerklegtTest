@@ -1,9 +1,4 @@
 #include "MainUI.h"
-#include <iostream>
-#include "UI_Manager.h"
-#include "UI_Salesman.h"
-#include "UI_Baker.h"
-#include "UI_Delivery.h"
 
 using namespace std;
 
@@ -21,33 +16,39 @@ MainUI::~MainUI()
 
 void MainUI::startUI()
 {
-    cout << "Welcome to Pizza hut" << endl;
-    cout << "Please tell us who you are:" << endl;
-    cout << "Choose m for manager" << endl;
-    cout << "Choose s for salesman" << endl;
-    cout << "Choose b for baker" << endl;
-    cout << "Choose d for delivery" << endl;
-
     char selection = '\0';
 
-    // Select who you are
-    cin >> selection;
-
-    // Responds to who you are, and shows you the appropriate front page
-    if (selection == 'm')
-    {
-        manager.addToMenu();
-    }
-    else if (selection == 's')
+    do
     {
 
-    }
-    else if (selection == 'b')
-    {
+        cout << "Welcome to Pizza hut" << endl;
+        cout << "Please tell us who you are:" << endl;
+        cout << "Choose m for manager" << endl;
+        cout << "Choose s for salesman" << endl;
+        cout << "Choose b for baker" << endl;
+        cout << "Choose d for delivery" << endl;
 
-    }
-    else if (selection == 'd')
-    {
+        //Asks the user who he/she is.
+        cin >> selection;
 
-    }
+        //Responds to who you are, and shows you the appropriate front page
+        if (selection == 'm')
+        {
+            manager.addToMenu();
+        }
+        else if (selection == 's')
+        {
+
+        }
+        else if (selection == 'b')
+        {
+
+        }
+        else if (selection == 'd')
+        {
+
+        }
+
+    //Loops if the selection is not q or Q (Quit).
+    } while(toupper(selection) != 'Q');
 }
