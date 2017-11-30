@@ -17,7 +17,7 @@ class DataManager
         void addPizzasToMenu(const Pizza *pizzas, const int arrsize);
         void addOrders(const Order *orders, const int arrsize);
         void addExtra(const Extra *extras, const int arrsize);
-        void readToppings();
+        vector<Topping> readToppings();
         void readPizzaMenu();
         void readCurrentOrders();
         void readExtras();

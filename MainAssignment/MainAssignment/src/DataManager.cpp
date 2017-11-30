@@ -64,25 +64,28 @@ void DataManager::addExtra(const Extra *extras, const int arrsize) {
 }
 
 // Reads out of the binary file toppingList.dat and writes out the contents to the console
-void DataManager::readToppings() {
-    // Opens the file that I want to read from in binary mode
+vector<Topping> DataManager::readToppings() {
+
+    vector<Topping> topping;
+
     fin.open("toppingList.dat", ios::binary);
-    // Sets records as the record for Topping
+
     int records = getToppingRecord();
-    // Creates a dynamic array of toppings
+
     Topping *toppings = new Topping[records];
-    // Reads all of the toppings from the file in one motion
+
     fin.read((char*)toppings, sizeof(Topping) * records);
-    // Closes the file
+
     fin.close();
-    // For loop to write out all of the toppings
+
     for(int i = 0; i < records; i++) {
-        // Writes out one topping per loop
-        cout << toppings[i];
-        cout << endl;
+
+        topping.push_back(toppings[i]);
     }
-    // Deletes the dynamic array
+
     delete[] toppings;
+
+    return topping;
 }
 
 // Reads out of the binary file pizzaMenu.dat and writes out the contents to the console
