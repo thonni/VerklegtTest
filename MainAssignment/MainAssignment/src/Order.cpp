@@ -25,15 +25,27 @@ void Order::addExtra(Extra extra) {
 }
 
 void Order::removePizza(int i) {
-    int ssize = this->pizzas.size();
     this->pizzas.at(i) = this->pizzas.back();
     this->pizzas.pop_back();
 }
 
 void Order::removeExtra(int i) {
-    int ssize = this->extras.size();
-    this->extras.at(i) = this->extras.back();
+    this->extras.at(i - 1) = this->extras.back();
     this->extras.pop_back();
+}
+
+void Order::listPizzas() {
+    int ssize = this->pizzas.size();
+    for(int i = 0; i < ssize; i++) {
+        cout << (i + 1) << this->pizzas.at(i);
+    }
+}
+
+void Order::listExtras() {
+    int ssize = this->extras.size();
+    for(int i = 0; i < ssize; i++) {
+        cout << (i + 1) << this->extras.at(i);
+    }
 }
 
 ostream& operator << (ostream& out, const Order& order)
