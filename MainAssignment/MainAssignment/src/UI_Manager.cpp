@@ -35,3 +35,16 @@ void addToMenu (){
         }
     } while(choice != 'q');
 }
+
+
+void UI_Manager::addTopping()
+{
+    string name;
+    double price;
+
+    cout << "Please enter the name of the topping: ";
+    cin >> name;
+
+    cout << "Please enter the price of the topping: ";
+    cin >> price;
+}

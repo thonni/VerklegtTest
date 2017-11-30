@@ -13,6 +13,7 @@ class UI_Manager
         UI_Manager();
         virtual ~UI_Manager();
         void addToMenu ();
+        void addTopping();
 
     protected:
 
