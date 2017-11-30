@@ -2,7 +2,7 @@
 #define ORDER_H
 
 #include <vector>
-#include "Pizza.h"
+#include "pizza.h"
 #include "Extra.h"
 
 using namespace std;

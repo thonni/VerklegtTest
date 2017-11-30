@@ -14,6 +14,28 @@ UI_Manager::~UI_Manager()
 }
 
 void addToMenu (){
+<<<<<<< HEAD
+    char choice;
+    do {
+        cout << "What would you like to add?" ;
+        cout << "Choose t for toppings" << endl;
+        cout << "Choose p for pizzas on menu" << endl;
+        cout << "Choose e for extras" << endl;
+        cout << "Choose q to quit" << endl;
+        cin >> choice;
+        if(choice == 't'){
+            //data.addToppings()
+        }
+        else if (choice == 'p')
+        {
+            //data.addPizzasToMenu();
+        }
+        else if (choice == 'e')
+        {
+            //data.addExtra();
+        }
+    } while(choice != 'q');
+=======
     cout << "What would you like to add?" ;
     cout << "Choose t for toppings" << endl;
     cout << "Choose t for toppings" << endl;
@@ -25,4 +47,5 @@ void addToMenu (){
     if(choice == 't'){
         //data.addToppings()
     }
+>>>>>>> be1abc7d5ecd68f3e0788b923b80feb5cfd8300b
 }
