@@ -14,11 +14,11 @@ class DataManager
         DataManager();
         virtual ~DataManager();
         void addToppings(const vector<Topping> topping);
-        void addPizzasToMenu(const Pizza *pizzas, const int arrsize);
+        void addPizzasToMenu(const vector<Pizza> pizzas);
         void addOrders(const Order *orders, const int arrsize);
         void addExtra(const Extra *extras, const int arrsize);
         vector<Topping> readToppings();
-        void readPizzaMenu();
+        vector<Pizza> readPizzaMenu();
         void readCurrentOrders();
         void readExtras();
         void moveOrders();

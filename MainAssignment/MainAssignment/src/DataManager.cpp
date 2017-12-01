@@ -1,4 +1,4 @@
-#include "DataManager.h"
+#include "../include/DataManager.h"
 #include <fstream>
 
 // Declare fout and fin in the global scope since they are used very often
@@ -19,26 +19,41 @@ DataManager::~DataManager()
 
 // Adds a dynamic array of toppings to the binary file toppingList.dat
 void DataManager::addToppings(const vector<Topping> topping) {
-    // Opens the file that I want to write inn in binary mode with the append setting
+
     int arrsize = topping.size();
+
     Topping *toppings = new Topping[arrsize];
+
     for(int i = 0; i < arrsize; i++) {
         toppings[i] = topping[i];
     }
+
     fout.open ("toppingList.dat", ios::binary|ios::app);
-    // Writes the dynamic array into the file in one motion
+
     fout.write((char*)toppings, sizeof(Topping) * arrsize);
-    // Closes the file
+
+    delete[] toppings;
+
     fout.close();
 }
 
 // Adds a dynamic array of pizzas to the binary file pizzaMenu.dat
-void DataManager::addPizzasToMenu(const Pizza *pizzas, const int arrsize) {
-    // Opens the file that I want to write inn in binary mode with the append setting
+void DataManager::addPizzasToMenu(const vector<Pizza> pizza) {
+
+    int arrsize = pizza.size();
+
+    Pizza *pizzas = new Pizza[arrsize];
+
+    for(int i = 0; i < arrsize; i++) {
+        pizzas[i] = pizza[i];
+    }
+
     fout.open ("pizzaMenu.dat", ios::binary|ios::app);
-    // Writes the dynamic array into the file in one motion
+
     fout.write((char*)pizzas, sizeof(Pizza) * arrsize);
-    // Closes the file
+
+    delete[] pizzas;
+
     fout.close();
 }
 
@@ -89,25 +104,28 @@ vector<Topping> DataManager::readToppings() {
 }
 
 // Reads out of the binary file pizzaMenu.dat and writes out the contents to the console
-void DataManager::readPizzaMenu() {
-    // Opens the file that I want to read from in binary mode
+vector<Pizza> DataManager::readPizzaMenu() {
+
+    vector<Pizza> pizza;
+
     fin.open("pizzaMenu.dat", ios::binary);
-    // Sets records as the record for Pizza
+
     int records = getPizzaRecord();
-    // Creates a dynamic array of pizzas
+
     Pizza *pizzas = new Pizza[records];
-    // Reads all of the pizzas from the file in one motion
+
     fin.read((char*)pizzas, sizeof(Pizza) * records);
-    // Closes the file
+
     fin.close();
-    // For loop to write out all of the pizzas
+
     for(int i = 0; i < records; i++) {
-        // Writes out one topping per loop
-        cout << pizzas[i];
-        cout << endl;
+
+        pizza.push_back(pizzas[i]);
     }
-    // Deletes the dynamic array
+
     delete[] pizzas;
+
+    return pizza;
 }
 
 // Reads out of the binary file currentOrders.dat and writes out the contents to the console
