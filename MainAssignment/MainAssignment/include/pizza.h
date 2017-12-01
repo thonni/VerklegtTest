@@ -23,12 +23,8 @@ class Pizza
         Pizza(string name, Pizza::Size pizzaSize);
 
         void addTopping(Topping topping);
-<<<<<<< HEAD
-        double generatePrice(double extraCost);
-=======
         void generatePrice();
         void generatePrice(double extraCost);
->>>>>>> 70912da1a64aefdffb1950821fac2d73a8d2ac71
 
         friend ostream& operator << (ostream& out, const Pizza& pizza);
         friend istream& operator >> (istream& in, Pizza& pizza);
@@ -46,6 +42,7 @@ class Pizza
         double price;
         char name[32];
         Pizza::Size pizzaSize;
+        double basePizzaPrice = 1300.0;
 };
 
 #endif // PIZZA_H

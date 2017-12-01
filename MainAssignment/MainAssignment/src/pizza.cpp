@@ -31,18 +31,12 @@ void Pizza::addTopping(Topping topping)
     this->toppings.push_back(topping);
 }
 
-
-<<<<<<< HEAD
-double Pizza::generatePrice(double extraCost = 0.0)
-=======
 void Pizza::generatePrice()
 {
     this->generatePrice(0.0);
 }
 
-
 void Pizza::generatePrice(double extraCost = 0.0)
->>>>>>> 70912da1a64aefdffb1950821fac2d73a8d2ac71
 {
     //Create temporary variables for price and a Topping class.
     double tempPrice = 0;
@@ -55,12 +49,11 @@ void Pizza::generatePrice(double extraCost = 0.0)
         tempTopping = this->toppings.at(i);
         tempPrice += tempTopping.getPrice();
     }
-    //Add extraCost to tempPrice
-    tempPrice += extraCost;
+    //Add extraCost and the base price to tempPrice
+    tempPrice += (extraCost + this->basePizzaPrice);
 
     //Set price to be the calculated tempPrice.
     this->price = tempPrice;
-    return tempPrice;
 }
 
 
