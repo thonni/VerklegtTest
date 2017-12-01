@@ -10,7 +10,7 @@ UI_Baker::~UI_Baker()
     //dtor
 }
 
-void bakerMenu()
+void UI_Baker::bakerMenu()
 {
     int location, orderNumber;
     char orderMark;
