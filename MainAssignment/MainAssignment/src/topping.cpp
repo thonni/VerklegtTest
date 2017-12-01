@@ -39,3 +39,29 @@ ostream& operator << (ostream& out, const Topping& topping)
 
     return out;
 }
+
+
+double Topping::getPrice()
+{
+    return this->price;
+}
+
+string Topping::getName()
+{
+    string returnString = "";
+    char currentChar;
+    int i = 0;
+
+
+    while(currentChar != '\0');
+    {
+        currentChar = this->name[i];
+
+        if(currentChar != '\0')
+        {
+            returnString += currentChar;
+        }
+
+        i++;
+    }
+}

@@ -32,6 +32,21 @@ void Pizza::addTopping(Topping topping)
 }
 
 
+void Pizza::generatePrice(double extraCost = 0.0)
+{
+    double tempPrice = 0;
+    Topping tempTopping;
+    for(unsigned int i = 0; i < this->toppings.size(); i++)
+    {
+        tempTopping = this->toppings.at(i);
+        tempPrice += tempTopping.getPrice();
+    }
+    tempPrice += extraCost;
+
+    this->price = tempPrice;
+}
+
+
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
     return out;
@@ -45,4 +60,7 @@ istream& operator >> (istream& in, Pizza& pizza)
 
 
 ///Getters and setters.
-int Pizza::getToppingCount(){ return this->toppings.size(); }
+int Pizza::getToppingCount()
+{
+    return this->toppings.size();
+}

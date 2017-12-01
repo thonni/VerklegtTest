@@ -35,6 +35,11 @@ class Topping
         ///////////////////////////////////////////////////////////////////////
         friend ostream& operator << (ostream& out, const Topping& topping);
 
+
+        ///Getters and setters.
+        double getPrice();
+        string getName();
+
     protected:
 
     private:
