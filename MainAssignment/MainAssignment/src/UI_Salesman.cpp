@@ -28,24 +28,39 @@ void UI_Salesman::customerOrder()
         {
             data.readToppings();
         }
-        if (choice == 'm')
+        else if (choice == 'm')
         {
             data.readPizzaMenu();
         }
-        if (choice == 'e')
+        else if (choice == 'e')
         {
             data.readExtras();
+        }
+        else if (choice != 'f')
+        {
+            cout << "Invalid input!" << endl;
         }
     } while (choice != 'f');
 
     cout << "The total amount is " << "bleeehhhh" << " ISK." << endl;
     cout << endl;
-    cout << "Please choose a delivery method." << endl;
 }
 
 void UI_Salesman::orderSorting()
 {
+    char delivery;
+    cout << "How do you want to get your order?" << endl;
+    cout << "Choose p for pick up." << endl;
+    cout << "Choose d for home delivery." << endl;
 
+    if (delivery == 'p')
+    {
+        cout << "Choose were you will pick up." << endl;
+    }
+    else if (delivery == 'd')
+    {
+        cout << "Where should the pizza be delivered?" << endl;
+    }
 }
 
 

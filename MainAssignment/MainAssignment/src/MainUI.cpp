@@ -37,10 +37,13 @@ void MainUI::startUI()
         if (selection == 'm')
         {
             manager.addToMenu();
+            cout << endl;
         }
         else if (selection == 's')
         {
             salesman.customerOrder();
+            salesman.orderSorting();
+            cout << endl;
         }
         else if (selection == 'b')
         {
