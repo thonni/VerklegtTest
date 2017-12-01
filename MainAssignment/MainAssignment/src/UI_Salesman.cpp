@@ -69,8 +69,8 @@ void UI_Salesman::customerOrder()
             } while(toupper(selection) != 'E');
             newPizza.generatePrice();
             cout << "This pizza costs " << newPizza.getPrice() << endl;
+            cout << ""
             totalPrice += newPizza.getPrice();
-
         }
 
 
