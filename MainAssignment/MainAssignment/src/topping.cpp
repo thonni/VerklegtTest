@@ -48,8 +48,7 @@ double Topping::getPrice()
 
 string Topping::getName()
 {
-    //Create a string and put the name which is a char array
-    //in it as a string.
+    //Convert char array name to string and store in return string
     string returnString = string(this->name);
     //Return the string.
     return returnString;

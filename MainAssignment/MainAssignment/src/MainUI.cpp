@@ -36,7 +36,7 @@ void MainUI::startUI()
         //Responds to who you are, and shows you the appropriate front page
         if (selection == 'm')
         {
-            manager.addToMenu();
+            manager.startUI();
             cout << endl;
         }
         else if (selection == 's')

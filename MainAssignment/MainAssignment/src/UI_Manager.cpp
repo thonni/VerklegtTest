@@ -15,7 +15,7 @@ UI_Manager::~UI_Manager()
 }
 
 
-void UI_Manager::addToMenu (){
+void UI_Manager::startUI (){
     char choice;
     do {
         cout << "What would you like to add?" << endl;
@@ -34,11 +34,17 @@ void UI_Manager::addToMenu (){
         }
         else if (choice == 'e')
         {
-            ///THIS IS TEMPORARY, IT READS AND DISPLAYS EVERYTHING IN THE TOPPING FILE.
+            /*//THIS IS TEMPORARY, IT READS AND DISPLAYS EVERYTHING IN THE TOPPING FILE.
             toppingsToAdd = data.readToppings();
             for(unsigned int i = 0; i < toppingsToAdd.size(); i++)
             {
                 cout << toppingsToAdd.at(i);
+            }*/
+            vector<Pizza> pizzas;
+            pizzas = data.readPizzaMenu();
+            for(unsigned int i = 0; i < pizzas.size(); i++)
+            {
+                cout << pizzas.at(i);
             }
         }
         else if(toupper(choice) != 'Q')
@@ -128,6 +134,7 @@ void UI_Manager::addPizza()
             //Add the topping to the pizza.
             newPizza.addTopping(availableToppings[selectionAsInt]);
         }
+        //If it is not in range, it checks if you entered the letter e or E.
         else if(toupper(selection) != 'E')
         {
             /// \TODO: Make error message here.
