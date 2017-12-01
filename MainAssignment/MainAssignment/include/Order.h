@@ -12,13 +12,16 @@ class Order
     public:
         Order();
         virtual ~Order();
-        char getState();
         void addPizza(Pizza pizza);
         void addExtra(Extra extra);
         void removePizza(int i);
         void removeExtra(int i);
         void listPizzas();
         void listExtras();
+
+        ///Getters and setters.
+        char getState();
+
 
         friend ostream& operator << (ostream& out, const Order& order);
 
@@ -28,6 +31,7 @@ class Order
         char state;
         vector<Pizza> pizzas;
         vector<Extra> extras;
+        double totalPrice;
 };
 
 #endif // ORDER_H

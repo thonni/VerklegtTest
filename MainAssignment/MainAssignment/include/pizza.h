@@ -42,7 +42,7 @@ class Pizza
         double price;
         char name[32];
         Pizza::Size pizzaSize;
-        double basePizzaPrice = 1300.0;
+        double basePizzaPrice;
 };
 
 #endif // PIZZA_H

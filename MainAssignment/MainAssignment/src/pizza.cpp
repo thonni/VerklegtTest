@@ -6,6 +6,7 @@ Pizza::Pizza()
     this->name[0] = '\0';
     this->pizzaSize = Small;
     this->price = 0.0;
+    this->basePizzaPrice = 1300;
 }
 
 
@@ -23,6 +24,7 @@ Pizza::Pizza(string name, Pizza::Size pizzaSize = Small)
 
     //Put the pizzaSize input in pizzaSize.
     this->pizzaSize = pizzaSize;
+    this->basePizzaPrice = 1300;
 }
 
 
@@ -77,7 +79,23 @@ int Pizza::getToppingCount()
 
 double Pizza::getPrice()
 {
-    return this->price;
+    //Returns a different price depending on the pizza size.
+    if(this->pizzaSize == this->Small)
+    {
+        return this->price * 1.0;
+    }
+    else if(this->pizzaSize == this->Medium)
+    {
+        return this->price * 1.2;
+    }
+    else if(this->pizzaSize == this->Large)
+    {
+        return this->price * 1.4;
+    }
+    else
+    {
+        return -1.0;
+    }
 }
 
 string Pizza::getName()
