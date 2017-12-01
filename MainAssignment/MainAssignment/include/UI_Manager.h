@@ -20,6 +20,7 @@ class UI_Manager
         virtual ~UI_Manager();
         void addToMenu ();
         void addTopping();
+        void addPizza();
 
     protected:
 

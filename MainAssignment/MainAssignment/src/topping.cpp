@@ -48,24 +48,9 @@ double Topping::getPrice()
 
 string Topping::getName()
 {
-    //Create temporary variables to store the return string
-    //and the iterator.
-    string returnString = "";
-    char currentChar;
-    int i = 0;
-
-    //Loop until it comes to the end of the character array.
-    while(this->name[i] != '\0');
-    {
-        //Check if it is at the end of the character array.
-        if(this->name[i] != '\0')
-        {
-            //Add the current character to the return string.
-            returnString += this->name[i];;
-        }
-
-        i++;
-    }
-
+    //Create a string and put the name which is a char array
+    //in it as a string.
+    string returnString = string(this->name);
+    //Return the string.
     return returnString;
 }
