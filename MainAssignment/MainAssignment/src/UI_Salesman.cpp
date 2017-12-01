@@ -78,7 +78,51 @@ void UI_Salesman::takeOrder()
         }
         else if(toupper(choice) == 'F')
         {
+<<<<<<< HEAD
 
+=======
+            string name;
+            Topping tempTopping;
+            vector<Topping> availableToppings;
+            vector<Pizza> newPizzas;
+            char selection = '\0';
+            unsigned int selectionAsInt = 0;
+            Pizza newPizza(name, Pizza::Small);
+            //Get a vector for all saved toppings using DataManager.
+            availableToppings = data.readToppings();
+            do
+            {
+                for(unsigned int i = 0; i < availableToppings.size(); i++)
+                {
+                    tempTopping = availableToppings[i];
+                    cout << "ID: " << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
+                }
+                cout << "E - End" << endl << endl;
+
+                //Ask the user to select a topping.
+                cout << "Please select the id of the topping to add: ";
+                cin >> selection;
+
+                //Change the char selection to int.
+                selectionAsInt = (int)(selection - '0');
+
+                //Check if the selection is in the correct range.
+                if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
+                {
+                    //Add the topping to the pizza.
+                    newPizza.addTopping(availableToppings[selectionAsInt]);
+                }
+                //If it is not in range, it checks if you entered the letter e or E.
+                else if(toupper(selection) != 'E')
+                {
+                    /// \TODO: Make error message here.
+                }
+
+            } while(toupper(selection) != 'E');
+            newPizza.generatePrice();
+            cout << "This pizza costs " << newPizza.getPrice() << endl;
+            cout << ""
+            totalPrice += newPizza.getPrice();
         }
 
     } while(toupper(choice) != 'C');
