@@ -32,6 +32,27 @@ void Pizza::addTopping(Topping topping)
 }
 
 
+void Pizza::generatePrice(double extraCost = 0.0)
+{
+    //Create temporary variables for price and a Topping class.
+    double tempPrice = 0;
+    Topping tempTopping;
+
+    //Loop trough all toppings that Pizza is storing and add
+    //the price of those toppings to tempPrice.
+    for(unsigned int i = 0; i < this->toppings.size(); i++)
+    {
+        tempTopping = this->toppings.at(i);
+        tempPrice += tempTopping.getPrice();
+    }
+    //Add extraCost to tempPrice
+    tempPrice += extraCost;
+
+    //Set price to be the calculated tempPrice.
+    this->price = tempPrice;
+}
+
+
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
     return out;
@@ -45,4 +66,7 @@ istream& operator >> (istream& in, Pizza& pizza)
 
 
 ///Getters and setters.
-int Pizza::getToppingCount(){ return this->toppings.size(); }
+int Pizza::getToppingCount()
+{
+    return this->toppings.size();
+}
