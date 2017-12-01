@@ -38,21 +38,11 @@ void DataManager::addToppings(const vector<Topping> topping) {
 }
 
 // Adds a dynamic array of pizzas to the binary file pizzaMenu.dat
-void DataManager::addPizzasToMenu(const vector<Pizza> pizza) {
-
-    int arrsize = pizza.size();
-
-    Pizza *pizzas = new Pizza[arrsize];
-
-    for(int i = 0; i < arrsize; i++) {
-        pizzas[i] = pizza[i];
-    }
+void DataManager::addPizzasToMenu(const Pizza pizza) {
 
     fout.open ("pizzaMenu.dat", ios::binary|ios::app);
 
-    fout.write((char*)pizzas, sizeof(Pizza) * arrsize);
-
-    delete[] pizzas;
+    fout.write((char*)(&pizza), sizeof(Pizza));
 
     fout.close();
 }

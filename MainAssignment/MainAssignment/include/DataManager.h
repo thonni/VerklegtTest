@@ -14,7 +14,7 @@ class DataManager
         DataManager();
         virtual ~DataManager();
         void addToppings(const vector<Topping> topping);
-        void addPizzasToMenu(const vector<Pizza> pizzas);
+        void addPizzasToMenu(const Pizza pizza);
         void addOrders(const Order *orders, const int arrsize);
         void addExtra(const Extra *extras, const int arrsize);
         vector<Topping> readToppings();
