@@ -21,13 +21,13 @@ void UI_Salesman::customerOrder()
 
     do
     {
-        cout << "Choose p to make a pizza" << endl;
-        cout << "Choose m to pick a pizza off the menu" << endl;
-        cout << "Choose e to add a soda or an extra to the order" << endl;
-        cout << "Choose f when the order is finished" << endl;
+        cout << "Choose P to make a pizza" << endl;
+        cout << "Choose M to pick a pizza off the menu" << endl;
+        cout << "Choose E to add a soda or an extra to the order" << endl;
+        cout << "Choose F when the order is finished" << endl;
         cin >> choice;
 
-        if (choice == 'p')
+        if (toupper(choice) == 'P')
         {
             string name;
             Topping tempTopping;
@@ -59,10 +59,6 @@ void UI_Salesman::customerOrder()
                 {
                     //Add the topping to the pizza.
                     newPizza.addTopping(availableToppings[selectionAsInt]);
-
-                    Topping tempTopp;
-                    tempTopp = availableToppings[selectionAsInt];
-                    totalPrice += tempTopp.getPrice();
                 }
                 //If it is not in range, it checks if you entered the letter e or E.
                 else if(toupper(selection) != 'E')
@@ -77,15 +73,15 @@ void UI_Salesman::customerOrder()
         }
 
 
-        else if (choice == 'm')
+        else if (toupper(choice) == 'M')
         {
             data.readPizzaMenu();
         }
-        else if (choice == 'e')
+        else if (toupper(choice) == 'E')
         {
             data.readExtras();
         }
-        else if (choice != 'f')
+        else if (toupper(choice) != 'F')
         {
             cout << "Invalid input!" << endl;
         }
