@@ -29,11 +29,12 @@ class Pizza
         friend ostream& operator << (ostream& out, const Pizza& pizza);
         friend istream& operator >> (istream& in, Pizza& pizza);
 
-        //Getters and setters
+        ///Getters and setters.
         int getToppingCount();
         double getPrice();
         string getName();
         vector<Topping> getToppings();
+        void setSize(Pizza::Size pizzaSize);
 
     protected:
 

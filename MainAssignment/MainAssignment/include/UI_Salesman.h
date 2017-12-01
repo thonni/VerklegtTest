@@ -12,8 +12,13 @@ class UI_Salesman
     public:
         UI_Salesman();
         virtual ~UI_Salesman();
-        void customerOrder();
+        void startUI();
         void orderSorting();
+
+        void takeOrder();
+        Pizza choosePizzaFromMenu();
+        Pizza makePizza();
+
     protected:
     private:
 };

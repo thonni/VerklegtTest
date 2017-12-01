@@ -91,7 +91,7 @@ void UI_Manager::addPizza()
     string name;
     Topping tempTopping;
     vector<Topping> availableToppings;
-    vector<Pizza> newPizzas;
+    //vector<Pizza> newPizzas;
     char selection = '0';
     unsigned int selectionAsInt = 0;
 
@@ -163,6 +163,6 @@ void UI_Manager::addPizza()
 
 
     //Add the pizza to a vector and use DataManager to save the pizza to file.
-    newPizzas.push_back(newPizza);
-    data.addPizzasToMenu(newPizzas);
+    //newPizzas.push_back(newPizza);
+    data.addPizzasToMenu(newPizza);
 }
