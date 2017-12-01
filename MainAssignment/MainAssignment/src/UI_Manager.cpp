@@ -60,8 +60,8 @@ void UI_Manager::addTopping()
     {
         //Ask the user for a name and price for the new topping.
         cout << "Please enter the name of the topping: ";
-        cout << "Please enter the price of the topping: ";
         cin >> name;
+        cout << "Please enter the price of the topping: ";
         cin >> price;
 
         //Create a temporary instance of Topping.
