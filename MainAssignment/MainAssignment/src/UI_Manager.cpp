@@ -95,6 +95,9 @@ void UI_Manager::addPizza()
     char selection = '0';
     unsigned int selectionAsInt = 0;
 
+    //Clear the screen.
+    cout << string(50, '\n');
+
     //Get a vector for all saved toppings using DataManager.
     availableToppings = data.readToppings();
 
@@ -107,11 +110,14 @@ void UI_Manager::addPizza()
 
     do
     {
+        //Clear the screen.
+        cout << string(50, '\n');
+
         //Loop trough all menu toppings and print them on screen.
         for(unsigned int i = 0; i < availableToppings.size(); i++)
         {
             tempTopping = availableToppings[i];
-            cout << "ID: " << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
+            cout << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
         }
         cout << "E - End" << endl << endl;
 
@@ -136,11 +142,25 @@ void UI_Manager::addPizza()
 
     } while(toupper(selection) != 'E');
 
+    //Clear the screen.
+    cout << string(50, '\n');
+
     //Make the pizza calculate the price of it self.
     newPizza.generatePrice(0.0);
 
-    //Tell the user the price.
-    cout << "The base price has been calculated to be " << newPizza.getPrice() << " ISK" << endl;
+    //Tell the user all the information about the pizza he/she created
+    cout << "Name: " << newPizza.getName() << endl << endl;
+    cout << "Toppings:" << endl;
+    for(unsigned int i = 0; i < newPizza.getToppings().size(); i++)
+    {
+        cout << " *" << newPizza.getToppings().at(i).getName() << endl;
+    }
+    cout << endl << "Total price: " << newPizza.getPrice() << " ISK" << endl << endl;
+
+    //Ask the user if everything is OK.
+    cout << "Is this OK? (Y/N): ";
+    cin >> selection;
+
 
     //Add the pizza to a vector and use DataManager to save the pizza to file.
     newPizzas.push_back(newPizza);

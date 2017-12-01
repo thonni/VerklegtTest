@@ -75,3 +75,17 @@ double Pizza::getPrice()
 {
     return this->price;
 }
+
+string Pizza::getName()
+{
+    //Convert char array name to string and store in return string
+    string returnString = string(this->name);
+    //Return the string.
+    return returnString;
+}
+
+
+vector<Topping> Pizza::getToppings()
+{
+    return this->toppings;
+}

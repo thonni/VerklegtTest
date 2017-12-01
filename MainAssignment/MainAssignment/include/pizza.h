@@ -31,6 +31,8 @@ class Pizza
         //Getters and setters
         int getToppingCount();
         double getPrice();
+        string getName();
+        vector<Topping> getToppings();
 
     protected:
 
