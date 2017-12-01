@@ -32,7 +32,17 @@ void Pizza::addTopping(Topping topping)
 }
 
 
+<<<<<<< HEAD
 double Pizza::generatePrice(double extraCost = 0.0)
+=======
+void Pizza::generatePrice()
+{
+    this->generatePrice(0.0);
+}
+
+
+void Pizza::generatePrice(double extraCost = 0.0)
+>>>>>>> 70912da1a64aefdffb1950821fac2d73a8d2ac71
 {
     //Create temporary variables for price and a Topping class.
     double tempPrice = 0;
@@ -75,4 +85,18 @@ int Pizza::getToppingCount()
 double Pizza::getPrice()
 {
     return this->price;
+}
+
+string Pizza::getName()
+{
+    //Convert char array name to string and store in return string
+    string returnString = string(this->name);
+    //Return the string.
+    return returnString;
+}
+
+
+vector<Topping> Pizza::getToppings()
+{
+    return this->toppings;
 }
