@@ -41,8 +41,8 @@ void MainUI::startUI()
         }
         else if (selection == 's')
         {
-            salesman.customerOrder();
-            salesman.orderSorting();
+            salesman.startUI();
+            //salesman.orderSorting();
             cout << endl;
         }
         else if (selection == 'b')
