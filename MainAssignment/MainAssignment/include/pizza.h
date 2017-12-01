@@ -23,7 +23,7 @@ class Pizza
         Pizza(string name, Pizza::Size pizzaSize);
 
         void addTopping(Topping topping);
-        void generatePrice(double extraCost);
+        double generatePrice(double extraCost);
 
         friend ostream& operator << (ostream& out, const Pizza& pizza);
         friend istream& operator >> (istream& in, Pizza& pizza);

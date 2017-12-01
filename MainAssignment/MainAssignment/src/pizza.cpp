@@ -32,7 +32,7 @@ void Pizza::addTopping(Topping topping)
 }
 
 
-void Pizza::generatePrice(double extraCost = 0.0)
+double Pizza::generatePrice(double extraCost = 0.0)
 {
     //Create temporary variables for price and a Topping class.
     double tempPrice = 0;
@@ -50,6 +50,7 @@ void Pizza::generatePrice(double extraCost = 0.0)
 
     //Set price to be the calculated tempPrice.
     this->price = tempPrice;
+    return tempPrice;
 }
 
 
