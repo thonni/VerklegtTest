@@ -12,7 +12,7 @@ UI_Salesman::~UI_Salesman()
     //dtor
 }
 
-void customerOrder ()
+void UI_Salesman::customerOrder ()
 {
     cout << "Please enter the customer's order" << endl;
     char choice;
