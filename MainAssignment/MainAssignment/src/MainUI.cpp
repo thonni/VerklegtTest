@@ -3,6 +3,7 @@
 using namespace std;
 
 UI_Manager manager;
+UI_Salesman salesman;
 
 MainUI::MainUI()
 {
@@ -39,7 +40,7 @@ void MainUI::startUI()
         }
         else if (selection == 's')
         {
-
+            salesman.customerOrder();
         }
         else if (selection == 'b')
         {
