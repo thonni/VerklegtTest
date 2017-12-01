@@ -61,7 +61,7 @@ void UI_Salesman::customerOrder()
                     newPizza.addTopping(availableToppings[selectionAsInt]);
 
                     Topping tempTopp;
-                    availableToppings[selectionAsInt] = tempTopp;
+                    tempTopp = availableToppings[selectionAsInt];
                     totalPrice += tempTopp.getPrice();
                 }
                 //If it is not in range, it checks if you entered the letter e or E.
@@ -71,8 +71,9 @@ void UI_Salesman::customerOrder()
                 }
 
             } while(toupper(selection) != 'E');
+            cout << "This pizza costs " << newPizza.getPrice();
+            totalPrice += newPizza.getPrice();
 
-            totalPrice += newPizza.generatePrice(0.0);
         }
 
 
