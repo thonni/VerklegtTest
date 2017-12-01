@@ -70,3 +70,8 @@ int Pizza::getToppingCount()
 {
     return this->toppings.size();
 }
+
+double Pizza::getPrice()
+{
+    return this->price;
+}

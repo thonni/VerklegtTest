@@ -30,6 +30,7 @@ class Pizza
 
         //Getters and setters
         int getToppingCount();
+        double getPrice();
 
     protected:
 

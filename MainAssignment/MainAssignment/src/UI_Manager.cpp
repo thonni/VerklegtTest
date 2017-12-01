@@ -18,10 +18,10 @@ UI_Manager::~UI_Manager()
 void UI_Manager::startUI (){
     char choice;
     do {
-        cout << "What would you like to add?" << endl;
-        cout << "Choose t for toppings" << endl;
-        cout << "Choose p for pizzas on menu" << endl;
-        cout << "Choose e for extras" << endl;
+        cout << "What would you like to do?" << endl;
+        cout << "Choose t to add toppings" << endl;
+        cout << "Choose p to add pizzas on menu" << endl;
+        cout << "Choose e to add extras" << endl;
         cout << "Choose q to quit" << endl;
         cin >> choice;
         if(choice == 't')
@@ -34,12 +34,6 @@ void UI_Manager::startUI (){
         }
         else if (choice == 'e')
         {
-            /*//THIS IS TEMPORARY, IT READS AND DISPLAYS EVERYTHING IN THE TOPPING FILE.
-            toppingsToAdd = data.readToppings();
-            for(unsigned int i = 0; i < toppingsToAdd.size(); i++)
-            {
-                cout << toppingsToAdd.at(i);
-            }*/
             vector<Pizza> pizzas;
             pizzas = data.readPizzaMenu();
             for(unsigned int i = 0; i < pizzas.size(); i++)
@@ -117,12 +111,12 @@ void UI_Manager::addPizza()
         for(unsigned int i = 0; i < availableToppings.size(); i++)
         {
             tempTopping = availableToppings[i];
-            cout << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
+            cout << "ID: " << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
         }
         cout << "E - End" << endl << endl;
 
         //Ask the user to select a topping.
-        cout << "Please select a topping to add: ";
+        cout << "Please select the id of the topping to add: ";
         cin >> selection;
 
         //Change the char selection to int.
@@ -142,6 +136,13 @@ void UI_Manager::addPizza()
 
     } while(toupper(selection) != 'E');
 
+    //Make the pizza calculate the price of it self.
+    newPizza.generatePrice(0.0);
+
+    //Tell the user the price.
+    cout << "The base price has been calculated to be " << newPizza.getPrice() << " ISK" << endl;
+
+    //Add the pizza to a vector and use DataManager to save the pizza to file.
     newPizzas.push_back(newPizza);
     data.addPizzasToMenu(newPizzas);
 }
