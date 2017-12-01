@@ -13,6 +13,7 @@ class UI_Salesman
         UI_Salesman();
         virtual ~UI_Salesman();
         void customerOrder();
+        void orderSorting();
     protected:
     private:
 };

@@ -12,7 +12,7 @@ UI_Salesman::~UI_Salesman()
     //dtor
 }
 
-void UI_Salesman::customerOrder ()
+void UI_Salesman::customerOrder()
 {
     cout << "Please enter the customer's order" << endl;
     char choice;
@@ -36,6 +36,16 @@ void UI_Salesman::customerOrder ()
         {
             data.readExtras();
         }
-
     } while (choice != 'f');
+
+    cout << "The total amount is " << "bleeehhhh" << " ISK." << endl;
+    cout << endl;
+    cout << "Please choose a delivery method." << endl;
 }
+
+void UI_Salesman::orderSorting()
+{
+
+}
+
+
