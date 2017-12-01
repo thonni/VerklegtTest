@@ -146,7 +146,7 @@ void UI_Manager::addPizza()
     cout << string(50, '\n');
 
     //Make the pizza calculate the price of it self.
-    newPizza.generatePrice(0.0);
+    newPizza.generatePrice();
 
     //Tell the user all the information about the pizza he/she created
     cout << "Name: " << newPizza.getName() << endl << endl;
