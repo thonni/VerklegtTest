@@ -27,11 +27,12 @@ void MainUI::startUI()
 
         cout << "Welcome to Pizza hut" << endl;
         cout << "Please tell us who you are:" << endl;
-        cout << "Choose m for manager" << endl;
-        cout << "Choose s for salesman" << endl;
-        cout << "Choose b for baker" << endl;
-        cout << "Choose d for delivery" << endl;
-        cout << "Choose q to go quit" << endl;
+        cout << "Choose M for manager" << endl;
+        cout << "Choose S for salesman" << endl;
+        cout << "Choose B for baker" << endl;
+        cout << "Choose D for delivery" << endl;
+        cout << "Choose Q to go quit" << endl;
+        cout << ": ";
 
         //Asks the user who he/she is.
         cin >> selection;

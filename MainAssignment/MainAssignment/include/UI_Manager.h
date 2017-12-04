@@ -17,7 +17,6 @@ class UI_Manager
 {
     public:
         UI_Manager();
-        virtual ~UI_Manager();
         void startUI ();
         void addTopping();
         void addPizza();

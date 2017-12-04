@@ -19,7 +19,7 @@ class UI_Salesman
         Pizza makePizza();
         Extra chooseExtraFromMenu();
         void removeFromOrder(Order* order);
-        void finishUpOrder(Order* order);
+        bool finishUpOrder(Order* order);
 
     protected:
     private:

@@ -91,7 +91,6 @@ void UI_Salesman::takeOrder()
         }
         else if(toupper(choice) == 'F')
         {
-<<<<<<< HEAD
             //Call the finishUpOrder function which
             //takes newOrder as an pointer argument.
             //If the order was finished up it returns true.
@@ -99,11 +98,6 @@ void UI_Salesman::takeOrder()
         }
 
     } while(toupper(choice) != 'C' && orderFinished == false);
-=======
-
-        }
-    } while(toupper(choice) != 'C');
->>>>>>> 91eec6c9734a2f543b82a1b5bfccc6fb3103b633
 }
 
 
