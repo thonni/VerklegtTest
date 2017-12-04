@@ -38,11 +38,20 @@ void DataManager::addToppings(const vector<Topping> topping) {
 }
 
 // Adds a dynamic array of pizzas to the binary file pizzaMenu.dat
-void DataManager::addPizzasToMenu(const Pizza pizza) {
+void DataManager::addPizzasToMenu(Pizza pizza) {
 
     fout.open ("pizzaMenu.dat", ios::binary|ios::app);
 
-    fout.write((char*)(&pizza), sizeof(Pizza));
+    int tCount = pizza.getToppingCount();
+
+    fout.write((char*)(&tCount), sizeof(int));
+
+    vector<Topping> toppings;
+    toppings = pizza.getToppings();
+
+    for(int i = 0; i < tCount; i++) {
+        fout.write((char*)(&toppings.at(i)), sizeof(Topping));
+    }
 
     fout.close();
 }
@@ -94,28 +103,25 @@ vector<Topping> DataManager::readToppings() {
 }
 
 // Reads out of the binary file pizzaMenu.dat and writes out the contents to the console
+// Still working on making this shit work the way I want it to.
 vector<Pizza> DataManager::readPizzaMenu() {
 
-    vector<Pizza> pizza;
+    vector<Pizza> tempPizza;
+
+    int tCount;
 
     fin.open("pizzaMenu.dat", ios::binary);
 
-    int records = getPizzaRecord();
+    fin.read((char*)(&tCount), sizeof(int));
 
-    Pizza *pizzas = new Pizza[records];
+    Topping topping;
 
-    fin.read((char*)pizzas, sizeof(Pizza) * records);
-
-    fin.close();
-
-    for(int i = 0; i < records; i++) {
-
-        pizza.push_back(pizzas[i]);
+    for(int i = 0; i < tCount; i++) {
+        fin.read((char*)(&topping), sizeof(Topping));
+        tempPizza.at(i).addTopping(topping);
     }
 
-    delete[] pizzas;
-
-    return pizza;
+    return tempPizza;
 }
 
 // Reads out of the binary file currentOrders.dat and writes out the contents to the console
