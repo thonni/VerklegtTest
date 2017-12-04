@@ -22,6 +22,9 @@ void MainUI::startUI()
     do
     {
 
+        //Clear the screen.
+        cout << string(50, '\n');
+
         cout << "Welcome to Pizza hut" << endl;
         cout << "Please tell us who you are:" << endl;
         cout << "Choose m for manager" << endl;

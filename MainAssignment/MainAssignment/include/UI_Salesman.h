@@ -11,13 +11,15 @@ class UI_Salesman
 {
     public:
         UI_Salesman();
-        virtual ~UI_Salesman();
         void startUI();
         void orderSorting();
 
         void takeOrder();
         Pizza choosePizzaFromMenu();
         Pizza makePizza();
+        Extra chooseExtraFromMenu();
+        void removeFromOrder(Order* order);
+        void finishUpOrder(Order* order);
 
     protected:
     private:

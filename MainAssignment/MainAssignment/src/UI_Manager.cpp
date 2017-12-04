@@ -163,6 +163,6 @@ void UI_Manager::addPizza()
 
 
     //Add the pizza to a vector and use DataManager to save the pizza to file.
-    newPizzas.push_back(newPizza);
-    data.addPizzasToMenu(newPizzas);
+    //newPizzas.push_back(newPizza);
+    //data.addPizzasToMenu(newPizzas);
 }

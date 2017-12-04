@@ -14,12 +14,12 @@ Order::~Order()
 
 void Order::addPizza(Pizza pizza)
 {
-    pizzas.push_back(pizza);
+    this->pizzas.push_back(pizza);
 }
 
 void Order::addExtra(Extra extra)
 {
-    extras.push_back(extra);
+    this->extras.push_back(extra);
 }
 
 void Order::removePizza(int i)

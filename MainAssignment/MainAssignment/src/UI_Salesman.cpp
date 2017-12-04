@@ -7,11 +7,6 @@ UI_Salesman::UI_Salesman()
     //ctor
 }
 
-UI_Salesman::~UI_Salesman()
-{
-    //dtor
-}
-
 void UI_Salesman::startUI()
 {
     char choice;
@@ -25,6 +20,7 @@ void UI_Salesman::startUI()
         cout << "Choose O to take order" << endl;
         cout << "Choose V to view orders" << endl;
         cout << "Choose B to go back" << endl;
+        cout << ": ";
         cin >> choice;
 
         if (toupper(choice) == 'O')
@@ -47,6 +43,10 @@ void UI_Salesman::startUI()
 void UI_Salesman::takeOrder()
 {
     char choice;
+    bool orderFinished = false;
+
+    //Create an instance of order.
+    Order newOrder;
 
     do
     {
@@ -59,6 +59,7 @@ void UI_Salesman::takeOrder()
         cout << "Choose S to Select a pizza from the menu" << endl;
         cout << "Choose M to Make a Pizza from scratch" << endl;
         cout << "Choose E to add Extras" << endl;
+        cout << "Choose R to Remove something from order" << endl;
         cout << "Choose F to Finish up the order" << endl;
         cout << "Choose C to Cancel order" << endl;
         cout << ": ";
@@ -66,72 +67,47 @@ void UI_Salesman::takeOrder()
 
         if(toupper(choice) == 'S')
         {
-            this->choosePizzaFromMenu();
+            //Call the choosePizzaFromMenu function
+            //and add the pizza it returns to newOrder.
+            newOrder.addPizza(this->choosePizzaFromMenu());
         }
         else if(toupper(choice) == 'M')
         {
-            this->makePizza();
+            //Call the makePizza function
+            //and add the pizza it returns to newOrder.
+            newOrder.addPizza(this->makePizza());
         }
         else if(toupper(choice) == 'E')
         {
-
+            //Call the addExtra function
+            //and add the Extra it returns to newOrder.
+            newOrder.addExtra(this->chooseExtraFromMenu());
+        }
+        else if(toupper(choice) == 'R')
+        {
+            //Call the removeFromOrder function which
+            //takes newOrder as an pointer argument.
+            this->removeFromOrder(&newOrder);
         }
         else if(toupper(choice) == 'F')
         {
-<<<<<<< HEAD
-
-=======
-            string name;
-            Topping tempTopping;
-            vector<Topping> availableToppings;
-            vector<Pizza> newPizzas;
-            char selection = '\0';
-            unsigned int selectionAsInt = 0;
-            Pizza newPizza(name, Pizza::Small);
-            //Get a vector for all saved toppings using DataManager.
-            availableToppings = data.readToppings();
-            do
-            {
-                for(unsigned int i = 0; i < availableToppings.size(); i++)
-                {
-                    tempTopping = availableToppings[i];
-                    cout << "ID: " << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
-                }
-                cout << "E - End" << endl << endl;
-
-                //Ask the user to select a topping.
-                cout << "Please select the id of the topping to add: ";
-                cin >> selection;
-
-                //Change the char selection to int.
-                selectionAsInt = (int)(selection - '0');
-
-                //Check if the selection is in the correct range.
-                if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
-                {
-                    //Add the topping to the pizza.
-                    newPizza.addTopping(availableToppings[selectionAsInt]);
-                }
-                //If it is not in range, it checks if you entered the letter e or E.
-                else if(toupper(selection) != 'E')
-                {
-                    /// \TODO: Make error message here.
-                }
-
-            } while(toupper(selection) != 'E');
-            newPizza.generatePrice();
-            cout << "This pizza costs " << newPizza.getPrice() << endl;
-            cout << ""
-            totalPrice += newPizza.getPrice();
+            //Call the finishUpOrder function which
+            //takes newOrder as an pointer argument.
+            //If the order was finished up it returns true.
+            orderFinished = this->finishUpOrder(&newOrder);
         }
 
-    } while(toupper(choice) != 'C');
+    } while(toupper(choice) != 'C' && orderFinished == false);
 }
 
 
 Pizza UI_Salesman::choosePizzaFromMenu()
 {
-    /// \TODO: Print out all pizzas and make the user select from them.
+    /// \TODO: Print out all menu pizzas from file and make the user select from them.
+
+    //Temp stuff just so it returns something (And doesn't give an warning when compiling).
+    Pizza temp("Temp", Pizza::Small);
+    return temp;
 }
 
 
@@ -228,6 +204,11 @@ Pizza UI_Salesman::makePizza()
     {
         cout << " *" << newPizza.getToppings().at(i).getName() << endl;
     }
+    //If there were no toppings, say that there were none
+    if(newPizza.getToppings().size() == 0)
+    {
+        cout << " *NO TOPPINGS" << endl;
+    }
     cout << endl << "Pizza price: " << newPizza.getPrice() << " ISK" << endl << endl;
 
     //Ask the user if everything is OK.
@@ -238,21 +219,28 @@ Pizza UI_Salesman::makePizza()
     return newPizza;
 }
 
-/*void UI_Salesman::orderSorting()
-{
-    char delivery;
-    cout << "How do you want to get your order?" << endl;
-    cout << "Choose p for pick up." << endl;
-    cout << "Choose d for home delivery." << endl;
 
-    if (delivery == 'p')
-    {
-        cout << "Choose were you will pick up." << endl;
-    }
-    else if (delivery == 'd')
-    {
-        cout << "Where should the pizza be delivered?" << endl;
-    }
+Extra UI_Salesman::chooseExtraFromMenu()
+{
+    /// \TODO: Print out all menu extras from file and make the user select from them.
+
+    //Temp stuff just so it returns something (And doesn't give an warning when compiling).
+    Extra temp("temp", Extra::Drink, 0.0);
+    return temp;
 }
 
-*/
+
+void UI_Salesman::removeFromOrder(Order* order)
+{
+    /// \TODO: print out all items that are currently in the order and make the user select
+    ///        something to remove (Or select something to cancel).
+}
+
+
+bool UI_Salesman::finishUpOrder(Order* order)
+{
+    /// \TODO: Print out all items that are currently in the order in a nice list and ask the user
+    ///        if he/she wants to finish up the order, if so it saves the order to file and returns true
+    ///        else it returns false.
+    return true;
+}
