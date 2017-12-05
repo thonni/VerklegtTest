@@ -1,19 +1,5 @@
 #include "MainUI.h"
 
-using namespace std;
-
-UI_Manager manager;
-UI_Salesman salesman;
-
-MainUI::MainUI()
-{
-    //ctor
-}
-
-MainUI::~MainUI()
-{
-    //dtor
-}
 
 void MainUI::startUI()
 {

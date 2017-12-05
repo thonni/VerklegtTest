@@ -1,6 +1,8 @@
 #ifndef UI_SALESMAN_H
 #define UI_SALESMAN_H
-#include "DataManager.h"
+
+#include "toppingservice.h"
+#include "PizzaService.h"
 #include "topping.h"
 #include "pizza.h"
 #include "Extra.h"
@@ -10,7 +12,6 @@
 class UI_Salesman
 {
     public:
-        UI_Salesman();
         void startUI();
         void orderSorting();
 
@@ -22,7 +23,10 @@ class UI_Salesman
         bool finishUpOrder(Order* order);
 
     protected:
+
     private:
+        ToppingService toppingService;
+        PizzaService pizzaService;
 };
 
 #endif // UI_SALESMAN_H

@@ -6,7 +6,6 @@
 #include <string>
 
 #include "toppingservice.h"
-#include "PizzaService.h"
 #include "DataManager.h"
 #include "topping.h"
 #include "pizza.h"
@@ -27,8 +26,7 @@ class UI_Manager
 
     private:
         DataManager data;
-        ToppingService toppingService;
-        PizzaService pizzaService;
+
         vector<Topping> toppingsToAdd;
 
 };

@@ -37,8 +37,8 @@ class Topping
 
 
         ///Getters and setters.
-        double getPrice();
-        string getName();
+        double getPrice() const;
+        string getName() const;
 
     protected:
 

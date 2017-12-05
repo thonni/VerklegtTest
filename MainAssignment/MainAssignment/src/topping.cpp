@@ -41,12 +41,12 @@ ostream& operator << (ostream& out, const Topping& topping)
 }
 
 
-double Topping::getPrice()
+double Topping::getPrice() const
 {
     return this->price;
 }
 
-string Topping::getName()
+string Topping::getName() const
 {
     //Convert char array name to string and store in return string
     string returnString = string(this->name);

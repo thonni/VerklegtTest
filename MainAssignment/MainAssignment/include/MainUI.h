@@ -13,14 +13,13 @@ using namespace std;
 class MainUI
 {
     public:
-        MainUI();
-        virtual ~MainUI();
-
         void startUI();
 
     protected:
 
     private:
+        UI_Manager manager;
+        UI_Salesman salesman;
 
 };
 

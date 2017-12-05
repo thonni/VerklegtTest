@@ -33,6 +33,7 @@ class Pizza
         int getToppingCount();
         double getPrice();
         string getName();
+        void setName(string name);
         vector<Topping> getToppings();
         void setSize(Pizza::Size pizzaSize);
 

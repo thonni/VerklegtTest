@@ -61,12 +61,40 @@ void Pizza::generatePrice(double extraCost = 0.0)
 
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
+    Topping tempTopping;
+
+    out << pizza.name << " " << pizza.price << " ";
+    out << pizza.toppings.size() << " ";
+    for(unsigned int i = 0; i < pizza.toppings.size(); i++)
+    {
+        tempTopping = pizza.toppings.at(i);
+        out << tempTopping.getName() << " " << tempTopping.getPrice() << " ";
+    }
+    out << endl;
+
     return out;
 }
 
 
 istream& operator >> (istream& in, Pizza& pizza)
 {
+    unsigned int toppingsCount = 0;
+    string toppingName;
+    double toppingPrice;
+    int tempPizzaSize;
+
+
+    in >> pizza.name;
+    in >> pizza.price;
+    in >> toppingsCount;
+
+    for(unsigned int i = 0; i < toppingsCount; i++)
+    {
+        in >> toppingName >> toppingPrice;
+        Topping tempTopping(toppingName, toppingPrice);
+        pizza.addTopping(tempTopping);
+    }
+
     return in;
 }
 
@@ -104,6 +132,19 @@ string Pizza::getName()
     string returnString = string(this->name);
     //Return the string.
     return returnString;
+}
+
+
+void Pizza::setName(string name)
+{
+    //Iterate trough the input string and put each character into the char array.
+    for(unsigned int i = 0; i < name.length(); i++)
+    {
+        //Set the current character into the char array.
+        this->name[i] = name[i];
+        //Set the end character to the next character (Will be overwritten if it loops again).
+        this->name[i+1] = '\0';
+    }
 }
 
 

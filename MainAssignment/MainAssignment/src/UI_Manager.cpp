@@ -36,11 +36,13 @@ void UI_Manager::startUI (){
         {
             ///TEMPORARY, LISTS ALL SAVED PIZZAS.
             vector<Pizza> pizzas;
-            pizzas = data.readPizzaMenu();
+            pizzas = this->pizzaService.getPizzas();
             for(unsigned int i = 0; i < pizzas.size(); i++)
             {
                 cout << pizzas.at(i);
             }
+            cin >> choice;
+
         }
         else if(toupper(choice) != 'Q')
         {
@@ -57,12 +59,10 @@ void UI_Manager::addTopping()
 {
     string name;
     double price;
-    Topping tempTopping;
     char continueToAdd = '\0';
 
     do
     {
-
         //Clear the screen.
         cout << string(50, '\n');
 
@@ -73,21 +73,16 @@ void UI_Manager::addTopping()
         cin >> price;
 
         //Create a temporary instance of Topping.
-        tempTopping = Topping(name, price);
+        Topping toppingToAdd = Topping(name, price);
 
-        //Add the temporary topping to the vector.
-        toppingsToAdd.push_back(tempTopping);
+        //Ask the Topping service to save the Topping.
+        toppingService.addTopping(toppingToAdd);
 
         //Ask the user if he/she wants to add another topping.
         cout << "Add another topping? (Y/N): ";
         cin >> continueToAdd;
 
     } while(toupper(continueToAdd) == 'Y');
-
-    //Run the addToppings from DataManager to save the topping to file.
-    data.addToppings(toppingsToAdd);
-    //Clear the vector.
-    toppingsToAdd.clear();
 }
 
 
@@ -96,7 +91,6 @@ void UI_Manager::addPizza()
     string name;
     Topping tempTopping;
     vector<Topping> availableToppings;
-    //vector<Pizza> newPizzas;
     char selection = '0';
     unsigned int selectionAsInt = 0;
 
@@ -104,7 +98,7 @@ void UI_Manager::addPizza()
     cout << string(50, '\n');
 
     //Get a vector for all saved toppings using DataManager.
-    availableToppings = data.readToppings();
+    availableToppings = toppingService.getToppings();
 
     //Ask the user for a name for the new pizza.
     cout << "Pizza name: ";
@@ -170,5 +164,5 @@ void UI_Manager::addPizza()
     //Add the pizza to a vector and use DataManager to save the pizza to file.
     //newPizzas.push_back(newPizza);
     //data.addPizzasToMenu(newPizzas);
-    data.addPizzasToMenu(newPizza);
+    pizzaService.addPizza(newPizza);
 }
