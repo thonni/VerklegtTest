@@ -9,7 +9,7 @@ UI_AddRecord::UI_AddRecord()
 }
 
 void UI_AddRecord::startUI() {
-    string name, ssn, asdf;
+    string name, ssn;
     int month, year;
     double salary;
 

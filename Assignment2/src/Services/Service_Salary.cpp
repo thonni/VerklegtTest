@@ -47,7 +47,7 @@ void Service_Salary::verifyRecord(Salary salary) {
 
 }
 
-Salary* readRecords() {
+Salary* Service_Salary::readRecords() {
     vector<Salary> sals = repo.readSalaryRecords();
     Salary *salaries = new Salary[sals.size()];
     for(unsigned int i = 0; i < sals.size(); i++) {
@@ -56,7 +56,10 @@ Salary* readRecords() {
     return salaries;
 }
 
-
+int Service_Salary::countRecords() {
+    vector<Salary> sals = repo.readSalaryRecords();
+    return sals.size();
+}
 
 
 

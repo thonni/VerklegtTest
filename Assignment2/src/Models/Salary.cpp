@@ -5,7 +5,7 @@ Salary::Salary()
     //ctor
 }
 
-Salary::Salary(string employee_name, string employee_ssn, int month, int year, double salary) {
+Salary::Salary(string employee_name, string employee_ssn, int month, int year, int salary) {
     this->employee_name = employee_name;
     this->employee_ssn = employee_ssn;
     this->month = month;
@@ -29,7 +29,7 @@ int Salary::getYear() {
     return this->year;
 }
 
-double Salary::getSalary() {
+int Salary::getSalary() {
     return this->salary;
 }
 
@@ -49,7 +49,7 @@ void Salary::setYear(int year) {
     this->year = year;
 }
 
-void Salary::setSalary(double salary) {
+void Salary::setSalary(int salary) {
     this->salary = salary;
 }
 

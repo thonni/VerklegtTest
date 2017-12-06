@@ -3,8 +3,12 @@
 	<iostream>
 	"UI_Main.h"
 
-1512481963 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_main.h
+1512568898 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_main.h
 	"UI_AddRecord.h"
+	"UI_SSN.h"
+	"UI_totalYear.h"
+	"UI_totalSSN.h"
+	"UI_findHighest.h"
 	<iostream>
 
 1512486713 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_addrecord.h
@@ -12,43 +16,77 @@
 	"Service_Salary.h"
 	<fstream>
 
-1512481890 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\models\salary.h
+1512566171 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\models\salary.h
 	<string>
 
-1512484741 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\services\service_writesalary.h
+1512564603 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\services\service_salary.h
 	"Salary.h"
 	"Repository_Salary.h"
 
-1512481896 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\models\salary.cpp
-	"Salary.h"
-
-1512484912 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\services\service_writesalary.cpp
-	"Service_WriteSalary.h"
-	<string>
-
-1512486713 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_addrecord.cpp
-	"UI_AddRecord.h"
-	<iostream>
-	<string>
-
-1512482263 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_main.cpp
-	"UI_Main.h"
-
-1512485220 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\repositories\repository_salary.h
+1512563340 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\repositories\repository_salary.h
 	"Salary.h"
 	<vector>
 	<iostream>
 	<fstream>
+	<sstream>
+	<string>
+	<cstdlib>
+
+1512488103 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_ssn.h
+	"Salary.h"
+	"Service_Salary.h"
+	<fstream>
+	<iostream>
 	<string>
 
-1512486401 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\repositories\repository_salary.cpp
-	"Repository_Salary.h"
-
-1512486946 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\services\service_salary.h
+1512565657 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_totalyear.h
 	"Salary.h"
+	"Service_Salary.h"
+	<fstream>
+	<iostream>
+	<string>
+
+1512566492 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_totalssn.h
+	"Salary.h"
+	"Service_Salary.h"
+	<fstream>
+	<iostream>
+	<string>
+
+1512567430 c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\include\ui\ui_findhighest.h
+	"Salary.h"
+	"Service_Salary.h"
+	<fstream>
+	<iostream>
+	<string>
+
+1512566157 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\models\salary.cpp
+	"Salary.h"
+
+1512566157 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\repositories\repository_salary.cpp
 	"Repository_Salary.h"
 
-1512486957 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\services\service_salary.cpp
+1512564936 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\services\service_salary.cpp
 	"Service_Salary.h"
 	<string>
+
+1512487367 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_addrecord.cpp
+	"UI_AddRecord.h"
+	<iostream>
+	<string>
+
+1512569202 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_findhighest.cpp
+	"UI_findHighest.h"
+
+1512568904 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_main.cpp
+	"UI_Main.h"
+
+1512566269 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_ssn.cpp
+	"UI_SSN.h"
+
+1512566631 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_totalssn.cpp
+	"UI_totalSSN.h"
+
+1512566631 source:c:\users\galdu\hr\haust2017\vln1\assignment2\assignment2\src\ui\ui_totalyear.cpp
+	"UI_totalYear.h"
 
