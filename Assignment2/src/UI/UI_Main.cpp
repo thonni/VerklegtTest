@@ -55,10 +55,6 @@ void UI_Main::startUI() {
             findHigh.startUI();
             cout << endl;
         }
-        else if (selection == '4')
-        {
-
-        }
 
     //Loops if the selection is not q or Q (Quit).
     } while(toupper(selection) != 'Q');

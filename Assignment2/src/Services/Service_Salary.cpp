@@ -45,15 +45,20 @@ void Service_Salary::verifyRecord(Salary salary) {
     }
     vector<Salary> sals = repo.readSalaryRecords();
     repo.clearSalaryRecord();
+    bool push = true;
     for(unsigned int i = 0; i < sals.size(); i++) {
         if(sals.at(i).getMonth() == salary.getMonth() && sals.at(i).getYear() == salary.getYear() && sals.at(i).getSSN() == salary.getSSN()) {
-            repo.writeSalaryRecord(salary);
-        } else {
-            repo.writeSalaryRecord(sals.at(i));
+            cout << "i1 " << i << endl;
+            sals.at(i) = salary;
+            push = false;
         }
     }
-
-
+    if(push) {
+        sals.push_back(salary);
+    }
+    for(unsigned int i = 0; i < sals.size(); i++) {
+        repo.writeSalaryRecord(sals.at(i));
+    }
 }
 
 Salary* Service_Salary::readRecords() {
