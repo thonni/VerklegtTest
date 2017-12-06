@@ -39,6 +39,8 @@ class Topping
         ///Getters and setters.
         double getPrice() const;
         string getName() const;
+        void setPrice(double price);
+        void setName(string name);
 
     protected:
 

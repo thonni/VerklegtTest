@@ -19,10 +19,17 @@ class Extra
 
         Extra();
         Extra(string name, Extra::Type type, double price);
-        virtual ~Extra();
 
         friend ostream& operator << (ostream& out, const Extra& extra);
         friend istream& operator >> (istream& in, Extra& extra);
+
+        ///Getters and setters.
+        string getName() const;
+        double getPrice() const;
+        Extra::Type getType() const;
+        void setName(string name);
+        void setPrice(double price);
+        void setType(Extra::Type type);
 
     protected:
 

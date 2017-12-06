@@ -7,6 +7,7 @@
 
 #include "toppingservice.h"
 #include "PizzaService.h"
+#include "ExtraService.h"
 #include "DataManager.h"
 #include "topping.h"
 #include "pizza.h"
@@ -18,10 +19,10 @@ using namespace std;
 class UI_Manager
 {
     public:
-        UI_Manager();
         void startUI ();
-        void addTopping();
-        void addPizza();
+        void addToppingToMenu();
+        void addPizzaToMenu();
+        void addExtraToMenu();
 
     protected:
 
@@ -29,6 +30,7 @@ class UI_Manager
         DataManager data;
         ToppingService toppingService;
         PizzaService pizzaService;
+        ExtraService extraService;
         vector<Topping> toppingsToAdd;
 
 };

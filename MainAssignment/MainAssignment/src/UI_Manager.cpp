@@ -3,11 +3,6 @@
 
 using namespace std;
 
-UI_Manager::UI_Manager()
-{
-    //ctor
-}
-
 
 void UI_Manager::startUI (){
     char choice;
@@ -26,23 +21,15 @@ void UI_Manager::startUI (){
 
         if(choice == 't')
         {
-            this->addTopping();
+            this->addToppingToMenu();
         }
         else if (choice == 'p')
         {
-            this->addPizza();
+            this->addPizzaToMenu();
         }
         else if (choice == 'e')
         {
-            ///TEMPORARY, LISTS ALL SAVED PIZZAS.
-            vector<Pizza> pizzas;
-            pizzas = this->pizzaService.getPizzas();
-            for(unsigned int i = 0; i < pizzas.size(); i++)
-            {
-                cout << pizzas.at(i);
-            }
-            cin >> choice;
-
+            this->addExtraToMenu();
         }
         else if(toupper(choice) != 'Q')
         {
@@ -55,7 +42,7 @@ void UI_Manager::startUI (){
 
 //This function creates new toppings using user input
 //and uses DataManager to save them to toppingList.dat.
-void UI_Manager::addTopping()
+void UI_Manager::addToppingToMenu()
 {
     string name;
     double price;
@@ -86,7 +73,7 @@ void UI_Manager::addTopping()
 }
 
 
-void UI_Manager::addPizza()
+void UI_Manager::addPizzaToMenu()
 {
     string name;
     Topping tempTopping;
@@ -165,4 +152,74 @@ void UI_Manager::addPizza()
     //newPizzas.push_back(newPizza);
     //data.addPizzasToMenu(newPizzas);
     pizzaService.addPizza(newPizza);
+}
+
+
+void UI_Manager::addExtraToMenu()
+{
+    string name;
+    double price;
+    char charType;
+    Extra::Type type;
+    bool validType;
+    char continueToAdd = '\0';
+
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Ask the user for a name and price for the new extra.
+        cout << "Please enter the name of the extra: ";
+        cin >> name;
+        cout << "Please enter the price of the extra: ";
+        cin >> price;
+
+        do
+        {
+            //Set valid type to false;
+            validType = false;
+
+            //Ask the user what type this extra is.
+            cout << endl;
+            cout << "Of what type is this extra?" << endl;
+            cout << "Choose D for Drink" << endl;
+            cout << "Choose S for Sauce" << endl;
+            cout << "Choose I for SideDish" << endl;
+            cout << ": ";
+            cin >> charType;
+
+            //Check if the input was valid, if it is it sets
+            //the type into the variable type and sets validType
+            //to true to get out of the do-while loop.
+            if(toupper(charType) == 'D')
+            {
+                type = Extra::Drink;
+                validType = true;
+            }
+            else if(toupper(charType) == 'S')
+            {
+                type = Extra::Sauce;
+                validType = true;
+            }
+            else if(toupper(charType) == 'I')
+            {
+                type = Extra::SideDish;
+                validType = true;
+            }
+
+        //Loop if the input was invalid.
+        } while(!validType);
+
+        //Create a temporary instance of Extra using the user input.
+        Extra extraToAdd = Extra(name, type, price);
+
+        //Ask the Extra service to save the Extra.
+        extraService.addExtra(extraToAdd);
+
+        //Ask the user if he/she wants to add another extra.
+        cout << "Add another extra? (Y/N): ";
+        cin >> continueToAdd;
+
+    } while(toupper(continueToAdd) == 'Y');
 }

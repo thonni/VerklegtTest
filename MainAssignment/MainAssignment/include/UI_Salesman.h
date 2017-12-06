@@ -3,6 +3,8 @@
 
 #include "toppingservice.h"
 #include "PizzaService.h"
+#include "ExtraService.h"
+#include "OrderService.h"
 #include "topping.h"
 #include "pizza.h"
 #include "Extra.h"
@@ -27,6 +29,8 @@ class UI_Salesman
     private:
         ToppingService toppingService;
         PizzaService pizzaService;
+        ExtraService extraService;
+        OrderService orderService;
 };
 
 #endif // UI_SALESMAN_H

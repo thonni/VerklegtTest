@@ -73,8 +73,8 @@ void UI_Salesman::takeOrder()
         }
         else if(toupper(choice) == 'M')
         {
-            //Call the makePizza function and add the pizza
-            //it returns to newOrder only if the name of the pizza is not "N/A"
+            //Call the makePizza function and add the pizza it returns
+            //to newOrder only if the name of the pizza is not "N/A"
             //which means the pizza selection was canceled..
             tempPizza = this->makePizza();
             if(tempPizza.getName() != "N/A")
@@ -99,7 +99,9 @@ void UI_Salesman::takeOrder()
             //Call the finishUpOrder function which
             //takes newOrder as an pointer argument.
             //If the order was finished up it returns true.
-            orderFinished = this->finishUpOrder(&newOrder);
+            //orderFinished = this->finishUpOrder(&newOrder);
+
+
         }
 
     } while(toupper(choice) != 'C' && orderFinished == false);
@@ -277,11 +279,48 @@ Pizza UI_Salesman::makePizza()
 
 Extra UI_Salesman::chooseExtraFromMenu()
 {
-    /// \TODO: Print out all menu extras from file and make the user select from them.
+    Extra tempExtra;
+    Topping tempTopping;
+    vector<Extra> availableExtras;
+    char selection = '0';
+    unsigned int selectionAsInt = 0;
+    Extra newExtra("N/A", Extra::Drink, 0);
 
-    //Temp stuff just so it returns something (And doesn't give an warning when compiling).
-    Extra temp("temp", Extra::Drink, 0.0);
-    return temp;
+    //Ask extraService for a vector of all extras that are on the menu.
+    availableExtras = extraService.getExtras();
+
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Loop trough all the extras on the menu and print their id, name and price.
+        cout << "****EXTRA MENU****" << endl;
+        for(unsigned int i = 0; i < availableExtras.size(); i++)
+        {
+            tempExtra = availableExtras.at(i);
+            cout << i << " - Name: " << tempExtra.getName() << " - Price: " << tempExtra.getPrice() << " KR" << endl;
+        }
+        cout << "Choose C to Cancel" << endl << endl;
+
+        //Ask the user to select a extra from the menu.
+        cout << "Please select the id of the extra to add: ";
+        cin >> selection;
+
+        //Store the selection as int in another variable.
+        selectionAsInt = (int)(selection - '0');
+
+    //Loop if selection is out of range and is not c or C for cancel.
+    } while(!((selectionAsInt >= 0U && selectionAsInt < availableExtras.size()) || toupper(selection) == 'C'));
+
+    //Set newExtra to the selected extra if the selection was not canceled.
+    if(toupper(selection) != 'C')
+    {
+        newExtra = availableExtras.at(selectionAsInt);
+    }
+
+    //Return the extra.
+    return newExtra;
 }
 
 
@@ -289,6 +328,7 @@ void UI_Salesman::removeFromOrder(Order* order)
 {
     /// \TODO: print out all items that are currently in the order and make the user select
     ///        something to remove (Or select something to cancel).
+
 }
 
 

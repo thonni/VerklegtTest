@@ -81,8 +81,6 @@ istream& operator >> (istream& in, Pizza& pizza)
     unsigned int toppingsCount = 0;
     string toppingName;
     double toppingPrice;
-    int tempPizzaSize;
-
 
     in >> pizza.name;
     in >> pizza.price;

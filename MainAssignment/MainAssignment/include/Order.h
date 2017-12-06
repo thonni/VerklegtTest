@@ -11,7 +11,7 @@ class Order
 {
     public:
         Order();
-        virtual ~Order();
+        Order(int id);
         void addPizza(Pizza pizza);
         void addExtra(Extra extra);
         void removePizza(int i);
@@ -24,10 +24,12 @@ class Order
 
 
         friend ostream& operator << (ostream& out, const Order& order);
+        friend istream& operator >> (istream& in , Order& order);
 
     protected:
 
     private:
+        int id;
         char state;
         vector<Pizza> pizzas;
         vector<Extra> extras;
