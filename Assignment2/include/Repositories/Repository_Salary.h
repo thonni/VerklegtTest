@@ -17,6 +17,7 @@ class Repository_Salary
         Repository_Salary();
         vector<Salary> readSalaryRecords();
         void writeSalaryRecord(Salary Salary);
+        void clearSalaryRecord();
 
     protected:
 
