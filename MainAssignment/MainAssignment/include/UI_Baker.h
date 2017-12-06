@@ -5,15 +5,19 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
+#include "OrderService.h"
+
 
 class UI_Baker
 {
     public:
         UI_Baker();
         virtual ~UI_Baker();
-        void bakerMenu();
+        void startUI();
     protected:
     private:
+        OrderService orderService;
+        Order order;
 };
 
 #endif // UI_BAKER_H

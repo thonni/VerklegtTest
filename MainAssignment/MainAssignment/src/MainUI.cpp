@@ -38,7 +38,9 @@ void MainUI::startUI()
         }
         else if (selection == 'b')
         {
+            baker.startUI();
 
+            cout << endl;
         }
         else if (selection == 'd')
         {

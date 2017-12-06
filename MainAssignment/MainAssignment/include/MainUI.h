@@ -20,6 +20,7 @@ class MainUI
     private:
         UI_Manager manager;
         UI_Salesman salesman;
+        UI_Baker baker;
 
 };
 

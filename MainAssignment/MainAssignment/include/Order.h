@@ -14,6 +14,7 @@ class Order
         enum State
         {
             Received,
+            Prep,
             InOven,
             Ready,
             OnItsWay,

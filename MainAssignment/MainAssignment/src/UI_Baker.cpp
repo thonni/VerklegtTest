@@ -10,30 +10,48 @@ UI_Baker::~UI_Baker()
     //dtor
 }
 
-void UI_Baker::bakerMenu()
+void UI_Baker::startUI()
 {
-    int location, orderNumber;
-    char orderMark;
+    int orderID;
+    char location, orderMark;
+    //Clear the screen
+    cout << string(50, '\n');
+    cout << "Welcome baker" << endl << endl;
+
     cout << "Please choose your location." << endl;
     cout << "Choose B to go back." << endl;
 
-    cin >> location;
     /// Here the user inputs their location and the program will print out the unfinished orders for that location and their status
+    cin >> location;
+    orderService.getOrders();
 
-    cout << "Input a number of an order to make." << endl;
-    cin >> orderNumber;
+    cout << "Input the ID of an order to make." << endl;
+    cin >> orderID;
 
     cout << "Please mark the order appropriately." << endl;
-    cout << "Input P when the order is in progress." << endl;
-    cout << "Input F when the order is finished." << endl;
-    cout << "Choose B to go back." << endl;
+    cout << "Input P when the order is in Prep." << endl;
+    cout << "Input O when the order is in Oven." << endl;
+    cout << "Input R when the order is Ready." << endl;
+    cout << "Choose B to go Back." << endl;
     cin >> orderMark;
     if (orderMark == 'P')
     {
-        /// The number of order they choose gets marked "in progress" in the file.
+        // The number of order they choose gets marked "Prep" in the file.
+        order.setState(Order::Prep);
     }
-    else if (orderMark == 'F')
+    if (orderMark == 'O')
     {
-        /// The number of order they choose gets marked "in progress" in the file.
+        // The number of order they choose gets marked "InOven" in the file.
+        order.setState(Order::InOven);
+    }
+    else if (orderMark == 'R')
+    {
+        // The number of order they choose gets marked "Ready" in the file.
+        order.setState(Order::Ready);
+    }
+    else if (orderMark != 'R' || orderMark != 'O' || orderMark != 'P')
+    {
+        // Error message
+        cout << "Invalid input!" << endl;
     }
 }
