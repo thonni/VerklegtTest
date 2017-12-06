@@ -39,11 +39,20 @@ void Service_Salary::verifyRecord(Salary salary) {
     if(year != 2017) {
         throw 5;
     }
-    double money = salary.getSalary();
+    int money = salary.getSalary();
     if(money < 0) {
         throw 6;
     }
-    repo.writeSalaryRecord(salary);
+    vector<Salary> sals = repo.readSalaryRecords();
+    repo.clearSalaryRecord();
+    for(unsigned int i = 0; i < sals.size(); i++) {
+        if(sals.at(i).getMonth() == salary.getMonth() && sals.at(i).getYear() == salary.getYear() && sals.at(i).getSSN() == salary.getSSN()) {
+            repo.writeSalaryRecord(salary);
+        } else {
+            repo.writeSalaryRecord(sals.at(i));
+        }
+    }
+
 
 }
 

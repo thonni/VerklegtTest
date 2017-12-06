@@ -23,6 +23,7 @@ class Pizza
         Pizza(string name, Pizza::Size pizzaSize);
 
         void addTopping(Topping topping);
+        void clearToppings();
         void generatePrice();
         void generatePrice(double extraCost);
 

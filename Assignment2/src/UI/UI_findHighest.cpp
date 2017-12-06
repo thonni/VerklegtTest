@@ -24,31 +24,26 @@ void UI_findHighest::startUI() {
         vector<string> SSNs;
         vector<string> names;
         vector<int> salaries;
-        cout << "ONE" << endl;
-        cout << countRecords << endl;
         for(int i = 0; i < countRecords; i++) {
-            cout << "i " << i << endl;
-            cout << "year " << sals[i].getYear() << endl;
             if(sals[i].getYear() == year) {
                 for(unsigned int j = 0; j < SSNs.size(); j++) {
-                    cout << "j " << j << endl;
-                    if(SSNs.at(j) == sals->getSSN()) {
-                        salaries.at(i) += sals->getSalary();
-                        names.at(i) = sals->getName();
+                    if(SSNs.at(j) == sals[i].getSSN()) {
+                        salaries.at(j) += sals[i].getSalary();
+                        names.at(j) = sals[i].getName();
                         found = true;
                     }
                 }
                 if(!found) {
-                    SSNs.push_back(sals->getSSN());
-                    salaries.push_back(sals->getSalary());
-                    names.push_back(sals->getName());
+                    SSNs.push_back(sals[i].getSSN());
+                    salaries.push_back(sals[i].getSalary());
+                    names.push_back(sals[i].getName());
                 }
                 found = false;
             }
         }
-        cout << "TWO" << endl;
         for(unsigned int i = 0; i < salaries.size(); i++) {
             if(salaries[i] > highest) {
+                highest = salaries[i];
                 highestEmp = names[i];
             }
         }

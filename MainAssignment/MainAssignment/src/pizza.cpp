@@ -33,6 +33,13 @@ void Pizza::addTopping(Topping topping)
     this->toppings.push_back(topping);
 }
 
+
+void Pizza::clearToppings()
+{
+    this->toppings.clear();
+}
+
+
 void Pizza::generatePrice()
 {
     this->generatePrice(0.0);

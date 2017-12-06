@@ -10,6 +10,16 @@ using namespace std;
 class Order
 {
     public:
+
+        enum State
+        {
+            Received,
+            InOven,
+            Ready,
+            OnItsWay,
+            Delivered
+        };
+
         Order();
         Order(int id);
         void addPizza(Pizza pizza);
@@ -20,7 +30,8 @@ class Order
         void listExtras();
 
         ///Getters and setters.
-        char getState();
+        Order::State getState();
+        void setState(Order::State state);
 
 
         friend ostream& operator << (ostream& out, const Order& order);
@@ -30,7 +41,7 @@ class Order
 
     private:
         int id;
-        char state;
+        Order::State state;
         vector<Pizza> pizzas;
         vector<Extra> extras;
         double totalPrice;
