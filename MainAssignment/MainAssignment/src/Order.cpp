@@ -63,7 +63,7 @@ ostream& operator << (ostream& out, const Order& order)
     Topping tempTopping;
     Extra tempExtra;
 
-    out << order.id << " " << order.state << " ";
+    out << order.id << " " << (int)order.state << " ";
     out << order.pizzas.size() << " ";
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
@@ -97,11 +97,13 @@ istream& operator >> (istream& in , Order& order)
     string tempName;
     double tempPrice;
     int tempType;
+    int tempState;
 
     int size1, size2;
 
     //Get the order id and state.
-    in >> order.id >> order.state;
+    in >> order.id >> tempState;
+    order.state = (Order::State)(tempState);
 
     //Get the number of pizzas to come and loop through them
     in >> size1;
@@ -150,7 +152,12 @@ istream& operator >> (istream& in , Order& order)
 
 
 ///Getters and setters.
-char Order::getState()
+Order::State Order::getState()
 {
     return this->state;
+}
+
+void Order::setState(Order::State state)
+{
+    this->state = state;
 }

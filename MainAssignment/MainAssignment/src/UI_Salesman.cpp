@@ -42,6 +42,7 @@ void UI_Salesman::takeOrder()
 
     //Create an instance of order.
     Order newOrder;
+    newOrder.setState(Order::Received);
 
     do
     {
@@ -99,9 +100,7 @@ void UI_Salesman::takeOrder()
             //Call the finishUpOrder function which
             //takes newOrder as an pointer argument.
             //If the order was finished up it returns true.
-            //orderFinished = this->finishUpOrder(&newOrder);
-
-
+            orderFinished = this->finishUpOrder(&newOrder);
         }
 
     } while(toupper(choice) != 'C' && orderFinished == false);
@@ -337,5 +336,9 @@ bool UI_Salesman::finishUpOrder(Order* order)
     /// \TODO: Print out all items that are currently in the order in a nice list and ask the user
     ///        if he/she wants to finish up the order, if so it saves the order to file and returns true
     ///        else it returns false.
+
+
+
+
     return true;
 }

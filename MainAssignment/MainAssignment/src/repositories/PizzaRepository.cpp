@@ -37,6 +37,8 @@ vector<Pizza> PizzaRepository::getPizzas()
         {
             //Put the pizza into the vector
             returnVector.push_back(tempPizza);
+            //Clear the toppings vector.
+            tempPizza.clearToppings();
         }
     }
     else
