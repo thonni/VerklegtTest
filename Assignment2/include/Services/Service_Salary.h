@@ -13,6 +13,8 @@ class Service_Salary
 
         Salary* readRecords();
 
+        int countRecords();
+
     protected:
 
     private:
