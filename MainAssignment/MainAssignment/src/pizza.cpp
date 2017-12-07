@@ -159,6 +159,12 @@ vector<Topping> Pizza::getToppings()
 }
 
 
+Pizza::Size Pizza::getSize()
+{
+    return this->pizzaSize;
+}
+
+
 void Pizza::setSize(Pizza::Size pizzaSize)
 {
     this->pizzaSize = pizzaSize;

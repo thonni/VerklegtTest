@@ -36,6 +36,7 @@ class Pizza
         string getName();
         void setName(string name);
         vector<Topping> getToppings();
+        Pizza::Size getSize();
         void setSize(Pizza::Size pizzaSize);
 
     protected:
