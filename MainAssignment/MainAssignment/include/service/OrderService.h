@@ -11,6 +11,8 @@ class OrderService
         bool isValidOrder(const Order& order);
         void addOrder(const Order& order);
         vector<Order> getOrders();
+        void setOrderState(Order order);
+        Order getOrder(int ID);
 
     protected:
 

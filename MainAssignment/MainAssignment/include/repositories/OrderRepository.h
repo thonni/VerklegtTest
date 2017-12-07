@@ -8,6 +8,7 @@ class OrderRepository
     public:
         void addOrder(const Order& order);
         vector<Order> getOrders();
+        void clearOrders();
 
     protected:
 

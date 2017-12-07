@@ -17,6 +17,16 @@ void OrderRepository::addOrder(const Order& order)
 }
 
 
+void OrderRepository::clearOrders()
+{
+    ofstream fout;
+
+    fout.open("data/activeOrders.txt");
+
+    fout.close();
+}
+
+
 vector<Order> OrderRepository::getOrders()
 {
     //Create an instance of ifstream.
