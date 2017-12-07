@@ -47,6 +47,9 @@ void UI_Salesman::takeOrder()
     do
     {
 
+        //Make the order generate the total price of itself.
+        newOrder.generatePrice();
+
         //Clear the screen.
         cout << string(50, '\n');
 
@@ -155,7 +158,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
     //Set newPizza to the selected pizza if the selection was not canceled.
     if(toupper(selection) != 'C')
     {
-        newPizza = availablePizzas.at(0);
+        newPizza = availablePizzas.at(selectionAsInt);
     }
 
     //Return the pizza.
@@ -214,7 +217,7 @@ Pizza UI_Salesman::makePizza()
     {
         //Change the name of the pizza to indicate
         //that the order was not canceled.
-        newPizza.setName("Ok");
+        newPizza.setName("Custom Pizza");
         do
         {
             //Clear the screen.
@@ -247,8 +250,8 @@ Pizza UI_Salesman::makePizza()
 
         } while(selection == '0');
 
-        //Make the pizza calculate the price of it self.
-        newPizza.generatePrice();
+        //Make the pizza calculate the price of it self (And add extra for making a custom pizza).
+        newPizza.generatePrice(300.0);
 
         //Clear the screen.
         cout << string(50, '\n');
@@ -337,8 +340,77 @@ bool UI_Salesman::finishUpOrder(Order* order)
     ///        if he/she wants to finish up the order, if so it saves the order to file and returns true
     ///        else it returns false.
 
+    //Clear the screen.
+    cout << string(50, '\n');
+    //Print out everything in the order using printOutOrder
+    this->printOutOrder(*order);
 
+    char lala;
+    cin >> lala;
 
 
     return true;
+}
+
+
+void UI_Salesman::printOutOrder(Order order)
+{
+    Pizza tempPizza;
+    Extra tempExtra;
+
+    //Loops trough all the pizzas in the order and prints them out in this format:
+    //SIZE - NAME ............................ PRICE Kr
+    cout << "Pizzas: " << endl;
+    for(unsigned int i = 0; i < order.getPizzas().size(); i++)
+    {
+        tempPizza = order.getPizzas().at(i);
+
+        //Print out the size of the pizza.
+        if(tempPizza.getSize() == Pizza::Small)
+        {
+            cout << "Small  - ";
+        }
+        else if(tempPizza.getSize() == Pizza::Medium)
+        {
+            cout << "Medium - ";
+        }
+        else if(tempPizza.getSize() == Pizza::Large)
+        {
+            cout << "Large  - ";
+        }
+
+        //Print out the name of the pizza.
+        cout << tempPizza.getName();
+
+        //Print out dots in between name and price, and there are different amount
+        //of dots depending on the length of the name.
+        cout << " " << string((50-tempPizza.getName().length()), '.') << " ";
+
+        //print out the price of the pizza.
+        cout << tempPizza.getPrice() << " Kr" << endl;
+    }
+
+    //Loops trough all the pizzas in the order and prints them out in this format:
+    //NAME ................................... PRICE Kr
+    cout << endl << "Extras:" << endl;
+    for(unsigned int i = 0; i < order.getExtras().size(); i++)
+    {
+        tempExtra = order.getExtras().at(i);
+
+        //Print out the name of the extra.
+        cout << tempExtra.getName();
+
+        //Print out dots in between name and price, and there are different amount
+        //of dots depending on the length of the name.
+        cout << " " << string((59-tempExtra.getName().length()), '.') << " ";
+
+        //print out the price of the pizza.
+        cout << tempExtra.getPrice() << " Kr" << endl;
+    }
+
+    //Print out a line between the list and total
+    cout << string(70, '-') << endl;
+
+    //Print out the total price.
+    cout << "Total " << string(54, '.') << " " << order.getPrice() << " Kr" << endl;
 }

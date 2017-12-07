@@ -151,6 +151,29 @@ istream& operator >> (istream& in , Order& order)
 }
 
 
+void Order::generatePrice()
+{
+    Pizza tempPizza;
+    Extra tempExtra;
+
+    this->totalPrice = 0;
+
+    //Loop through all pizzas and add their price to the total price.
+    for(unsigned int i = 0; i < this->pizzas.size(); i++)
+    {
+        tempPizza = this->pizzas.at(i);
+        this->totalPrice += tempPizza.getPrice();
+    }
+
+    //Loop through all extras and add their price to the total price.
+    for(unsigned int i = 0; i < this->extras.size(); i++)
+    {
+        tempExtra = this->extras.at(i);
+        this->totalPrice += tempExtra.getPrice();
+    }
+}
+
+
 ///Getters and setters.
 Order::State Order::getState()
 {
@@ -160,6 +183,11 @@ Order::State Order::getState()
 void Order::setState(Order::State state)
 {
     this->state = state;
+}
+
+double Order::getPrice()
+{
+    return this->totalPrice;
 }
 
 bool Order::getPaidFor()
