@@ -15,21 +15,26 @@ void UI_Manager::startUI (){
         cout << "Choose T to add toppings" << endl;
         cout << "Choose P to add pizzas on menu" << endl;
         cout << "Choose E to add extras" << endl;
+        cout << "Choose L to add locations" << endl;
         cout << "Choose Q to quit" << endl;
         cout << ": ";
         cin >> choice;
 
-        if(choice == 't')
+        if(toupper(choice) == 'T')
         {
             this->addToppingToMenu();
         }
-        else if (choice == 'p')
+        else if (toupper(choice) == 'P')
         {
             this->addPizzaToMenu();
         }
-        else if (choice == 'e')
+        else if (toupper(choice) == 'E')
         {
             this->addExtraToMenu();
+        }
+        else if (toupper(choice) == 'L')
+        {
+            this->addLocation();
         }
         else if(toupper(choice) != 'Q')
         {
@@ -223,3 +228,38 @@ void UI_Manager::addExtraToMenu()
 
     } while(toupper(continueToAdd) == 'Y');
 }
+
+//This function creates new locations using user input
+//and uses DataManager to save them to locationList.dat.
+void UI_Manager::addLocation()
+{
+    string address;
+    string city;
+    char continueToAdd = '\0';
+
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Ask the user for a address and city for the new location.
+        cout << "Please enter the address: ";
+        cin.ignore();
+        getline(cin, address);
+        cout << "Please enter the city: ";
+        cin.ignore();
+        getline(cin, city);
+
+        //Create a temporary instance of Location.
+        Location locationToAdd = Location(address, city);
+
+        //Ask the Location service to save the location.
+        locationService.addLocation(locationToAdd);
+
+        //Ask the user if he/she wants to add another location.
+        cout << "Add another location? (Y/N): ";
+        cin >> continueToAdd;
+
+    } while(toupper(continueToAdd) == 'Y');
+}
+

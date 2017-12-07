@@ -1,12 +1,15 @@
 #ifndef LOCATIONREPOSITORY_H
 #define LOCATIONREPOSITORY_H
-
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include "Location.h"
 
 class LocationRepository
 {
     public:
-        LocationRepository();
-        virtual ~LocationRepository();
+        void addLocation(Location location);
+        vector<Location> getLocations();
     protected:
     private:
 };

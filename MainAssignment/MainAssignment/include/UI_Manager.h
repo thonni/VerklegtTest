@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+#include "LocationService.h"
 #include "toppingservice.h"
 #include "PizzaService.h"
 #include "ExtraService.h"
@@ -13,6 +14,7 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
+#include "Location.h"
 
 using namespace std;
 
@@ -23,6 +25,7 @@ class UI_Manager
         void addToppingToMenu();
         void addPizzaToMenu();
         void addExtraToMenu();
+        void addLocation();
 
     protected:
 
@@ -31,6 +34,7 @@ class UI_Manager
         ToppingService toppingService;
         PizzaService pizzaService;
         ExtraService extraService;
+        LocationService locationService;
         vector<Topping> toppingsToAdd;
 
 };

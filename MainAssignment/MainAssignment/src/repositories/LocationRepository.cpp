@@ -1,11 +1,35 @@
 #include "LocationRepository.h"
 
-LocationRepository::LocationRepository()
+void LocationRepository::addLocation(Location location)
 {
-    //ctor
+    ofstream fout;
+
+    fout.open("data/locationList.dat", ios::binary|ios::app);
+
+    fout.write((char*)(&location), sizeof(Location));
+
+    fout.close();
 }
 
-LocationRepository::~LocationRepository()
+
+vector<Location> LocationRepository::getLocations()
 {
-    //dtor
+    ifstream fin;
+
+    fin.open("data/locationList.dat", ios::binary);
+
+    fin.seekg(0, fin.end);
+    int records = fin.tellg() / sizeof(Location);
+    fin.seekg(0, fin.beg);
+
+    Location *data = new Location[records];
+    fin.read((char*)data, sizeof(Location) * records);
+
+    vector<Location> returnVector;
+    for(int i = 0; i < records; i++)
+    {
+        returnVector.push_back(data[i]);
+    }
+
+    return returnVector;
 }
