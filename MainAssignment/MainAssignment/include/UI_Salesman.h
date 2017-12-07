@@ -24,6 +24,8 @@ class UI_Salesman
         void removeFromOrder(Order* order);
         bool finishUpOrder(Order* order);
 
+        void printOutOrder(Order order);
+
     protected:
 
     private:

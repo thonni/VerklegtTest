@@ -29,10 +29,12 @@ class Order
         void removeExtra(int i);
         void listPizzas();
         void listExtras();
+        void generatePrice();
 
         ///Getters and setters.
         Order::State getState();
         void setState(Order::State state);
+        double getPrice();
         vector<Pizza> getPizzas();
         vector<Extra> getExtras();
         bool getPaidFor();
