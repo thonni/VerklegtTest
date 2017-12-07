@@ -1,5 +1,7 @@
 #include "UI_Baker.h"
 
+using namespace std;
+
 UI_Baker::UI_Baker()
 {
     //ctor
@@ -14,62 +16,82 @@ void UI_Baker::startUI()
 {
     int orderID;
     char location, orderMark;
-    bool noID = false;
+    bool noID = false, goBack = false;
     //Clear the screen
     cout << string(50, '\n');
     cout << "Welcome baker" << endl << endl;
 
-    cout << "Please choose your location." << endl;
-    cout << "Choose B to go back." << endl;
+    locations = locationService.getLocations();
+    int locSize = locations.size();
 
-    /// Here the user inputs their location and the program will print out the unfinished orders for that location and their status
-    cin >> location;
-    orderService.getOrders();
+    do
+    {
+        cout << "Please choose your location." << endl;
+        cout << "Choose B to go back." << endl;
 
-    cout << "Input the ID of an order to make." << endl;
-    cin >> orderID;
-    try
+        for(unsigned int i = 0; i < locations.size(); i++)
+        {
+            cout << (i + 1) << ": " << locations.at(i).getAddress() << " - " << locations.at(i).getCity() << endl;
+        }
+        cin >> location;
+    } while(!(toupper(location) != 'B' || location < (1 + '0') || location > (locSize + '1')));
+
+
+    if(toupper(location) == 'B')
     {
-        order = orderService.getOrder(orderID);
+        goBack = true;
     }
-    catch(int e)
+
+    if(!goBack)
     {
-        if(e == 0)
+        orderService.getOrders();
+
+        cout << "Input the ID of an order to make." << endl;
+        cin >> orderID;
+        try
         {
-            cout << "No Such ID could be found...";
-            noID = true;
+            order = orderService.getOrder(orderID);
+        }
+        catch(int e)
+        {
+            if(e == 0)
+            {
+                cout << "No Such ID could be found...";
+                noID = true;
+            }
+        }
+        while(toupper(orderMark) != 'B' || noID)
+        {
+            cout << "Please mark the order appropriately." << endl;
+            cout << "Input P when the order is in Prep." << endl;
+            cout << "Input O when the order is in Oven." << endl;
+            cout << "Input R when the order is Ready." << endl;
+            cout << "Choose B to go Back." << endl;
+            cin >> orderMark;
+            if (toupper(orderMark) == 'P')
+            {
+                // The number of order they choose gets marked "Prep" in the file.
+                order.setState(Order::Prep);
+                orderService.setOrderState(order);
+            }
+            else if (toupper(orderMark) == 'O')
+            {
+                // The number of order they choose gets marked "InOven" in the file.
+                order.setState(Order::InOven);
+                orderService.setOrderState(order);
+            }
+            else if (toupper(orderMark) == 'R')
+            {
+                // The number of order they choose gets marked "Ready" in the file.
+                order.setState(Order::Ready);
+                orderService.setOrderState(order);
+            }
+            else
+            {
+                // Error message
+                cout << "Invalid input!" << endl;
+            }
         }
     }
-    while(toupper(orderMark) != 'B' || noID)
-    {
-        cout << "Please mark the order appropriately." << endl;
-        cout << "Input P when the order is in Prep." << endl;
-        cout << "Input O when the order is in Oven." << endl;
-        cout << "Input R when the order is Ready." << endl;
-        cout << "Choose B to go Back." << endl;
-        cin >> orderMark;
-        if (toupper(orderMark) == 'P')
-        {
-            // The number of order they choose gets marked "Prep" in the file.
-            order.setState(Order::Prep);
-            orderService.setOrderState(order);
-        }
-        else if (toupper(orderMark) == 'O')
-        {
-            // The number of order they choose gets marked "InOven" in the file.
-            order.setState(Order::InOven);
-            orderService.setOrderState(order);
-        }
-        else if (toupper(orderMark) == 'R')
-        {
-            // The number of order they choose gets marked "Ready" in the file.
-            order.setState(Order::Ready);
-            orderService.setOrderState(order);
-        }
-        else
-        {
-            // Error message
-            cout << "Invalid input!" << endl;
-        }
-    }
+
 }
