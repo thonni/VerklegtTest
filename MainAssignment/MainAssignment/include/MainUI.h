@@ -21,6 +21,7 @@ class MainUI
         UI_Manager manager;
         UI_Salesman salesman;
         UI_Baker baker;
+        UI_Delivery delivery;
 
 };
 
