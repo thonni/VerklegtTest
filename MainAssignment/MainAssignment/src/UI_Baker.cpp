@@ -27,31 +27,33 @@ void UI_Baker::startUI()
 
     cout << "Input the ID of an order to make." << endl;
     cin >> orderID;
-
-    cout << "Please mark the order appropriately." << endl;
-    cout << "Input P when the order is in Prep." << endl;
-    cout << "Input O when the order is in Oven." << endl;
-    cout << "Input R when the order is Ready." << endl;
-    cout << "Choose B to go Back." << endl;
-    cin >> orderMark;
-    if (orderMark == 'P')
+    do
     {
-        // The number of order they choose gets marked "Prep" in the file.
-        order.setState(Order::Prep);
-    }
-    if (orderMark == 'O')
-    {
-        // The number of order they choose gets marked "InOven" in the file.
-        order.setState(Order::InOven);
-    }
-    else if (orderMark == 'R')
-    {
-        // The number of order they choose gets marked "Ready" in the file.
-        order.setState(Order::Ready);
-    }
-    else if (orderMark != 'R' || orderMark != 'O' || orderMark != 'P')
-    {
-        // Error message
-        cout << "Invalid input!" << endl;
-    }
+        cout << "Please mark the order appropriately." << endl;
+        cout << "Input P when the order is in Prep." << endl;
+        cout << "Input O when the order is in Oven." << endl;
+        cout << "Input R when the order is Ready." << endl;
+        cout << "Choose B to go Back." << endl;
+        cin >> orderMark;
+        if (toupper(orderMark) == 'P')
+        {
+            // The number of order they choose gets marked "Prep" in the file.
+            order.setState(Order::Prep);
+        }
+        else if (toupper(orderMark) == 'O')
+        {
+            // The number of order they choose gets marked "InOven" in the file.
+            order.setState(Order::InOven);
+        }
+        else if (toupper(orderMark) == 'R')
+        {
+            // The number of order they choose gets marked "Ready" in the file.
+            order.setState(Order::Ready);
+        }
+        else
+        {
+            // Error message
+            cout << "Invalid input!" << endl;
+        }
+    } while(toupper(orderMark) != 'B');
 }
