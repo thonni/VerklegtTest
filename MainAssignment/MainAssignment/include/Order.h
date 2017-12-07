@@ -37,6 +37,8 @@ class Order
         vector<Extra> getExtras();
         bool getPaidFor();
         void setPaidFor(bool paidFor);
+        int getId();
+        void setId(int id);
 
 
         friend ostream& operator << (ostream& out, const Order& order);

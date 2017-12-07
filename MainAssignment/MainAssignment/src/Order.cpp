@@ -172,6 +172,16 @@ void Order::setPaidFor(bool paidFor)
     this->paidFor = paidFor;
 }
 
+int Order::getId()
+{
+    return this->id;
+}
+
+void Order::setId(int id)
+{
+    this->id = id;
+}
+
 vector<Pizza> Order::getPizzas()
 {
     return this->pizzas;
