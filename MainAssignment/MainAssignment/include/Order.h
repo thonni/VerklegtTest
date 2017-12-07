@@ -33,6 +33,10 @@ class Order
         ///Getters and setters.
         Order::State getState();
         void setState(Order::State state);
+        vector<Pizza> getPizzas();
+        vector<Extra> getExtras();
+        bool getPaidFor();
+        void setPaidFor(bool paidFor);
 
 
         friend ostream& operator << (ostream& out, const Order& order);
@@ -46,6 +50,7 @@ class Order
         vector<Pizza> pizzas;
         vector<Extra> extras;
         double totalPrice;
+        bool paidFor;
 };
 
 #endif // ORDER_H

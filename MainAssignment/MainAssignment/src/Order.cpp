@@ -161,3 +161,23 @@ void Order::setState(Order::State state)
 {
     this->state = state;
 }
+
+bool Order::getPaidFor()
+{
+    return this->paidFor;
+}
+
+void Order::setPaidFor(bool paidFor)
+{
+    this->paidFor = paidFor;
+}
+
+vector<Pizza> Order::getPizzas()
+{
+    return this->pizzas;
+}
+
+vector<Extra> Order::getExtras()
+{
+    return this->extras;
+}
