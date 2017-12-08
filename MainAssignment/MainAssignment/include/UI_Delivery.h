@@ -5,6 +5,9 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
+#include "OrderService.h"
+#include "Location.h"
+#include "LocationService.h"
 
 class UI_Delivery
 {
@@ -14,6 +17,10 @@ class UI_Delivery
         void deliveryMenu();
     protected:
     private:
+        OrderService orderService;
+        Order order;
+        LocationService locationService;
+        vector<Location> locations;
 };
 
 #endif // UI_DELIVERY_H
