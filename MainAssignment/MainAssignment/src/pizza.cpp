@@ -6,7 +6,7 @@ Pizza::Pizza()
     this->name[0] = '\0';
     this->pizzaSize = Small;
     this->price = 0.0;
-    this->basePizzaPrice = 1300;
+
 }
 
 
@@ -24,7 +24,6 @@ Pizza::Pizza(string name, Pizza::Size pizzaSize = Small)
 
     //Put the pizzaSize input in pizzaSize.
     this->pizzaSize = pizzaSize;
-    this->basePizzaPrice = 1300;
 }
 
 
@@ -59,7 +58,7 @@ void Pizza::generatePrice(double extraCost = 0.0)
         tempPrice += tempTopping.getPrice();
     }
     //Add extraCost and the base price to tempPrice
-    tempPrice += (extraCost + this->basePizzaPrice);
+    tempPrice += (extraCost/*+ this->basePizzaPrice*/);
 
     //Set price to be the calculated tempPrice.
     this->price = tempPrice;

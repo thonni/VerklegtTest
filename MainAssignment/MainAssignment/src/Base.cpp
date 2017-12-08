@@ -23,10 +23,15 @@ Base::Base(string name, double price)
     this->price = price;
 }
 
+void Base::generateId()
+{
+    this->id = idService.getNextId();
+}
+
 
 istream& operator >> (istream& in, Base& base)
 {
-    in >> base.name >> base.price;
+    in >> base.id >> base.name >> base.price;
 
     return in;
 }
@@ -34,7 +39,7 @@ istream& operator >> (istream& in, Base& base)
 
 ostream& operator << (ostream& out, const Base& base)
 {
-    out << base.name << " " << base.price << endl;
+    out << base.id << " " << base.name << " " << base.price << endl;
 
     return out;
 }
@@ -68,4 +73,14 @@ void Base::setName(string name)
         //Set the end character to the next character (Will be overwritten if it loops again).
         this->name[i+1] = '\0';
     }
+}
+
+void Base::setId()
+{
+    this->id = id;
+}
+
+int Base::getId()
+{
+    return this->id;
 }

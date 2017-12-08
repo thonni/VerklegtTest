@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <IdService.h>
 
 using namespace std;
 
@@ -24,6 +25,8 @@ class Base
         ///////////////////////////////////////////////////////////////////////
         Base(string name, double price);
 
+        void generateId();
+
         ///////////////////////////////////////////////////////////////////////
         /// \brief Overwrites the istream operator,
         ///        takes in name and price, in that order.
@@ -42,12 +45,16 @@ class Base
         string getName() const;
         void setPrice(double price);
         void setName(string name);
+        void setId();
+        int getId();
 
     protected:
 
     private:
         char name[32];
         double price;
+        int id;
+        IdService idService;
 };
 
 

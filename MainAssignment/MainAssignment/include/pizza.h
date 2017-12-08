@@ -5,6 +5,7 @@
 #include <string.h>
 #include <vector>
 #include "topping.h"
+#include "Base.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ class Pizza
         Pizza(string name, Pizza::Size pizzaSize);
 
         void addTopping(Topping topping);
+        void addBase (Base base);
         void clearToppings();
         void generatePrice();
         void generatePrice(double extraCost);
@@ -46,7 +48,7 @@ class Pizza
         double price;
         char name[32];
         Pizza::Size pizzaSize;
-        double basePizzaPrice;
+        Base base;
 };
 
 #endif // PIZZA_H
