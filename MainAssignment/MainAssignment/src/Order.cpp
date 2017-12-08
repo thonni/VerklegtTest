@@ -211,3 +211,13 @@ vector<Extra> Order::getExtras()
 {
     return this->extras;
 }
+
+Location Order::getLocation()
+{
+    return this->location;
+}
+
+void Order::setLocation(Location location)
+{
+    this->location = location;
+}

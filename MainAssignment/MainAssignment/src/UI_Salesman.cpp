@@ -374,6 +374,7 @@ void UI_Salesman::removeFromOrder(Order* order)
 bool UI_Salesman::finishUpOrder(Order* order)
 {
     char choice;
+    unsigned int selectionAsInt;
     bool validInput = false;
     vector<Location> availableLocations;
     Location tempLocation;
@@ -411,6 +412,8 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
     do
     {
+        validInput = false;
+
         //Clear the screen.
         cout << string(50, '\n');
 
@@ -429,6 +432,15 @@ bool UI_Salesman::finishUpOrder(Order* order)
         cout << endl << "Please choose the id of the location you want your pizza to be made: ";
         cin >> choice;
 
+        //Change the char selection to int.
+        selectionAsInt = (int)(choice - '0');
+
+        //Check if the input was valid.
+        if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
+        {
+            order->setLocation(availableLocations.at(selectionAsInt));
+            validInput = true;
+        }
 
 
     } while(!validInput);

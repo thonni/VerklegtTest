@@ -5,6 +5,7 @@
 #include "IdService.h"
 #include "pizza.h"
 #include "Extra.h"
+#include "Location.h"
 
 using namespace std;
 
@@ -42,6 +43,8 @@ class Order
         void setHomeDelivery(bool homeDelivery);
         int getId();
         void setId(int id);
+        Location getLocation();
+        void setLocation(Location location);
 
 
         friend ostream& operator << (ostream& out, const Order& order);
@@ -58,6 +61,7 @@ class Order
         bool paidFor;
         bool homeDelivery;
         IdService idService;
+        Location location;
 };
 
 #endif // ORDER_H
