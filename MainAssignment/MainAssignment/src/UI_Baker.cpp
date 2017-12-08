@@ -48,6 +48,7 @@ void UI_Baker::startUI()
 
         cout << "Input the ID of an order to make." << endl;
         cin >> orderID;
+        //orderID = locations[orderID-1].getId();
         try
         {
             order = orderService.getOrder(orderID);
