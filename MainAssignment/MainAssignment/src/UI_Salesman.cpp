@@ -410,6 +410,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
     } while(!validInput);
 
+
     do
     {
         validInput = false;
@@ -444,6 +445,9 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
 
     } while(!validInput);
+
+    //Save the order to file.
+
 
     return true;
 }

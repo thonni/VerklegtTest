@@ -67,8 +67,9 @@ void Pizza::generatePrice(double extraCost = 0.0)
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
     Topping tempTopping;
-    string savedName = "";
 
+    //Goes through the name input and replaces all ' ' with '~'.
+    string savedName = "";
     for(int i = 0; i < 32; i++)
     {
         if(pizza.name[i] == ' ')
@@ -105,8 +106,8 @@ istream& operator >> (istream& in, Pizza& pizza)
     double toppingPrice;
     string savedName = "";
 
+    //Goes through the name input and replaces all '~' with ' '.
     in >> savedName;
-
     for(unsigned int i = 0; i < savedName.length(); i++)
     {
         if(savedName[i] == '~')
@@ -117,6 +118,7 @@ istream& operator >> (istream& in, Pizza& pizza)
         {
             pizza.name[i] = savedName[i];
         }
+        pizza.name[i+1] = '\0';
     }
 
     in >> pizza.price;
