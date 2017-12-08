@@ -116,13 +116,17 @@ Pizza UI_Salesman::choosePizzaFromMenu()
 {
     Pizza tempPizza;
     Topping tempTopping;
+    Base tempBase;
     vector<Pizza> availablePizzas;
+    vector<Base> availableBases;
     char selection = '0';
     unsigned int selectionAsInt = 0;
     Pizza newPizza("N/A", Pizza::Small);
 
     //Ask pizzaService for a vector of all pizzas that are on the menu.
     availablePizzas = pizzaService.getPizzas();
+    //Ask baseService for a vector of all bases that are on the menu.
+    availableBases = baseService.getBases();
 
     do
     {
@@ -157,10 +161,74 @@ Pizza UI_Salesman::choosePizzaFromMenu()
     //Loop if selection is out of range and is not c or C for cancel.
     } while(!((selectionAsInt >= 0U && selectionAsInt < availablePizzas.size()) || toupper(selection) == 'C'));
 
-    //Set newPizza to the selected pizza if the selection was not canceled.
+
     if(toupper(selection) != 'C')
     {
+        //Set newPizza to the selected pizza if the selection was not canceled.
         newPizza = availablePizzas.at(selectionAsInt);
+
+        do
+        {
+            //Clear the screen.
+            cout << string(50, '\n');
+
+            //Make the user select the size of the pizza.
+            cout << "Please select the size of the pizza" << endl;
+            cout << "Choose S for Small" << endl;
+            cout << "Choose M for Medium" << endl;
+            cout << "Choose L for Large" << endl;
+            cout << ": ";
+            cin >> selection;
+
+            //Set the size of the pizza depending on the user input.
+            if(toupper(selection) == 'S')
+            {
+                newPizza.setSize(Pizza::Small);
+            }
+            else if(toupper(selection) == 'M')
+            {
+                newPizza.setSize(Pizza::Medium);
+            }
+            else if(toupper(selection) == 'L')
+            {
+                newPizza.setSize(Pizza::Large);
+            }
+            else
+            {
+                selection = '0';
+            }
+
+          //Loop until a valid input is entered.
+        } while(selection == '0');
+
+        do
+        {
+            //Clear the screen.
+            cout << string(50, '\n');
+
+            //Print out all available pizza bases.
+            for(unsigned int i = 0; i < availableBases.size(); i++)
+            {
+                tempBase = availableBases.at(i);
+                cout << i << " - Name: " << tempBase.getName() << " - price: " << tempBase.getPrice() << " Kr" << endl;
+            }
+            cout << "Please select the id of the topping to add: ";
+            cin >> selection;
+
+
+            //Store the selection as int in another variable.
+            selectionAsInt = (int)(selection - '0');
+
+            //Check if the selection is in the correct range.
+            if((selectionAsInt >= 0 && selectionAsInt < availableBases.size()))
+            {
+                //Set the base to the selected base
+                newPizza.setBase(availableBases.at(selectionAsInt));
+                selection = '/';
+            }
+
+          //Loop until a valid input is entered.
+        } while(selection != '/');
     }
 
     //Return the pizza.

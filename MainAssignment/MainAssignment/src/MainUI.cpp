@@ -17,7 +17,7 @@ void MainUI::startUI()
         cout << "Choose S for salesman" << endl;
         cout << "Choose B for baker" << endl;
         cout << "Choose D for delivery" << endl;
-        cout << "Choose Q to go quit" << endl;
+        cout << "Choose Q to quit" << endl;
         cout << ": ";
 
         //Asks the user who he/she is.
