@@ -247,7 +247,6 @@ void UI_Manager::addLocation()
         cin.ignore();
         getline(cin, address);
         cout << "Please enter the city: ";
-        cin.ignore();
         getline(cin, city);
 
         //Create a temporary instance of Location.
