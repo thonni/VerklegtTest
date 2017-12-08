@@ -77,11 +77,11 @@ void UI_Delivery::deliveryMenu()
             cout << "Input D when the order is delivered." << endl;
             cout << "Choose B to go back." << endl;
             cin >> orderMark;
-            if (orderMark == 'O')
+            if (toupper(orderMark) == 'O')
             {
                 /// The number of order they choose gets marked "on its way" in the file.
             }
-            else if (orderMark == 'D')
+            else if (toupper(orderMark) == 'D')
             {
                 /// The number of order they choose gets marked "delivered" in the file.
             }
