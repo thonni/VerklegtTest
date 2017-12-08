@@ -37,7 +37,7 @@ vector<Order> OrderRepository::getOrders()
     Order tempOrder;
 
     //Open the activeOrders file.
-    fin.open("data/activeOrders.txt");
+    fin.open("activeOrders.txt");
 
     //Check if the file was opened (check if it exists).
     if(fin.is_open())
