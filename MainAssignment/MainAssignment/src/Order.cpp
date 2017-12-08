@@ -112,7 +112,7 @@ ostream& operator << (ostream& out, const Order& order)
 
     //Writes out the number of extras in the order.
     out << order.extras.size() << " ";
-    //Loops through all the extras in the order
+    //Loops through all the extras in the order.
     for(unsigned int i = 0; i < order.extras.size(); i++)
     {
         //Store the current extra in a temporary Extra variable.
@@ -202,19 +202,22 @@ istream& operator >> (istream& in , Order& order)
         order.addPizza(tempPizza);
     }
 
-    //Get the number of extras to come and loop trough them.
+    //Get the number of extras to come and loop trough them if there are any.
     in >> size1;
-    for(int i = 0; i < size1; i++)
+    if(size1 > 0)
     {
-        //Get the extra's name, type and price,
-        //and store in the temporary variables.
-        in >> tempName >> tempType >> tempPrice;
-        //Set the temp extra name type and price to the input.
-        tempExtra.setName(tempName);
-        tempExtra.setType((Extra::Type)(tempType));
-        tempExtra.setPrice(tempPrice);
-        //Add the extra to the order.
-        order.addExtra(tempExtra);
+        for(int i = 0; i < size1; i++)
+        {
+            //Get the extra's name, type and price,
+            //and store in the temporary variables.
+            in >> tempName >> tempType >> tempPrice;
+            //Set the temp extra name type and price to the input.
+            tempExtra.setName(tempName);
+            tempExtra.setType((Extra::Type)(tempType));
+            tempExtra.setPrice(tempPrice);
+            //Add the extra to the order.
+            order.addExtra(tempExtra);
+        }
     }
 
     return in;
