@@ -65,7 +65,8 @@ void UI_Manager::addToppingToMenu()
 
         //Ask the user for a name and price for the new topping.
         cout << "Please enter the name of the topping: ";
-        cin >> name;
+        cin.ignore();
+        getline(cin, name);
         cout << "Please enter the price of the topping: ";
         cin >> price;
 
@@ -97,12 +98,14 @@ void UI_Manager::addBaseToMenu()
 
         //Ask the user for a name and price for the new topping.
         cout << "Please enter the name of the base: ";
-        cin >> name;
+        cin.ignore();
+        getline(cin, name);
         cout << "Please enter the price of the base: ";
         cin >> price;
 
         //Create a temporary instance of Base.
         Base baseToAdd = Base(name, price);
+        baseToAdd.generateId();
 
         //Ask the Base service to save the Base.
         baseService.addBase(baseToAdd);
@@ -120,21 +123,28 @@ void UI_Manager::addPizzaToMenu()
     string name;
     Topping tempTopping;
     vector<Topping> availableToppings;
+    vector<Base> availableBases;
     char selection = '0';
     unsigned int selectionAsInt = 0;
 
     //Clear the screen.
     cout << string(50, '\n');
 
-    //Get a vector for all saved toppings using DataManager.
+    //Get a vector for all saved toppings using toppingService.
     availableToppings = toppingService.getToppings();
+    //Get a vector for all saved bases using baseService.
+    availableBases = baseService.getBases();
 
     //Ask the user for a name for the new pizza.
     cout << "Pizza name: ";
-    cin >> name;
+    cin.ignore();
+    getline(cin, name);
 
     //Create an instance of pizza using the name
     Pizza newPizza(name, Pizza::Small);
+
+    //Set the base of the pizza to be the first base on file.
+    newPizza.setBase(availableBases.at(0));
 
     do
     {
@@ -190,9 +200,7 @@ void UI_Manager::addPizzaToMenu()
     cin >> selection;
 
 
-    //Add the pizza to a vector and use DataManager to save the pizza to file.
-    //newPizzas.push_back(newPizza);
-    //data.addPizzasToMenu(newPizzas);
+    //Use pizzaService to save the new pizza to file.
     pizzaService.addPizza(newPizza);
 }
 
@@ -213,7 +221,8 @@ void UI_Manager::addExtraToMenu()
 
         //Ask the user for a name and price for the new extra.
         cout << "Please enter the name of the extra: ";
-        cin >> name;
+        cin.ignore();
+        getline(cin, name);
         cout << "Please enter the price of the extra: ";
         cin >> price;
 
