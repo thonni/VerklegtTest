@@ -14,8 +14,8 @@ UI_Baker::~UI_Baker()
 
 void UI_Baker::startUI()
 {
-    int orderID;
-    char location, orderMark;
+    int orderID, location;
+    char orderMark;
     bool noID = false, goBack = false;
     //Clear the screen
     cout << string(50, '\n');
@@ -27,17 +27,17 @@ void UI_Baker::startUI()
     do
     {
         cout << "Please choose your location." << endl;
-        cout << "Choose B to go back." << endl;
+        cout << "Choose 0 to go back." << endl;
 
         for(unsigned int i = 0; i < locations.size(); i++)
         {
             cout << (i + 1) << ": " << locations.at(i).getAddress() << " - " << locations.at(i).getCity() << endl;
         }
         cin >> location;
-    } while(!(toupper(location) != 'B' || location < (1 + '0') || location > (locSize + '1')));
+    } while(location < 0 || location > locSize);
 
 
-    if(toupper(location) == 'B')
+    if(location == 0)
     {
         goBack = true;
     }
@@ -60,7 +60,7 @@ void UI_Baker::startUI()
                 noID = true;
             }
         }
-        while(toupper(orderMark) != 'B' || noID)
+        while(toupper(orderMark) != 'B' || !noID)
         {
             cout << "Please mark the order appropriately." << endl;
             cout << "Input P when the order is in Prep." << endl;
