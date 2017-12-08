@@ -39,7 +39,7 @@ ostream& operator << (ostream& out, const Order& order)
     Topping tempTopping;
     Extra tempExtra;
 
-    out << order.id << " " << (int)order.state << " " << order.homeDelivery << " ";
+    out << order.id << " " << order.getLocation().getId() << " " << (int)order.state << " " << order.homeDelivery << " ";
     out << order.pizzas.size() << " ";
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
@@ -116,13 +116,28 @@ istream& operator >> (istream& in , Order& order)
 
     string tempName;
     double tempPrice;
+    int tempLocationId;
+    Location tempLocation;
+    vector<Location> availableLocations = order.locationService.getLocations();
     int tempType;
     int tempState;
 
     int size1, size2;
 
     //Get the order id, state and homeDelivery.
-    in >> order.id >> tempState >> order.homeDelivery;
+    in >> order.id;
+
+    in >> tempLocationId;
+    for(unsigned int i = 0; i < availableLocations.size(); i++)
+    {
+        tempLocation = availableLocations.at(i);
+        if(tempLocation.getId() == tempLocationId)
+        {
+            order.setLocation(tempLocation);
+        }
+    }
+
+    in >> tempState >> order.homeDelivery;
     order.state = (Order::State)(tempState);
 
     //Get the number of pizzas to come and loop through them
@@ -207,7 +222,7 @@ void Order::generatePrice()
 
 
 ///Getters and setters.
-Order::State Order::getState()
+Order::State Order::getState() const
 {
     return this->state;
 }
@@ -217,12 +232,12 @@ void Order::setState(Order::State state)
     this->state = state;
 }
 
-double Order::getPrice()
+double Order::getPrice() const
 {
     return this->totalPrice;
 }
 
-bool Order::getPaidFor()
+bool Order::getPaidFor() const
 {
     return this->paidFor;
 }
@@ -232,7 +247,7 @@ void Order::setPaidFor(bool paidFor)
     this->paidFor = paidFor;
 }
 
-bool Order::getHomeDelivery()
+bool Order::getHomeDelivery() const
 {
     return this->homeDelivery;
 }
@@ -242,7 +257,7 @@ void Order::setHomeDelivery(bool homeDelivery)
     this->homeDelivery = homeDelivery;
 }
 
-int Order::getId()
+int Order::getId() const
 {
     return this->id;
 }
@@ -252,17 +267,17 @@ void Order::setId(int id)
     this->id = id;
 }
 
-vector<Pizza> Order::getPizzas()
+vector<Pizza> Order::getPizzas() const
 {
     return this->pizzas;
 }
 
-vector<Extra> Order::getExtras()
+vector<Extra> Order::getExtras() const
 {
     return this->extras;
 }
 
-Location Order::getLocation()
+Location Order::getLocation() const
 {
     return this->location;
 }

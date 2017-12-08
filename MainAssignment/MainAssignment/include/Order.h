@@ -6,6 +6,7 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Location.h"
+#include "LocationService.h"
 
 using namespace std;
 
@@ -32,18 +33,18 @@ class Order
         void generateId();
 
         ///Getters and setters.
-        Order::State getState();
+        Order::State getState() const;
         void setState(Order::State state);
-        double getPrice();
-        vector<Pizza> getPizzas();
-        vector<Extra> getExtras();
-        bool getPaidFor();
+        double getPrice() const;
+        vector<Pizza> getPizzas() const;
+        vector<Extra> getExtras() const;
+        bool getPaidFor() const;
         void setPaidFor(bool paidFor);
-        bool getHomeDelivery();
+        bool getHomeDelivery() const;
         void setHomeDelivery(bool homeDelivery);
-        int getId();
+        int getId() const;
         void setId(int id);
-        Location getLocation();
+        Location getLocation() const;
         void setLocation(Location location);
 
 
@@ -61,6 +62,7 @@ class Order
         bool paidFor;
         bool homeDelivery;
         IdService idService;
+        LocationService locationService;
         Location location;
 };
 
