@@ -13,9 +13,20 @@ void Order::addPizza(Pizza pizza)
 }
 
 
+void Order::clearPizzas()
+{
+    this->pizzas.clear();
+}
+
+
 void Order::addExtra(Extra extra)
 {
     this->extras.push_back(extra);
+}
+
+void Order::clearExtras()
+{
+    this->extras.clear();
 }
 
 

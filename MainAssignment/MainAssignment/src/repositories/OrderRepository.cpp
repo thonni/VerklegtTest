@@ -47,7 +47,9 @@ vector<Order> OrderRepository::getOrders()
         {
             //Put the order into the vector
             returnVector.push_back(tempOrder);
-            Order tempOrder;
+            //Clear the pizza and extras vector in Order
+            tempOrder.clearPizzas();
+            tempOrder.clearExtras();
         }
     }
     else

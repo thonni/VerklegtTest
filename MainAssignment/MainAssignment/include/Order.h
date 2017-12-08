@@ -26,11 +26,14 @@ class Order
 
         Order();
         void addPizza(Pizza pizza);
+        void clearPizzas();
         void addExtra(Extra extra);
+        void clearExtras();
         void removePizza(int i);
         void removeExtra(int i);
         void generatePrice();
         void generateId();
+
 
         ///Getters and setters.
         Order::State getState() const;
