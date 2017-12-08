@@ -34,16 +34,17 @@ void Location::generateId()
 }
 
 
-istream& operator >> (istream& in, Location &location)
-{
-    in >> location.address >> location.city;
-    return in;
-}
-
 ostream& operator << (ostream& out, const Location &location)
 {
-    out << location.address << location.city;
+    out << location.id << location.address << location.city;
     return out;
+}
+
+
+istream& operator >> (istream& in, Location &location)
+{
+    in >> location.id >> location.address >> location.city;
+    return in;
 }
 
 
