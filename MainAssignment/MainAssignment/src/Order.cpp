@@ -39,7 +39,7 @@ ostream& operator << (ostream& out, const Order& order)
     Topping tempTopping;
     Extra tempExtra;
 
-    out << order.id << " " << order.getLocation().getId() << " " << (int)order.state << " " << order.homeDelivery << " ";
+    out << order.id << " " << order.paidFor << " " << order.getLocation().getId() << " " << (int)order.state << " " << order.homeDelivery << " ";
     out << order.pizzas.size() << " ";
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
@@ -124,8 +124,8 @@ istream& operator >> (istream& in , Order& order)
 
     int size1, size2;
 
-    //Get the order id, state and homeDelivery.
-    in >> order.id;
+    //Get the order id and paidFor.
+    in >> order.id >> order.paidFor;
 
     in >> tempLocationId;
     for(unsigned int i = 0; i < availableLocations.size(); i++)
