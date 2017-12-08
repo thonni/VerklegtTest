@@ -46,7 +46,7 @@ class Base
         void setPrice(double price);
         void setName(string name);
         void setId();
-        int getId();
+        int getId() const;
 
     protected:
 

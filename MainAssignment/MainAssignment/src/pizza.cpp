@@ -6,7 +6,6 @@ Pizza::Pizza()
     this->name[0] = '\0';
     this->pizzaSize = Small;
     this->price = 0.0;
-
 }
 
 
@@ -57,8 +56,8 @@ void Pizza::generatePrice(double extraCost = 0.0)
         tempTopping = this->toppings.at(i);
         tempPrice += tempTopping.getPrice();
     }
-    //Add extraCost and the base price to tempPrice
-    tempPrice += (extraCost/*+ this->basePizzaPrice*/);
+    //Add extraCost and the base price to tempPrice.
+    tempPrice += (extraCost + this->base.getPrice());
 
     //Set price to be the calculated tempPrice.
     this->price = tempPrice;
@@ -167,4 +166,14 @@ Pizza::Size Pizza::getSize()
 void Pizza::setSize(Pizza::Size pizzaSize)
 {
     this->pizzaSize = pizzaSize;
+}
+
+Base Pizza::getBase()
+{
+    return this->base;
+}
+
+void Pizza::setBase(Base base)
+{
+    this->base = base;
 }

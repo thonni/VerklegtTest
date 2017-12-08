@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <vector>
+#include "BaseService.h"
 #include "topping.h"
 #include "Base.h"
 
@@ -24,7 +25,6 @@ class Pizza
         Pizza(string name, Pizza::Size pizzaSize);
 
         void addTopping(Topping topping);
-        void addBase (Base base);
         void clearToppings();
         void generatePrice();
         void generatePrice(double extraCost);
@@ -40,6 +40,8 @@ class Pizza
         vector<Topping> getToppings();
         Pizza::Size getSize();
         void setSize(Pizza::Size pizzaSize);
+        Base getBase();
+        void setBase(Base base);
 
     protected:
 

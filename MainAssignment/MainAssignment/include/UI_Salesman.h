@@ -6,6 +6,7 @@
 #include "ExtraService.h"
 #include "OrderService.h"
 #include "LocationService.h"
+#include "BaseService.h"
 #include "Location.h"
 #include "topping.h"
 #include "pizza.h"
@@ -36,6 +37,7 @@ class UI_Salesman
         ExtraService extraService;
         OrderService orderService;
         LocationService locationService;
+        BaseService baseService;
 };
 
 #endif // UI_SALESMAN_H

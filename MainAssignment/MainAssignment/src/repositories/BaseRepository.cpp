@@ -4,7 +4,7 @@ void BaseRepository::addBase(Base base)
 {
     ofstream fout;
 
-    fout.open("data/baseList.dat", ios::binary|ios::app);
+    fout.open("baseList.dat", ios::binary|ios::app);
 
     fout.write((char*)(&base), sizeof(Base));
 
@@ -16,7 +16,7 @@ vector<Base> BaseRepository::getBases()
 {
     ifstream fin;
 
-    fin.open("data/baseList.dat", ios::binary);
+    fin.open("baseList.dat", ios::binary);
 
     fin.seekg(0, fin.end);
     int records = fin.tellg() / sizeof(Base);

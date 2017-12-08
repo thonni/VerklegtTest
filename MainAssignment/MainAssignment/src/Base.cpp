@@ -80,7 +80,7 @@ void Base::setId()
     this->id = id;
 }
 
-int Base::getId()
+int Base::getId() const
 {
     return this->id;
 }

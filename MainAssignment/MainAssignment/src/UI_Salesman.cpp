@@ -171,7 +171,9 @@ Pizza UI_Salesman::choosePizzaFromMenu()
 Pizza UI_Salesman::makePizza()
 {
     Topping tempTopping;
+    Base tempBase;
     vector<Topping> availableToppings;
+    vector<Base> availableBases;
     char selection = '0';
     unsigned int selectionAsInt = 0;
 
@@ -180,6 +182,8 @@ Pizza UI_Salesman::makePizza()
 
     //Ask toppingService for a vector of all toppings that are on the menu.
     availableToppings = toppingService.getToppings();
+    //Ask baseService for a vector of all bases that are on the menu.
+    availableBases = baseService.getBases();
 
     //Create an instance of pizza using the name
     Pizza newPizza("N/A", Pizza::Small);
@@ -251,6 +255,37 @@ Pizza UI_Salesman::makePizza()
             }
 
         } while(selection == '0');
+
+
+        do
+        {
+            //Clear the screen.
+            cout << string(50, '\n');
+
+            //Print out all available pizza bases.
+            for(unsigned int i = 0; i < availableBases.size(); i++)
+            {
+                tempBase = availableBases.at(i);
+                cout << i << " - Name: " << tempBase.getName() << " - price: " << tempBase.getPrice() << " Kr" << endl;
+            }
+            cout << "Please select the id of the topping to add: ";
+            cin >> selection;
+
+
+            //Store the selection as int in another variable.
+            selectionAsInt = (int)(selection - '0');
+
+            //Check if the selection is in the correct range.
+            if((selectionAsInt >= 0 && selectionAsInt < availableBases.size()))
+            {
+                //Set the base to the selected base
+                newPizza.setBase(availableBases.at(selectionAsInt));
+                selection = '/';
+            }
+
+
+        } while(selection != '/');
+
 
         //Make the pizza calculate the price of it self (And add extra for making a custom pizza).
         newPizza.generatePrice(300.0);
