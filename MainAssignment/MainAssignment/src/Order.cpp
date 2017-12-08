@@ -3,7 +3,7 @@
 
 Order::Order()
 {
-
+    this->paidFor = false;
 }
 
 
