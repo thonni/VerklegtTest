@@ -79,11 +79,15 @@ void UI_Delivery::deliveryMenu()
             cin >> orderMark;
             if (toupper(orderMark) == 'O')
             {
-                /// The number of order they choose gets marked "on its way" in the file.
+                // The number of order they choose gets marked "on its way" in the file.
+                order.setState(Order::OnItsWay);
+                orderService.setOrderState(order);
             }
             else if (toupper(orderMark) == 'D')
             {
-                /// The number of order they choose gets marked "delivered" in the file.
+                // The number of order they choose gets marked "delivered" in the file.
+                order.setState(Order::Delivered);
+                orderService.setOrderState(order);
             }
             else
             {
