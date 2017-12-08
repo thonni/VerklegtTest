@@ -7,7 +7,7 @@ void OrderRepository::addOrder(const Order& order)
     ofstream fout;
 
     //Open the activeOrders file
-    fout.open("data/activeOrders.txt", ios::app);
+    fout.open("activeOrders.txt", ios::app);
 
     //Write the pizza data using the Pizza ostream overloader.
     fout << order;
@@ -21,7 +21,7 @@ void OrderRepository::clearOrders()
 {
     ofstream fout;
 
-    fout.open("data/activeOrders.txt");
+    fout.open("activeOrders.txt");
 
     fout.close();
 }
@@ -37,7 +37,7 @@ vector<Order> OrderRepository::getOrders()
     Order tempOrder;
 
     //Open the activeOrders file.
-    fin.open("data/activeOrders.txt");
+    fin.open("activeOrders.txt");
 
     //Check if the file was opened (check if it exists).
     if(fin.is_open())

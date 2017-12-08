@@ -2,6 +2,7 @@
 #define ORDER_H
 
 #include <vector>
+#include "IdService.h"
 #include "pizza.h"
 #include "Extra.h"
 
@@ -22,14 +23,12 @@ class Order
         };
 
         Order();
-        Order(int id);
         void addPizza(Pizza pizza);
         void addExtra(Extra extra);
         void removePizza(int i);
         void removeExtra(int i);
-        void listPizzas();
-        void listExtras();
         void generatePrice();
+        void generateId();
 
         ///Getters and setters.
         Order::State getState();
@@ -39,6 +38,8 @@ class Order
         vector<Extra> getExtras();
         bool getPaidFor();
         void setPaidFor(bool paidFor);
+        bool getHomeDelivery();
+        void setHomeDelivery(bool homeDelivery);
         int getId();
         void setId(int id);
 
@@ -55,6 +56,8 @@ class Order
         vector<Extra> extras;
         double totalPrice;
         bool paidFor;
+        bool homeDelivery;
+        IdService idService;
 };
 
 #endif // ORDER_H

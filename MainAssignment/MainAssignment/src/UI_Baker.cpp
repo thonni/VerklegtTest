@@ -17,6 +17,7 @@ void UI_Baker::startUI()
     int orderID, location;
     char orderMark;
     bool noID = false, goBack = false;
+    vector<Order> orders;
     //Clear the screen
     cout << string(50, '\n');
     cout << "Welcome baker" << endl << endl;
@@ -44,7 +45,11 @@ void UI_Baker::startUI()
 
     if(!goBack)
     {
-        orderService.getOrders();
+        orders = orderService.getOrders();
+        for(int i = 0; i < orders.size(); i++)
+        {
+            cout << orders[i];
+        }
 
         cout << "Input the ID of an order to make." << endl;
         cin >> orderID;

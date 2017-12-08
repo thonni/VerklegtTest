@@ -7,7 +7,7 @@ void PizzaRepository::addPizza(Pizza pizza)
     ofstream fout;
 
     //Open the pizzaMenu file
-    fout.open("data/pizzaMenu.txt", ios::app);
+    fout.open("pizzaMenu.txt", ios::app);
 
     //Write the pizza data using the Pizza ostream overloader.
     fout << pizza;
@@ -27,7 +27,7 @@ vector<Pizza> PizzaRepository::getPizzas()
     Pizza tempPizza;
 
     //Open the pizzaMenu file.
-    fin.open("data/pizzaMenu.txt");
+    fin.open("pizzaMenu.txt");
 
     //Check if the file was opened (check if it exists).
     if(fin.is_open())

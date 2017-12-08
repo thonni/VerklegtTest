@@ -6,7 +6,7 @@ void ToppingRepository::addTopping(Topping topping)
 {
     ofstream fout;
 
-    fout.open("data/toppingList.dat", ios::binary|ios::app);
+    fout.open("toppingList.dat", ios::binary|ios::app);
 
     fout.write((char*)(&topping), sizeof(Topping));
 
@@ -18,7 +18,7 @@ vector<Topping> ToppingRepository::getToppings()
 {
     ifstream fin;
 
-    fin.open("data/toppingList.dat", ios::binary);
+    fin.open("toppingList.dat", ios::binary);
 
     fin.seekg(0, fin.end);
     int records = fin.tellg() / sizeof(Topping);
