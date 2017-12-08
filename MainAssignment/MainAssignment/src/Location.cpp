@@ -7,6 +7,7 @@ Location::Location()
     this->city[0] = '\0';
 }
 
+
 Location::Location(string address, string city)
 {
     //Iterate trough the input string and put each character into the char array.
@@ -26,6 +27,13 @@ Location::Location(string address, string city)
     }
 }
 
+
+void Location::generateId()
+{
+    this->id = idService.getNextId();
+}
+
+
 istream& operator >> (istream& in, Location &location)
 {
     in >> location.address >> location.city;
@@ -37,6 +45,9 @@ ostream& operator << (ostream& out, const Location &location)
     out << location.address << location.city;
     return out;
 }
+
+
+///Getters and Setters.
 
 string Location::getAddress() const
 {
@@ -52,6 +63,11 @@ string Location::getCity() const
     string returnString = string(this->city);
     //Return the string.
     return returnString;
+}
+
+int Location::getId() const
+{
+    return this->id;
 }
 
 void Location::setAddress(string address)
@@ -76,5 +92,7 @@ void Location::setCity(string city)
     }
 }
 
-
-
+void Location::setId(int id)
+{
+    this->id = id;
+}

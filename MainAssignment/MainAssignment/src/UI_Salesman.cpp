@@ -40,8 +40,10 @@ void UI_Salesman::takeOrder()
     bool orderFinished = false;
     Pizza tempPizza;
 
-    //Create an instance of order.
+    //Create an instance of order and make it get an id.
     Order newOrder;
+    newOrder.generateId();
+    //set the state of the order to 'received'.
     newOrder.setState(Order::Received);
 
     do
@@ -336,18 +338,65 @@ void UI_Salesman::removeFromOrder(Order* order)
 
 bool UI_Salesman::finishUpOrder(Order* order)
 {
-    /// \TODO: Print out all items that are currently in the order in a nice list and ask the user
-    ///        if he/she wants to finish up the order, if so it saves the order to file and returns true
-    ///        else it returns false.
+    char choice;
+    bool validInput = false;
+    vector<Location> availableLocations;
+    Location tempLocation;
 
-    //Clear the screen.
-    cout << string(50, '\n');
-    //Print out everything in the order using printOutOrder
-    this->printOutOrder(*order);
+    //Ask LocationService for all saved locations.
+    availableLocations = locationService.getLocations();
 
-    char lala;
-    cin >> lala;
 
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Print out everything in the order using printOutOrder
+        this->printOutOrder(*order);
+
+        //Ask the user if he/she wants the order home delivered.
+        cout << endl << "Do you want your order to be delivered to your home? (Y/N): ";
+        cin >> choice;
+
+        //Check the answer, if it is y it sets homeDelivery to true,
+        //else it sets it to false.
+        if(toupper(choice) == 'Y')
+        {
+            order->setHomeDelivery(true);
+            validInput = true;
+        }
+        else if(toupper(choice) == 'N')
+        {
+            order->setHomeDelivery(false);
+            validInput = true;
+        }
+
+    } while(!validInput);
+
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Print out everything in the order using printOutOrder
+        //this->printOutOrder(*order);
+
+        //Print out all available locations.
+        for(unsigned int i = 0; i < availableLocations.size(); i++)
+        {
+            tempLocation = availableLocations.at(i);
+
+            cout << i << " - " << tempLocation.getAddress() << " " << tempLocation.getCity() << endl;
+        }
+
+        //Ask the user if he/she wants the order home delivered.
+        cout << endl << "Please choose the id of the location you want your pizza to be made: ";
+        cin >> choice;
+
+
+
+    } while(!validInput);
 
     return true;
 }

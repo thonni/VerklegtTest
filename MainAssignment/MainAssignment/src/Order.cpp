@@ -7,12 +7,6 @@ Order::Order()
 }
 
 
-Order::Order(int id)
-{
-    this->id = id;
-}
-
-
 void Order::addPizza(Pizza pizza)
 {
     this->pizzas.push_back(pizza);
@@ -39,31 +33,13 @@ void Order::removeExtra(int i)
 }
 
 
-void Order::listPizzas()
-{
-    int ssize = this->pizzas.size();
-    for(int i = 0; i < ssize; i++) {
-        cout << (i + 1) << this->pizzas.at(i);
-    }
-}
-
-
-void Order::listExtras()
-{
-    int ssize = this->extras.size();
-    for(int i = 0; i < ssize; i++) {
-        cout << (i + 1) << this->extras.at(i);
-    }
-}
-
-
 ostream& operator << (ostream& out, const Order& order)
 {
     Pizza tempPizza;
     Topping tempTopping;
     Extra tempExtra;
 
-    out << order.id << " " << (int)order.state << " ";
+    out << order.id << " " << (int)order.state << " " << order.homeDelivery << " ";
     out << order.pizzas.size() << " ";
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
@@ -88,6 +64,12 @@ ostream& operator << (ostream& out, const Order& order)
 }
 
 
+void Order::generateId()
+{
+    this->id = idService.getNextId();
+}
+
+
 istream& operator >> (istream& in , Order& order)
 {
     Pizza tempPizza;
@@ -101,8 +83,8 @@ istream& operator >> (istream& in , Order& order)
 
     int size1, size2;
 
-    //Get the order id and state.
-    in >> order.id >> tempState;
+    //Get the order id, state and homeDelivery.
+    in >> order.id >> tempState >> order.homeDelivery;
     order.state = (Order::State)(tempState);
 
     //Get the number of pizzas to come and loop through them
@@ -198,6 +180,16 @@ bool Order::getPaidFor()
 void Order::setPaidFor(bool paidFor)
 {
     this->paidFor = paidFor;
+}
+
+bool Order::getHomeDelivery()
+{
+    return this->homeDelivery;
+}
+
+void Order::setHomeDelivery(bool homeDelivery)
+{
+    this->homeDelivery = homeDelivery;
 }
 
 int Order::getId()
