@@ -39,13 +39,18 @@ ostream& operator << (ostream& out, const Order& order)
     Topping tempTopping;
     Extra tempExtra;
 
+    //Write out the order id, paidFor boolean, location id, order state, and home delivery boolean.
     out << order.id << " " << order.paidFor << " " << order.getLocation().getId() << " " << (int)order.state << " " << order.homeDelivery << " ";
+
+    //Write out the number of pizzas in the order
     out << order.pizzas.size() << " ";
+    //Loop trough all the pizzas in the order
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
+        //Store the current pizza in a temporary Pizza variable.
         tempPizza = order.pizzas.at(i);
 
-        //Goes through the pizza name and replaces all ' ' with '~' and saves that.
+        //Goes through the pizza name and replaces all ' ' with '~' and writes that.
         string tempName = "";
         for(int i = 0; i < 32; i++)
         {
@@ -64,12 +69,15 @@ ostream& operator << (ostream& out, const Order& order)
         }
         out << tempName << " ";
 
+        //Write out the number of toppings on the current pizza.
         out << tempPizza.getToppings().size() << " ";
+        //Loops through the toppings in the order.
         for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
         {
-
+            //Store the current topping in a temporary Topping variable.
             tempTopping = tempPizza.getToppings().at(j);
-            //Goes through the pizza name and replaces all ' ' with '~' and saves that.
+
+            //Goes through the topping name and replaces all ' ' with '~' and saves that.
             tempName = "";
             for(int i = 0; i < 32; i++)
             {
@@ -86,15 +94,19 @@ ostream& operator << (ostream& out, const Order& order)
                     tempName += tempTopping.getName()[i];
                 }
             }
-
+            //Writes out the current topping price.
             out << tempName << " " << tempTopping.getPrice() << " ";
         }
     }
 
+    //Writes out the number of extras in the order.
     out << order.extras.size() << " ";
+    //Loops through all the extras in the order
     for(unsigned int i = 0; i < order.extras.size(); i++)
     {
+        //Store the current extra in a temporary Extra variable.
         tempExtra = order.extras.at(i);
+        //Writes out the current topping name, price and type.
         out << tempExtra.getName() << " " << (int)(tempExtra.getType()) << " " << tempExtra.getPrice() << " ";
     }
 

@@ -47,6 +47,7 @@ vector<Order> OrderRepository::getOrders()
         {
             //Put the order into the vector
             returnVector.push_back(tempOrder);
+            Order tempOrder;
         }
     }
     else
