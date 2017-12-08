@@ -24,27 +24,27 @@ void MainUI::startUI()
         cin >> selection;
 
         //Responds to who you are, and shows you the appropriate front page
-        if (selection == 'm')
+        if (toupper(selection) == 'M')
         {
             manager.startUI();
             cout << endl;
         }
-        else if (selection == 's')
+        else if (toupper(selection) == 'S')
         {
             salesman.startUI();
-            //salesman.orderSorting();
 
             cout << endl;
         }
-        else if (selection == 'b')
+        else if (toupper(selection) == 'B')
         {
             baker.startUI();
 
             cout << endl;
         }
-        else if (selection == 'd')
+        else if (toupper(selection) == 'D')
         {
-
+            delivery.deliveryMenu();
+            cout << endl;
         }
 
     //Loops if the selection is not q or Q (Quit).

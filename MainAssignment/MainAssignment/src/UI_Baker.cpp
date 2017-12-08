@@ -46,7 +46,7 @@ void UI_Baker::startUI()
     if(!goBack)
     {
         orders = orderService.getOrders();
-        for(int i = 0; i < orders.size(); i++)
+        for(unsigned int i = 0; i < orders.size(); i++)
         {
             cout << orders[i];
         }
@@ -62,12 +62,17 @@ void UI_Baker::startUI()
         {
             if(e == 0)
             {
-                cout << "No Such ID could be found...";
+                cout << "No Such ID could be found..." << endl;
                 noID = true;
             }
         }
-        while(toupper(orderMark) != 'B' || !noID)
+        while(toupper(orderMark) != 'B')
         {
+            if(noID)
+            {
+                cin >> orderMark;
+                break;
+            }
             cout << "Please mark the order appropriately." << endl;
             cout << "Input P when the order is in Prep." << endl;
             cout << "Input O when the order is in Oven." << endl;
