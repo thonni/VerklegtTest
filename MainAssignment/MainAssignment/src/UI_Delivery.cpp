@@ -16,6 +16,7 @@ void UI_Delivery::deliveryMenu()
     char orderMark;
     bool noID = false, goBack = false;
 
+    cout << string(50, '\n');
     locations = locationService.getLocations();
     int locSize = locations.size();
 
@@ -58,8 +59,13 @@ void UI_Delivery::deliveryMenu()
                 noID = true;
             }
         }
-        while(toupper(orderMark) != 'B' || !noID)
+        while(toupper(orderMark) != 'B')
         {
+            if(noID)
+            {
+                cin >> orderMark;
+                break;
+            }
             cout << "Please choose a payment method." << endl;
             // card or cash.
 
