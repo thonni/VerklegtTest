@@ -12,17 +12,22 @@ void UI_Manager::startUI (){
         cout << string(50, '\n');
 
         cout << "What would you like to do?" << endl;
-        cout << "Choose T to add toppings" << endl;
-        cout << "Choose P to add pizzas on menu" << endl;
-        cout << "Choose E to add extras" << endl;
-        cout << "Choose L to add locations" << endl;
-        cout << "Choose Q to quit" << endl;
+        cout << "Choose T to add Toppings" << endl;
+        cout << "Choose B to add a Base" << endl;
+        cout << "Choose P to add Pizzas on menu" << endl;
+        cout << "Choose E to add Extras" << endl;
+        cout << "Choose L to add Locations" << endl;
+        cout << "Choose Q to Quit" << endl;
         cout << ": ";
         cin >> choice;
 
         if(toupper(choice) == 'T')
         {
             this->addToppingToMenu();
+        }
+        if(toupper(choice) == 'B')
+        {
+            this->addBaseToMenu();
         }
         else if (toupper(choice) == 'P')
         {
@@ -72,6 +77,38 @@ void UI_Manager::addToppingToMenu()
 
         //Ask the user if he/she wants to add another topping.
         cout << "Add another topping? (Y/N): ";
+        cin >> continueToAdd;
+
+    } while(toupper(continueToAdd) == 'Y');
+}
+
+//This function creates new bases using user input
+//and uses DataManager to save them to
+void UI_Manager::addBaseToMenu()
+{
+    string name;
+    double price;
+    char continueToAdd = '\0';
+
+    do
+    {
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Ask the user for a name and price for the new topping.
+        cout << "Please enter the name of the base: ";
+        cin >> name;
+        cout << "Please enter the price of the base: ";
+        cin >> price;
+
+        //Create a temporary instance of Base.
+        Base baseToAdd = Base(name, price);
+
+        //Ask the Base service to save the Base.
+        baseService.addBase(baseToAdd);
+
+        //Ask the user if he/she wants to add another Base.
+        cout << "Add another base? (Y/N): ";
         cin >> continueToAdd;
 
     } while(toupper(continueToAdd) == 'Y');
@@ -251,6 +288,7 @@ void UI_Manager::addLocation()
 
         //Create a temporary instance of Location.
         Location locationToAdd = Location(address, city);
+        locationToAdd.generateId();
 
         //Ask the Location service to save the location.
         locationService.addLocation(locationToAdd);
