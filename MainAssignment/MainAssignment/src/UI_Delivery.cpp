@@ -84,6 +84,7 @@ void UI_Delivery::deliveryMenu()
         }
     }
 
+    /*
     /// Here it would be kind of cool to get the "O" option only if the orer is to be home delivered. If it's picked up, only the D option would show.
     /// Also, if it's picked up, they payment method choice would appear first, but if it's home delivered, thar option would appear after the order is market "on its way"
     cout << "Please choose a payment method." << endl;
@@ -101,5 +102,5 @@ void UI_Delivery::deliveryMenu()
     else if (orderMark == 'D')
     {
         /// The number of order they choose gets marked "delivered" in the file.
-    }
+    }*/
 }
