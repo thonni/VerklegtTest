@@ -447,7 +447,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
     } while(!validInput);
 
     //Save the order to file.
-
+    orderService.addOrder(*order);
 
     return true;
 }

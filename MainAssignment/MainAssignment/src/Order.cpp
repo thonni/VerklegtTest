@@ -44,12 +44,50 @@ ostream& operator << (ostream& out, const Order& order)
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
         tempPizza = order.pizzas.at(i);
-        out << tempPizza.getName() << " ";
+
+        //Goes through the pizza name and replaces all ' ' with '~' and saves that.
+        string tempName = "";
+        for(int i = 0; i < 32; i++)
+        {
+            if(tempPizza.getName()[i] == ' ')
+            {
+                tempName += '~';
+            }
+            else if(tempPizza.getName()[i] == '\0')
+            {
+                break;
+            }
+            else
+            {
+                tempName += tempPizza.getName()[i];
+            }
+        }
+        out << tempName << " ";
+
         out << tempPizza.getToppings().size() << " ";
         for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
         {
+
             tempTopping = tempPizza.getToppings().at(j);
-            out << tempTopping.getName() << " " << tempTopping.getPrice() << " ";
+            //Goes through the pizza name and replaces all ' ' with '~' and saves that.
+            tempName = "";
+            for(int i = 0; i < 32; i++)
+            {
+                if(tempTopping.getName()[i] == ' ')
+                {
+                    tempName += '~';
+                }
+                else if(tempTopping.getName()[i] == '\0')
+                {
+                    break;
+                }
+                else
+                {
+                    tempName += tempTopping.getName()[i];
+                }
+            }
+
+            out << tempName << " " << tempTopping.getPrice() << " ";
         }
     }
 
@@ -91,10 +129,22 @@ istream& operator >> (istream& in , Order& order)
     in >> size1;
     for(int i = 0; i < size1; i++)
     {
-        //Store the pizza name in a temporary variable and
+        //Goes through the name input and replaces all '~' with ' ' and
         //set the name using setName.
         in >> tempName;
-        tempPizza.setName(tempName);
+        string tempName2 = "";
+        for(unsigned int i = 0; i < tempName.length(); i++)
+        {
+            if(tempName[i] == '~')
+            {
+                tempName2 += ' ';
+            }
+            else
+            {
+                tempName2 += tempName[i];
+            }
+        }
+        tempPizza.setName(tempName2);
 
         //Get the number of toppings on the pizza and loop through them.
         in >> size2;
