@@ -7,6 +7,7 @@
 #include "Extra.h"
 #include "Location.h"
 #include "LocationService.h"
+#include "BaseService.h"
 
 using namespace std;
 
@@ -65,6 +66,7 @@ class Order
         bool paidFor;
         bool homeDelivery;
         IdService idService;
+        BaseService baseService;
         LocationService locationService;
         Location location;
 };

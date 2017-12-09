@@ -52,7 +52,61 @@ void Order::generateId()
 
 ostream& operator << (ostream& out, const Order& order)
 {
+
     Pizza tempPizza;
+    Topping tempTopping;
+    Extra tempExtra;
+
+    //Write out the order id, paidFor boolean, location id, order state, and home delivery boolean.
+    out << order.id << "," << order.paidFor << "," << order.getLocation().getId() << "," << (int)order.state << "," << order.homeDelivery << ",";
+
+    //Write out the number of pizzas in the order
+    out << order.pizzas.size() << ",";
+    //Loop trough all the pizzas in the order
+    for(unsigned int i = 0; i < order.pizzas.size(); i++)
+    {
+        //Store the current pizza in a temporary Pizza variable.
+        tempPizza = order.pizzas.at(i);
+
+
+        out << tempPizza.getName() << ",";
+
+        out << tempPizza.getBase().getId() << ",";
+
+        //Write out the number of toppings on the current pizza.
+        out << tempPizza.getToppings().size() << ",";
+        //Loops through the toppings in the order.
+        for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
+        {
+            //Store the current topping in a temporary Topping variable.
+            tempTopping = tempPizza.getToppings().at(j);
+
+
+            //Writes out the current topping name and price.
+            out << tempTopping.getName() << "," << tempTopping.getPrice() << ",";
+        }
+    }
+
+    //Writes out the number of extras in the order.
+    out << order.extras.size() << ",";
+    //Loops through all the extras in the order.
+    for(unsigned int i = 0; i < order.extras.size(); i++)
+    {
+        //Store the current extra in a temporary Extra variable.
+        tempExtra = order.extras.at(i);
+        //Writes out the current topping name, price and type.
+        out << tempExtra.getName() << "," << (int)(tempExtra.getType()) << "," << tempExtra.getPrice();
+        if(i < order.extras.size()-1)
+        {
+            out << ",";
+        }
+    }
+
+    out << endl;
+
+    return out;
+
+    /*Pizza tempPizza;
     Topping tempTopping;
     Extra tempExtra;
 
@@ -85,6 +139,8 @@ ostream& operator << (ostream& out, const Order& order)
             }
         }
         out << tempName << " ";
+
+        out << tempPizza.getBase().getId() << " ";
 
         //Write out the number of toppings on the current pizza.
         out << tempPizza.getToppings().size() << " ";
@@ -129,21 +185,28 @@ ostream& operator << (ostream& out, const Order& order)
 
     out << endl;
 
-    return out;
+    return out;*/
 }
 
 
 istream& operator >> (istream& in , Order& order)
 {
-    Pizza tempPizza;
+
+    ///NOTHING HERE.
+
+
+    /*Pizza tempPizza;
     Topping tempTopping;
     Extra tempExtra;
+    Base tempBase;
 
     string tempName;
     double tempPrice;
     int tempLocationId;
+    int tempBaseId;
     Location tempLocation;
     vector<Location> availableLocations = order.locationService.getLocations();
+    vector<Base> availableBases = order.baseService.getBases();
     int tempType;
     int tempState;
 
@@ -186,6 +249,18 @@ istream& operator >> (istream& in , Order& order)
         }
         tempPizza.setName(tempName2);
 
+        in >> tempBaseId;
+
+        for(unsigned int j = 0; j < availableBases.size(); j++)
+        {
+            tempBase = availableBases.at(j);
+            if(tempBase.getId() == tempBaseId)
+            {
+                tempPizza.setBase(tempBase);
+            }
+        }
+
+
         //Get the number of toppings on the pizza and loop through them.
         in >> size2;
         for(int j = 0; j < size2; j++)
@@ -204,7 +279,7 @@ istream& operator >> (istream& in , Order& order)
         order.addPizza(tempPizza);
     }
 
-    //Get the number of extras to come and loop trough them if there are any.
+    //Get the number of extras to come and loop through them if there are any.
     in >> size1;
     if(size1 > 0)
     {
@@ -222,7 +297,7 @@ istream& operator >> (istream& in , Order& order)
         }
     }
 
-    return in;
+    return in;*/
 }
 
 

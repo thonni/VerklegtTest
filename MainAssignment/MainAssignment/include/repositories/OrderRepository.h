@@ -1,7 +1,12 @@
 #ifndef ORDERREPOSITORY_H
 #define ORDERREPOSITORY_H
 
+#include <stdlib.h>
 #include "Order.h"
+#include "LocationService.h"
+#include "BaseService.h"
+
+using namespace std;
 
 class OrderRepository
 {
@@ -13,6 +18,8 @@ class OrderRepository
     protected:
 
     private:
+        LocationService locationService;
+        BaseService baseService;
 };
 
 #endif // ORDERREPOSITORY_H

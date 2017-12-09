@@ -172,28 +172,28 @@ void UI_Baker::printOutOrders()
         amountOfPizzas = tempOrder.getPizzas().size();
 
         //Gets the amount of sideDishes.
-        /*for(unsigned int j = 0; j < tempOrder.getExtras().size(); i++)
+        for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
         {
             tempExtra = tempOrder.getExtras().at(j);
             if(tempExtra.getType() == Extra::SideDish)
             {
                 amountOfSideDishes++;
             }
-        }*/
+        }
 
         //Print out the order info: Id, amount of pizzas, and amount of side dishes.
         cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes" << endl;
         //Loop through all the pizzas if there are any.
         if(amountOfPizzas > 0)
         {
-            cout << " Pizzas: " << endl;
-            for(unsigned int y = 0; y < order.getPizzas().size(); y++)
+            cout << " PIZZAS: " << endl;
+            for(unsigned int y = 0; y < tempOrder.getPizzas().size(); y++)
             {
                 //Store the current pizza in a temporary pizza variable.
-                tempPizza = order.getPizzas().at(y);
+                tempPizza = tempOrder.getPizzas().at(y);
 
                 //Prints out the current pizza name.
-                cout << " *" << tempPizza.getName() << " - ";
+                cout << "  *" << tempPizza.getName() << " - ";
                 //Prints out the current pizza size.
                 if(tempPizza.getSize() == Pizza::Small)
                 {
@@ -211,16 +211,23 @@ void UI_Baker::printOutOrders()
                 cout << tempPizza.getBase().getName() << endl;
 
                 //Check if the current pizza is a custom pizza, and if so it prints out its toppings.
-                if(tempPizza.getName() != "Custom Pizza")
+                if(tempPizza.getName() == "Custom Pizza")
                 {
+                    cout << "   -Toppings - ";
                     //Loop through all the toppings on the current pizza.
                     for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
                     {
                         //Store the current topping in a temporary topping variable.
                         tempTopping = tempPizza.getToppings().at(j);
 
-                        cout << "  -" << tempTopping.getName() << endl;
+                        cout << tempTopping.getName();
+
+                        if(j != tempPizza.getToppings().size() - 1)
+                        {
+                            cout << ", ";
+                        }
                     }
+                    cout << endl;
                 }
             }
         }
@@ -228,17 +235,17 @@ void UI_Baker::printOutOrders()
         //Loop through all the side dishes if there are any.
         if(amountOfSideDishes > 0)
         {
-            cout << " Side dishes:" << endl;
+            cout << " SIDE DISHES:" << endl;
             for(unsigned int j = 0; j < this->orders.at(i).getExtras().size(); j++)
             {
                 //Store the current extra in a temporary extra variable.
                 tempExtra = this->orders.at(i).getExtras().at(j);
 
-                cout << " *" << tempExtra.getName() << endl;
+                cout << "  *" << tempExtra.getName() << endl;
             }
         }
 
-        cout << endl;
+        cout << "----------------------------------------" << endl;
 
     }
 }
