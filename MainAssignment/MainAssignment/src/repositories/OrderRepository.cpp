@@ -45,6 +45,9 @@ vector<Order> OrderRepository::getOrders()
         //Loop until the end of file and fetch data using the Order istream overloader.
         while(fin >> tempOrder)
         {
+            //This line is here because it worked against an overflow error for some damn reason.
+            cout << "" << endl;
+
             //Put the order into the vector
             returnVector.push_back(tempOrder);
             //Clear the pizza and extras vector in Order
