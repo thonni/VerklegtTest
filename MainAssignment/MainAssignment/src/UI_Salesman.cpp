@@ -239,6 +239,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
 Pizza UI_Salesman::makePizza()
 {
     Topping tempTopping;
+    Topping tempTopp;
     Base tempBase;
     vector<Topping> availableToppings;
     vector<Base> availableBases;
@@ -267,8 +268,23 @@ Pizza UI_Salesman::makePizza()
             tempTopping = availableToppings[i];
             cout << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << " KR" << endl;
         }
+
+
         cout << "E - End" << endl;
         cout << "C - Cancel pizza" << endl << endl;
+
+        cout << endl;
+
+        //Loop trough toppings on pizza and print them on screen.
+        cout << "****TOPPINGS ON CUSTOM PIZZA****" << endl;
+        for(unsigned int i = 0; i < newPizza.getToppingCount(); i++)
+        {
+            tempTopp = newPizza.getToppings().at(i);
+            cout << tempTopp.getName() << endl;
+        }
+        cout << endl;
+
+
 
         //Ask the user to select a topping.
         cout << "Please select the id of the topping to add: ";
