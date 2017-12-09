@@ -53,6 +53,7 @@ vector<Order> OrderRepository::getOrders()
             //Clear the pizza and extras vector in Order
             tempOrder.clearPizzas();
             tempOrder.clearExtras();
+            cout << "";
         }
     }
     else

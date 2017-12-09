@@ -66,18 +66,41 @@ void UI_Baker::startUI()
     {
         goBack = true;
     }
-
     if(!goBack)
     {
+        vector<Pizza> pizzas;
+        vector<Topping> toppings;
         orders = orderService.getOrders();
+<<<<<<< HEAD
         this->printOutOrders(orders);s
+=======
+        for(unsigned int i = 0; i < orders.size(); i++)
+        {
+            if(orders[i].getLocation().getId() == locations[location - 1].getId())
+            {
+                cout << "Order ID: " << i << endl;
+                cout << "Order state: " << orders[i].getState() << endl;
+                pizzas = orders[i].getPizzas();
+                cout << "- Pizzas: " << endl;
+                for(unsigned int j = 0; j < pizzas.size(); j++)
+                {
+                    cout << "-- " << pizzas[j].getName() << endl;
+                    toppings = pizzas[j].getToppings();
+                    for(unsigned int y = 0; y < toppings.size(); y++)
+                    {
+                        cout << "--- " << toppings[y].getName() << endl;
+                    }
+                }
+            }
+        }
+>>>>>>> ad3360859cb85c13f11d2d09e18c4f23efd6e2ae
 
         cout << "Input the ID of an order to make." << endl;
         cin >> orderID;
         //orderID = locations[orderID-1].getId();
         try
         {
-            order = orderService.getOrder(orderID);
+            order = orderService.getOrder(orders[orderID].getId());
         }
         catch(int e)
         {
@@ -87,6 +110,7 @@ void UI_Baker::startUI()
                 noID = true;
             }
         }
+        orderMark = 'a';
         while(toupper(orderMark) != 'B')
         {
             if(noID)

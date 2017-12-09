@@ -22,8 +22,6 @@ int IdRepository::getNextId()
 
     fin >> id;
 
-    cout << id << endl;
-
     fin.close();
 
     fout.open("id.txt");
