@@ -139,7 +139,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
         for(unsigned int i = 0; i < availablePizzas.size(); i++)
         {
             tempPizza = availablePizzas.at(i);
-            cout << i << " - Name: " << tempPizza.getName() << " - Price: " << tempPizza.getPrice() << " KR" << endl;
+            cout << i << " - Name: " << tempPizza.getName() << " - Price of small: " << tempPizza.getPrice() << " KR" << endl;
             cout << "Toppings:" << endl;
 
             for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
@@ -159,7 +159,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
         selectionAsInt = (int)(selection - '0');
 
     //Loop if selection is out of range and is not c or C for cancel.
-    } while(!((selectionAsInt >= 0U && selectionAsInt < availablePizzas.size()) || toupper(selection) == 'C'));
+    } while(!((selectionAsInt >= 0 && selectionAsInt < availablePizzas.size()) || toupper(selection) == 'C'));
 
 
     if(toupper(selection) != 'C')
@@ -450,7 +450,6 @@ bool UI_Salesman::finishUpOrder(Order* order)
     //Ask LocationService for all saved locations.
     availableLocations = locationService.getLocations();
 
-
     do
     {
         //Clear the screen.
@@ -460,7 +459,8 @@ bool UI_Salesman::finishUpOrder(Order* order)
         this->printOutOrder(*order);
 
         //Ask the user if he/she wants the order home delivered.
-        cout << endl << "Do you want your order to be delivered to your home? (Y/N): ";
+        cout << endl << "Do you want your order to be delivered to your home? (Y/N) " << endl;
+        cout << "Choose B to go back." << endl;
         cin >> choice;
 
         //Check the answer, if it is y it sets homeDelivery to true,
@@ -476,48 +476,53 @@ bool UI_Salesman::finishUpOrder(Order* order)
             validInput = true;
         }
 
-    } while(!validInput);
+    } while(!validInput && toupper(choice) != 'B');
 
-
-    do
+    if (toupper(choice) != 'B')
     {
-        validInput = false;
-
-        //Clear the screen.
-        cout << string(50, '\n');
-
-        //Print out everything in the order using printOutOrder
-        //this->printOutOrder(*order);
-
-        //Print out all available locations.
-        for(unsigned int i = 0; i < availableLocations.size(); i++)
+        do
         {
-            tempLocation = availableLocations.at(i);
+            validInput = false;
 
-            cout << i << " - " << tempLocation.getAddress() << " " << tempLocation.getCity() << endl;
-        }
+            //Clear the screen.
+            cout << string(50, '\n');
 
-        //Ask the user if he/she wants the order home delivered.
-        cout << endl << "Please choose the id of the location you want your pizza to be made: ";
-        cin >> choice;
+            //Print out everything in the order using printOutOrder
+            //this->printOutOrder(*order);
 
-        //Change the char selection to int.
-        selectionAsInt = (int)(choice - '0');
+            //Print out all available locations.
+            for(unsigned int i = 0; i < availableLocations.size(); i++)
+            {
+                tempLocation = availableLocations.at(i);
 
-        //Check if the input was valid.
-        if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
-        {
-            order->setLocation(availableLocations.at(selectionAsInt));
-            validInput = true;
-        }
+                cout << i << " - " << tempLocation.getAddress() << " " << tempLocation.getCity() << endl;
+            }
 
+            //Ask the user if he/she wants the order home delivered.
+            cout << endl << "Please choose the id of the location you want your pizza to be made: ";
+            cin >> choice;
 
-    } while(!validInput);
+            //Change the char selection to int.
+            selectionAsInt = (int)(choice - '0');
 
-    //Save the order to file.
-    orderService.addOrder(*order);
+            //Check if the input was valid.
+            if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
+            {
+                order->setLocation(availableLocations.at(selectionAsInt));
+                validInput = true;
+            }
+        } while(!validInput);
 
-    return true;
+        //Save the order to file.
+        orderService.addOrder(*order);
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
 }
 
 
