@@ -57,21 +57,36 @@ void UI_Manager::addToppingToMenu()
     string name;
     double price;
     char continueToAdd = '\0';
+    Topping tempTopping;
+    vector<Topping> availableToppings;
+    Topping toppingToAdd;
 
     do
     {
         //Clear the screen.
         cout << string(50, '\n');
 
+        //Get a vector for all saved toppings using toppingService.
+        availableToppings = toppingService.getToppings();
+
+        //Loop trough all menu toppings and print them on screen.
+        cout << "****AVAILABLE TOPPINGS**** " << endl;
+        for(unsigned int i = 0; i < availableToppings.size(); i++)
+        {
+            tempTopping = availableToppings[i];
+            cout << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
+        }
+        cout << endl;
+
         //Ask the user for a name and price for the new topping.
-        cout << "Please enter the name of the topping: ";
+        cout << "Please enter the name of the topping to add: ";
         cin.ignore();
         getline(cin, name);
         cout << "Please enter the price of the topping: ";
         cin >> price;
 
         //Create a temporary instance of Topping.
-        Topping toppingToAdd = Topping(name, price);
+        toppingToAdd = Topping(name, price);
 
         //Ask the Topping service to save the Topping.
         toppingService.addTopping(toppingToAdd);
@@ -213,14 +228,29 @@ void UI_Manager::addExtraToMenu()
     Extra::Type type;
     bool validType;
     char continueToAdd = '\0';
+    Extra tempExtra;
+    vector<Extra> availableExtras;
+    //Ask extraService for a vector of all extras that are on the menu.
+    availableExtras = extraService.getExtras();
 
     do
     {
         //Clear the screen.
         cout << string(50, '\n');
+        //Ask extraService for a vector of all extras that are on the menu.
+        availableExtras = extraService.getExtras();
+
+        //Loop trough all the extras on the menu and print their id, name and price.
+        cout << "****CURRENT EXTRA MENU****" << endl;
+        for(unsigned int i = 0; i < availableExtras.size(); i++)
+        {
+            tempExtra = availableExtras.at(i);
+            cout << i << " - Name: " << tempExtra.getName() << " - Price: " << tempExtra.getPrice() << " KR" << endl;
+        }
+        cout << endl;
 
         //Ask the user for a name and price for the new extra.
-        cout << "Please enter the name of the extra: ";
+        cout << "Please enter the name of the extra to add to menu: ";
         cin.ignore();
         getline(cin, name);
         cout << "Please enter the price of the extra: ";
