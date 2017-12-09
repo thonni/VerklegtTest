@@ -44,6 +44,12 @@ void Order::removeExtra(int i)
 }
 
 
+void Order::generateId()
+{
+    this->id = idService.getNextId();
+}
+
+
 ostream& operator << (ostream& out, const Order& order)
 {
     Pizza tempPizza;
@@ -121,13 +127,9 @@ ostream& operator << (ostream& out, const Order& order)
         out << tempExtra.getName() << " " << (int)(tempExtra.getType()) << " " << tempExtra.getPrice() << " ";
     }
 
+    out << endl;
+
     return out;
-}
-
-
-void Order::generateId()
-{
-    this->id = idService.getNextId();
 }
 
 
