@@ -201,12 +201,12 @@ void Pizza::setSize(Pizza::Size pizzaSize)
     this->pizzaSize = pizzaSize;
 }
 
-Base Pizza::getBase()
-{
-    return this->base;
-}
-
 void Pizza::setBase(Base base)
 {
     this->base = base;
+}
+
+Base Pizza::getBase()
+{
+    return this->base;
 }

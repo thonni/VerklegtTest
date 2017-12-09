@@ -547,12 +547,15 @@ void UI_Salesman::printOutOrder(Order order)
             cout << "Large  - ";
         }
 
+        //Print out the type of base of the pizza.
+        cout << tempPizza.getBase().getName() << " - " ;
+
         //Print out the name of the pizza.
         cout << tempPizza.getName();
 
         //Print out dots in between name and price, and there are different amount
         //of dots depending on the length of the name.
-        cout << " " << string((50-tempPizza.getName().length()), '.') << " ";
+        cout << " " << string((47-tempPizza.getName().length()- tempPizza.getBase().getName().length()), '.') << " ";
 
         //print out the price of the pizza.
         cout << tempPizza.getPrice() << " Kr" << endl;
