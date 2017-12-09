@@ -105,14 +105,27 @@ void UI_Manager::addBaseToMenu()
     string name;
     double price;
     char continueToAdd = '\0';
+    Base tempBase;
+    vector<Base> availableBases;
 
     do
     {
         //Clear the screen.
         cout << string(50, '\n');
 
+        //Ask baseService for a vector of all bases that are on the menu.
+        availableBases = baseService.getBases();
+        //Print out all available pizza bases.
+        cout << "****AVAILABLE PIZZA BASES****" << endl;
+        for(unsigned int i = 0; i < availableBases.size(); i++)
+        {
+            tempBase = availableBases.at(i);
+            cout << i << " - Name: " << tempBase.getName() << " - price: " << tempBase.getPrice() << " Kr" << endl;
+        }
+        cout << endl;
+
         //Ask the user for a name and price for the new topping.
-        cout << "Please enter the name of the base: ";
+        cout << "Please enter the name of the base to add: ";
         cin.ignore();
         getline(cin, name);
         cout << "Please enter the price of the base: ";
@@ -137,13 +150,35 @@ void UI_Manager::addPizzaToMenu()
 {
     string name;
     Topping tempTopping;
+    Topping tempTopp;
     vector<Topping> availableToppings;
     vector<Base> availableBases;
     char selection = '0';
     unsigned int selectionAsInt = 0;
+    Pizza tempPizza;
+    vector<Pizza> availablePizzas;
 
     //Clear the screen.
     cout << string(50, '\n');
+
+    //Ask pizzaService for a vector of all pizzas that are on the menu.
+    availablePizzas = pizzaService.getPizzas();
+
+    //Loop trough all the pizzas on the menu and print their id, name, price
+    //and also loop trough their toppings and print them out.
+    cout << "****AVAILABLE PIZZAS ON MENU****" << endl;
+    for(unsigned int i = 0; i < availablePizzas.size(); i++)
+    {
+        tempPizza = availablePizzas.at(i);
+        cout <<"Name: " << tempPizza.getName() << " - Price of small: " << tempPizza.getPrice() << " KR" << endl;
+        cout << "Toppings:" << endl;
+        for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
+        {
+            tempTopping = tempPizza.getToppings().at(j);
+            cout << " *" << tempTopping.getName() << endl;
+        }
+        cout << endl;
+    }
 
     //Get a vector for all saved toppings using toppingService.
     availableToppings = toppingService.getToppings();
@@ -151,7 +186,7 @@ void UI_Manager::addPizzaToMenu()
     availableBases = baseService.getBases();
 
     //Ask the user for a name for the new pizza.
-    cout << "Pizza name: ";
+    cout << "Name of pizza to add on menu: ";
     cin.ignore();
     getline(cin, name);
 
@@ -173,6 +208,15 @@ void UI_Manager::addPizzaToMenu()
             cout << i << " - Name: " << tempTopping.getName() << " - Price: " << tempTopping.getPrice() << endl;
         }
         cout << "E - End" << endl << endl;
+
+        //Loop trough toppings on pizza and print them on screen.
+        cout << "****TOPPINGS ON "<< newPizza.getName() << "****" << endl;
+        for(unsigned int i = 0; i < newPizza.getToppingCount(); i++)
+        {
+            tempTopp = newPizza.getToppings().at(i);
+            cout << i << " - Name: " << tempTopp.getName() << endl;
+        }
+        cout << endl;
 
         //Ask the user to select a topping.
         cout << "Please select the id of the topping to add: ";
@@ -312,14 +356,25 @@ void UI_Manager::addLocation()
     string address;
     string city;
     char continueToAdd = '\0';
+    vector<Location> locations;
 
     do
     {
         //Clear the screen.
         cout << string(50, '\n');
 
+        //Print out available locations.
+        locations = locationService.getLocations();
+        int locSize = locations.size();
+        cout << "***AVAILABLE LOCATIONS***" << endl;
+        for(unsigned int i = 0; i < locations.size(); i++)
+        {
+            cout << (i + 1) << ": " << locations.at(i).getAddress() << ", " << locations.at(i).getCity() << endl;
+        }
+        cout << endl;
+
         //Ask the user for a address and city for the new location.
-        cout << "Please enter the address: ";
+        cout << "Please enter the street name and number: ";
         cin.ignore();
         getline(cin, address);
         cout << "Please enter the city: ";
