@@ -86,6 +86,7 @@ void UI_Salesman::takeOrder()
             tempPizza = this->makePizza();
             if(tempPizza.getName() != "N/A")
             {
+                tempPizza.generatePrice();
                 newOrder.addPizza(tempPizza);
             }
         }
@@ -568,6 +569,7 @@ void UI_Salesman::printOutOrder(Order order)
 {
     Pizza tempPizza;
     Extra tempExtra;
+    Order tempOrder;
 
     //Loops trough all the pizzas in the order and prints them out in this format:
     //SIZE - NAME ............................ PRICE Kr
@@ -601,7 +603,16 @@ void UI_Salesman::printOutOrder(Order order)
         cout << " " << string((47-tempPizza.getName().length()- tempPizza.getBase().getName().length()), '.') << " ";
 
         //print out the price of the pizza.
-        cout << setprecision(2) << fixed << tempPizza.getPrice() << " Kr" << endl;
+        if(checkMenu(tempPizza))
+        {
+            tempPizza.generatePrice();
+        }
+        else
+        {
+            tempPizza.generatePrice(300);
+        }
+        tempOrder.addPizza(tempPizza);
+        cout << tempPizza.getPrice() << " Kr" << endl;
     }
 
     //Loops trough all the pizzas in the order and prints them out in this format:
@@ -619,14 +630,16 @@ void UI_Salesman::printOutOrder(Order order)
         cout << " " << string((59-tempExtra.getName().length()), '.') << " ";
 
         //print out the price of the pizza.
-        cout << setprecision(2) << fixed << tempExtra.getPrice() << " Kr" << endl;
+        tempOrder.addExtra(tempExtra);
+        cout << tempExtra.getPrice() << " Kr" << endl;
     }
 
     //Print out a line between the list and total
     cout << string(70, '-') << endl;
 
     //Print out the total price.
-    cout << "Total " << string(54, '.') << " " << setprecision(2) << fixed << order.getPrice() << " Kr" << endl << endl;
+    tempOrder.generatePrice();
+    cout << "Total " << string(54, '.') << " " << tempOrder.getPrice() << " Kr" << endl << endl;
 }
 
 
@@ -634,8 +647,10 @@ void UI_Salesman::viewOrders()
 {
     char choice;
     unsigned int choiceToInt;
+    int counter = 0;
     bool validInput;
     vector<Order> orders;
+    Order tempOrder;
     orders = orderService.getOrders();
     vector<Location> availableLocations = locationService.getLocations();
 
@@ -671,13 +686,32 @@ void UI_Salesman::viewOrders()
     {
         if(orders[i].getLocation().getId() == salesmanLocation.getId())
         {
-            printOutOrder(orders[i]);
+            tempOrder = orders[i];
+            cout << counter << " - ";
+            counter++;
+            this->printOutOrder(tempOrder);
         }
     }
 }
 
 
-
+bool UI_Salesman::checkMenu(Pizza pizza)
+{
+    vector<Pizza> pizzas = pizzaService.getPizzas();
+    vector<Topping> inToppings = pizza.getToppings();
+    vector<Topping> tempToppings;
+    sort(inToppings.begin(), inToppings.end());
+    for(unsigned int i = 0; i < pizzas.size(); i++)
+    {
+        tempToppings = pizzas[i].getToppings();
+        sort(tempToppings.begin(), tempToppings.end());
+        if(tempToppings == inToppings)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 
 

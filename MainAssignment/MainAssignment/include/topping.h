@@ -36,6 +36,12 @@ class Topping
         friend ostream& operator << (ostream& out, const Topping& topping);
 
 
+        friend bool operator < (const Topping& toppingA, const Topping& toppingB);
+
+
+        friend bool operator == (const Topping& ToppingA, const Topping& toppingB);
+
+
         ///Getters and setters.
         double getPrice() const;
         string getName() const;

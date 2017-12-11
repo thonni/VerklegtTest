@@ -15,12 +15,16 @@ class UI_Delivery
         UI_Delivery();
         virtual ~UI_Delivery();
         void deliveryMenu();
+        void printOutOrders(vector<Order> validOrders);
+        void seeChangeActiveOrders();
+
     protected:
     private:
         OrderService orderService;
         Order order;
         LocationService locationService;
         vector<Location> locations;
+        Location deliveryLocation;
 };
 
 #endif // UI_DELIVERY_H
