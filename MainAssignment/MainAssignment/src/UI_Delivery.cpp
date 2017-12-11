@@ -60,7 +60,7 @@ void UI_Delivery::deliveryMenu()
     if(!goBack)
     {
         //orderService.getOrders();
-        this->seeChangeActiveOrders();
+        this->seeOrdersToBeDelivered();
 
         /*cout << "Input the ID of an order to deliver." << endl;
         cin >> orderID;
@@ -114,7 +114,7 @@ void UI_Delivery::deliveryMenu()
     }
 }
 
-void UI_Delivery::seeChangeActiveOrders()
+void UI_Delivery::seeOrdersToBeDelivered()
 {
     char choice;
     unsigned int choiceToInt;
@@ -133,7 +133,7 @@ void UI_Delivery::seeChangeActiveOrders()
         tempOrder = allOrders.at(i);
 
         //Check if the current order is at the chosen location and in a valid state for the baker.
-        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3)
+        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 )
         {
             validOrders.push_back(tempOrder);
             numberOfOrders++;
