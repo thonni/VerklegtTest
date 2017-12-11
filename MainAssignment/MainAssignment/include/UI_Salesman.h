@@ -12,6 +12,7 @@
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
+#include <iomanip>
 
 
 class UI_Salesman
@@ -28,6 +29,7 @@ class UI_Salesman
         bool finishUpOrder(Order* order);
 
         void printOutOrder(Order order);
+        void viewOrders();
 
     protected:
 
@@ -38,6 +40,7 @@ class UI_Salesman
         OrderService orderService;
         LocationService locationService;
         BaseService baseService;
+        Location salesmanLocation;
 };
 
 #endif // UI_SALESMAN_H
