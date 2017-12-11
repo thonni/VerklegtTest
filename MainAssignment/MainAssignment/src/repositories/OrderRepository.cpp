@@ -55,91 +55,105 @@ vector<Order> OrderRepository::getOrders()
             data = "";
             getline(fin, data);
 
-            for(unsigned int i = 0; i < data.length(); i++)
+            //Check if the data has any characters, and if so loop through each character
+            //and separate the data into a string vector.
+            if(data.length() > 0)
             {
-                if(data[i] == ',')
+                for(unsigned int i = 0; i < data.length(); i++)
                 {
-                    dataVector.push_back(tempData);
-                    tempData = "";
-                }
-                else
-                {
-                    tempData += data[i];
-                }
-            }
-            dataVector.push_back(tempData);
-
-            Order tempOrder;
-            Location tempLocation;
-
-            tempOrder.setId(atoi(dataVector.at(0).c_str()));
-            tempOrder.setPaidFor(atoi(dataVector.at(1).c_str()));
-
-            int locationId = atoi(dataVector.at(2).c_str());
-            for(unsigned int i = 0; i < availableLocations.size(); i++)
-            {
-                tempLocation = availableLocations.at(i);
-                if(tempLocation.getId() == locationId)
-                {
-                    tempOrder.setLocation(tempLocation);
-                }
-            }
-
-            tempOrder.setState((Order::State)atoi(dataVector.at(3).c_str()));
-            tempOrder.setHomeDelivery((bool)atoi(dataVector.at(4).c_str()));
-
-            int counter = 6;
-            int pizzaCount = atoi(dataVector.at(5).c_str());
-            for(int i = 0; i < pizzaCount; i++)
-            {
-                Pizza tempPizza;
-                tempPizza.setName(dataVector.at(counter));
-                counter++;
-
-                int baseId = atoi(dataVector.at(counter).c_str());
-                counter++;
-                for(unsigned int j = 0; j < availableBases.size(); j++)
-                {
-                    tempBase = availableBases.at(j);
-                    if(tempBase.getId() == baseId)
+                    if(data[i] == ',')
                     {
-                        tempPizza.setBase(tempBase);
+                        dataVector.push_back(tempData);
+                        tempData = "";
+                    }
+                    else
+                    {
+                        tempData += data[i];
+                    }
+                }
+                tempData = "";
+                dataVector.push_back(tempData);
+
+                cout << dataVector.size() << endl;
+
+                Order tempOrder;
+                Location tempLocation;
+
+                tempOrder.setId(atoi(dataVector.at(0).c_str()));
+                tempOrder.setPaidFor(atoi(dataVector.at(1).c_str()));
+
+                int locationId = atoi(dataVector.at(2).c_str());
+                for(unsigned int i = 0; i < availableLocations.size(); i++)
+                {
+                    tempLocation = availableLocations.at(i);
+                    if(tempLocation.getId() == locationId)
+                    {
+                        tempOrder.setLocation(tempLocation);
                     }
                 }
 
-                int toppingCount = atoi(dataVector.at(counter).c_str());
-                counter++;
-                for(int j = 0; j < toppingCount; j++)
+                tempOrder.setState((Order::State)atoi(dataVector.at(3).c_str()));
+                tempOrder.setHomeDelivery((bool)atoi(dataVector.at(4).c_str()));
+
+                int counter = 6;
+                int pizzaCount = atoi(dataVector.at(5).c_str());
+                for(int i = 0; i < pizzaCount; i++)
                 {
-                    string tempToppingName = dataVector.at(counter);
+                    Pizza tempPizza;
+                    tempPizza.setName(dataVector.at(counter));
                     counter++;
-                    float tempToppingPrice = (float)atoi(dataVector.at(counter).c_str());
+
+                    int baseId = atoi(dataVector.at(counter).c_str());
                     counter++;
-                    Topping tempTopping;
-                    tempTopping.setName(tempToppingName);
-                    tempTopping.setPrice(tempToppingPrice);
-                    tempPizza.addTopping(tempTopping);
+                    for(unsigned int j = 0; j < availableBases.size(); j++)
+                    {
+                        tempBase = availableBases.at(j);
+                        if(tempBase.getId() == baseId)
+                        {
+                            tempPizza.setBase(tempBase);
+                        }
+                    }
+
+                    int toppingCount = atoi(dataVector.at(counter).c_str());
+                    counter++;
+                    for(int j = 0; j < toppingCount; j++)
+                    {
+                        string tempToppingName = dataVector.at(counter);
+                        counter++;
+                        float tempToppingPrice = (float)atoi(dataVector.at(counter).c_str());
+                        counter++;
+                        Topping tempTopping;
+                        tempTopping.setName(tempToppingName);
+                        tempTopping.setPrice(tempToppingPrice);
+                        tempPizza.addTopping(tempTopping);
+                    }
+
+                    tempOrder.addPizza(tempPizza);
                 }
-            }
 
-            int extraCount = atoi(dataVector.at(counter).c_str());
-            counter++;
-            for(int i = 0; i < extraCount; i++)
-            {
-                Extra tempExtra;
-                tempExtra.setName(dataVector.at(counter));
+                int extraCount = atoi(dataVector.at(counter).c_str());
                 counter++;
-                tempExtra.setType((Extra::Type)atoi(dataVector.at(counter).c_str()));
-                counter++;
-                tempExtra.setPrice((float)atoi(dataVector.at(counter).c_str()));
-                tempOrder.addExtra(tempExtra);
-            }
+                for(int i = 0; i < extraCount; i++)
+                {
+                    Extra tempExtra;
+                    tempExtra.setName(dataVector.at(counter));
+                    counter++;
+                    tempExtra.setType((Extra::Type)atoi(dataVector.at(counter).c_str()));
+                    counter++;
+                    tempExtra.setPrice((float)atoi(dataVector.at(counter).c_str()));
+                    tempOrder.addExtra(tempExtra);
+                }
 
-            //Put the order into the vector
-            returnVector.push_back(tempOrder);
-            //Clear the pizza and extras vector in Order
-            tempOrder.clearPizzas();
-            tempOrder.clearExtras();
+                //Clear the dataVector for the next order;
+                dataVector.clear();
+
+                //Put the order into the vector
+                returnVector.push_back(tempOrder);
+                cout << tempOrder.getPizzas().at(0).getName() << endl;
+                //Clear the pizza and extras vector in Order
+                tempOrder.clearPizzas();
+                tempOrder.clearExtras();
+            }
         }
     }
     else

@@ -16,14 +16,16 @@ class UI_Baker
         UI_Baker();
         virtual ~UI_Baker();
         void startUI();
-        void printOutOrders();
+        void seeChangeActiveOrders();
+        void seeBakedOrders();
+        void printOutOrders(vector<Order> validOrders);
     protected:
     private:
         OrderService orderService;
         Order order;
         LocationService locationService;
-        vector<Order> orders;
         vector<Location> locations;
+        Location bakerLocation;
 };
 
 #endif // UI_BAKER_H
