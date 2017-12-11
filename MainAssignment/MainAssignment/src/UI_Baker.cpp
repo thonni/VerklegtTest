@@ -89,6 +89,7 @@ void UI_Baker::seeChangeActiveOrders()
 
     //Count the amount of orders for the chosen location
     //and store those orders in the validOrders vector.
+    numberOfOrders = 0;
     for(unsigned int i = 0; i < allOrders.size(); i++)
     {
         //Stores the current order in a temporary order variable.
@@ -114,15 +115,21 @@ void UI_Baker::seeChangeActiveOrders()
         if(numberOfOrders > 0)
         {
             cout << "Select an order to move to the next state" << endl;
+            cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
 
             //Change the choice character to int and store in choiceToInt.
             choiceToInt = (unsigned int)(choice - '0');
 
+            //Check if the choice was in range of validOrders
             if(choiceToInt < numberOfOrders)
             {
 
+            }
+            else if(toupper(choice) == 'B')
+            {
+                validInput = true;
             }
         }
         else

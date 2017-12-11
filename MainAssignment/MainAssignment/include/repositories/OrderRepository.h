@@ -12,6 +12,7 @@ class OrderRepository
 {
     public:
         void addOrder(const Order& order);
+        void reAddOrders(vector<Order> orders);
         vector<Order> getOrders();
         void clearOrders();
 

@@ -17,6 +17,26 @@ void OrderRepository::addOrder(const Order& order)
 }
 
 
+void OrderRepository::reAddOrders(vector<Order> orders)
+{
+    //Create an instance of ofstream.
+    ofstream fout;
+
+    //Open the activeOrders file
+    fout.open("activeOrders.txt");
+
+    //Loop through all the orders in the vector.
+    for(unsigned int i = 0; i < orders.size(); i++)
+    {
+        //Write the pizza data using the Pizza ostream overloader.
+        fout << orders.at(i);
+    }
+
+    //Close the file
+    fout.close();
+}
+
+
 void OrderRepository::clearOrders()
 {
     ofstream fout;
