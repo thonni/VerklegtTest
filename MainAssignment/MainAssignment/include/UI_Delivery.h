@@ -16,7 +16,7 @@ class UI_Delivery
         virtual ~UI_Delivery();
         void deliveryMenu();
         void printOutOrders(vector<Order> validOrders);
-        void seeChangeActiveOrders();
+        void seeOrdersToBeDelivered();
 
     protected:
     private:
