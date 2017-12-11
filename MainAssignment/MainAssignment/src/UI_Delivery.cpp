@@ -80,14 +80,12 @@ void UI_Delivery::deliveryMenu()
             if (toupper(orderMark) == 'O')
             {
                 // The number of order they choose gets marked "on its way" in the file.
-                order.setState(Order::OnItsWay);
-                orderService.setOrderState(order);
+                orderService.setOrderState(order.getId(), Order::OnItsWay);
             }
             else if (toupper(orderMark) == 'D')
             {
                 // The number of order they choose gets marked "delivered" in the file.
-                order.setState(Order::Delivered);
-                orderService.setOrderState(order);
+                orderService.setOrderState(order.getId(), Order::Delivered);
             }
             else
             {

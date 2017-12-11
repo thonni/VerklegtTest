@@ -26,18 +26,19 @@ vector<Order> OrderService::getOrders()
 }
 
 
-void OrderService::setOrderState(Order order)
+void OrderService::setOrderState(int id, Order::State state)
 {
-    vector<Order> orders = getOrders();
-    orderRepository.clearOrders();
+    vector<Order> orders = this->getOrders();
+
     for(unsigned int i = 0; i < orders.size(); i++)
     {
-        if(orders.at(i).getId() == order.getId())
+        if(orders.at(i).getId() == id)
         {
-            orders[i] = order;
+            orders.at(i).setState(state);
         }
-        orderRepository.addOrder(orders[i]);
     }
+
+    orderRepository.reAddOrders(orders);
 }
 
 
