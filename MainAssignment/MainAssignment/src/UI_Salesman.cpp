@@ -1,5 +1,6 @@
 #include "UI_Salesman.h"
 
+using namespace std;
 
 void UI_Salesman::startUI()
 {
@@ -23,7 +24,7 @@ void UI_Salesman::startUI()
         }
         else if (toupper(choice) == 'V')
         {
-
+            this->viewOrders();
         }
         else if (toupper(choice) != 'F')
         {
@@ -600,7 +601,7 @@ void UI_Salesman::printOutOrder(Order order)
         cout << " " << string((47-tempPizza.getName().length()- tempPizza.getBase().getName().length()), '.') << " ";
 
         //print out the price of the pizza.
-        cout << tempPizza.getPrice() << " Kr" << endl;
+        cout << setprecision(2) << fixed << tempPizza.getPrice() << " Kr" << endl;
     }
 
     //Loops trough all the pizzas in the order and prints them out in this format:
@@ -618,13 +619,88 @@ void UI_Salesman::printOutOrder(Order order)
         cout << " " << string((59-tempExtra.getName().length()), '.') << " ";
 
         //print out the price of the pizza.
-        cout << tempExtra.getPrice() << " Kr" << endl;
+        cout << setprecision(2) << fixed << tempExtra.getPrice() << " Kr" << endl;
     }
 
     //Print out a line between the list and total
     cout << string(70, '-') << endl;
 
     //Print out the total price.
-    cout << "Total " << string(54, '.') << " " << order.getPrice() << " Kr" << endl;
+    cout << "Total " << string(54, '.') << " " << setprecision(2) << fixed << order.getPrice() << " Kr" << endl << endl;
 }
+
+
+void UI_Salesman::viewOrders()
+{
+    char choice;
+    unsigned int choiceToInt;
+    bool validInput;
+    vector<Order> orders;
+    orders = orderService.getOrders();
+    vector<Location> availableLocations = locationService.getLocations();
+
+    do
+    {
+        validInput = false;
+
+        //Clear the screen
+        cout << string(50, '\n');
+
+        //Loop through and print out all available locations.
+        for(unsigned int i = 0; i < availableLocations.size(); i++)
+        {
+            this->salesmanLocation = availableLocations.at(i);
+
+            cout << i << " - " << this->salesmanLocation.getAddress() << "  " << this->salesmanLocation.getCity() << endl;
+        }
+        cout << "Please choose the location you work at: ";
+        cin >> choice;
+
+        //Change the choice to int and store in another variable
+        choiceToInt = (unsigned int)(choice - '0');
+
+        if(choiceToInt < availableLocations.size())
+        {
+            this->salesmanLocation = availableLocations.at(choiceToInt);
+            validInput = true;
+        }
+
+    } while(!validInput);
+    cout << endl << endl;
+    for(unsigned int i = 0; i < orders.size(); i++)
+    {
+        if(orders[i].getLocation().getId() == salesmanLocation.getId())
+        {
+            printOutOrder(orders[i]);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
