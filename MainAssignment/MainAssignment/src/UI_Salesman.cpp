@@ -650,6 +650,7 @@ void UI_Salesman::viewOrders()
     int counter = 0;
     bool validInput;
     vector<Order> orders;
+    vector<int> numbers;
     Order tempOrder;
     orders = orderService.getOrders();
     vector<Location> availableLocations = locationService.getLocations();
@@ -684,14 +685,20 @@ void UI_Salesman::viewOrders()
     cout << endl << endl;
     for(unsigned int i = 0; i < orders.size(); i++)
     {
-        if(orders[i].getLocation().getId() == salesmanLocation.getId())
+        if(orders[i].getLocation().getId() == salesmanLocation.getId() && !orders[i].getPaidFor())
         {
             tempOrder = orders[i];
             cout << counter << " - ";
+            numbers.push_back(i);
             counter++;
             this->printOutOrder(tempOrder);
         }
     }
+    cout << "Please select which order you wish to mark as paid for: ";
+    cin >> choice;
+
+    choiceToInt = (unsigned int)(choice - '0');
+    orderService.setOrderPaid(orders[numbers[choiceToInt]].getId());
 }
 
 

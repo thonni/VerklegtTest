@@ -41,6 +41,22 @@ void OrderService::setOrderState(int id, Order::State state)
     orderRepository.reAddOrders(orders);
 }
 
+void OrderService::setOrderPaid(int id)
+{
+    vector<Order> orders = this->getOrders();
+
+    for(unsigned int i = 0; i < orders.size(); i++)
+    {
+        if(orders.at(i).getId() == id)
+        {
+            orders.at(i).setPaidFor(true);
+        }
+    }
+
+    orderRepository.reAddOrders(orders);
+}
+
+
 void OrderService::printOutAllOrders()
 {
     Order tempOrder;

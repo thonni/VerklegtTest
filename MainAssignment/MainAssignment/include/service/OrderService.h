@@ -12,6 +12,7 @@ class OrderService
         void addOrder(const Order& order);
         vector<Order> getOrders();
         void setOrderState(int id, Order::State state);
+        void setOrderPaid(int id);
         void printOutAllOrders();
 
         ///Getters and setters.
