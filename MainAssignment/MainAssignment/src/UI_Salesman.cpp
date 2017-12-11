@@ -275,7 +275,7 @@ Pizza UI_Salesman::makePizza()
 
         cout << endl;
 
-        //Loop trough toppings on pizza and print them on screen.
+        //Loop trough toppings on custom pizza and print them on screen.
         cout << "****TOPPINGS ON CUSTOM PIZZA****" << endl;
         for(unsigned int i = 0; i < newPizza.getToppingCount(); i++)
         {
@@ -528,6 +528,27 @@ bool UI_Salesman::finishUpOrder(Order* order)
                 validInput = true;
             }
         } while(!validInput);
+
+        validInput = false;
+        //Clear the screen.
+        cout << string(50, '\n');
+        cout << "Do you wish to pay for the order now? (Y/N)" << endl;
+        cin << choice;
+        if(toupper(choice) == 'Y')
+        {
+            char paymentMethod;
+            cout << "Do you wish to pay with card or cash?" << endl;
+            cout << "Choose 1 to pay with card" << endl;
+            cout << "Choose 2 to pay with cash" << endl;
+            cin << paymentMethod;
+            order->setPaidFor(true);
+            validInput = true;
+        }
+        else if(toupper(choice) == 'N')
+        {
+            order->setPaidFor(false);
+            validInput = true;
+        }
 
         //Save the order to file.
         orderService.addOrder(*order);
