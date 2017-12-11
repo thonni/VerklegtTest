@@ -212,7 +212,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
                 tempBase = availableBases.at(i);
                 cout << i << " - Name: " << tempBase.getName() << " - price: " << tempBase.getPrice() << " Kr" << endl;
             }
-            cout << "Please select the id of the topping to add: ";
+            cout << "Please select the id of the pizza base to add: ";
             cin >> selection;
 
 
@@ -277,7 +277,7 @@ Pizza UI_Salesman::makePizza()
 
         //Loop trough toppings on custom pizza and print them on screen.
         cout << "****TOPPINGS ON CUSTOM PIZZA****" << endl;
-        for(unsigned int i = 0; i < newPizza.getToppingCount(); i++)
+        for(int i = 0; i < newPizza.getToppingCount(); i++)
         {
             tempTopp = newPizza.getToppings().at(i);
             cout << tempTopp.getName() << endl;
@@ -352,7 +352,7 @@ Pizza UI_Salesman::makePizza()
                 tempBase = availableBases.at(i);
                 cout << i << " - Name: " << tempBase.getName() << " - price: " << tempBase.getPrice() << " Kr" << endl;
             }
-            cout << "Please select the id of the topping to add: ";
+            cout << "Please select the id of the pizza base to add: ";
             cin >> selection;
 
 
@@ -533,14 +533,14 @@ bool UI_Salesman::finishUpOrder(Order* order)
         //Clear the screen.
         cout << string(50, '\n');
         cout << "Do you wish to pay for the order now? (Y/N)" << endl;
-        cin << choice;
+        cin >> choice;
         if(toupper(choice) == 'Y')
         {
             char paymentMethod;
             cout << "Do you wish to pay with card or cash?" << endl;
             cout << "Choose 1 to pay with card" << endl;
             cout << "Choose 2 to pay with cash" << endl;
-            cin << paymentMethod;
+            cin >> paymentMethod;
             order->setPaidFor(true);
             validInput = true;
         }
@@ -627,3 +627,4 @@ void UI_Salesman::printOutOrder(Order order)
     //Print out the total price.
     cout << "Total " << string(54, '.') << " " << order.getPrice() << " Kr" << endl;
 }
+
