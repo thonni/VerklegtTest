@@ -123,6 +123,8 @@ vector<Order> OrderRepository::getOrders()
                     Pizza tempPizza;
                     tempPizza.setName(dataVector.at(counter));
                     counter++;
+                    tempPizza.setSize((Pizza::Size)atoi(dataVector.at(counter).c_str()));
+                    counter++;
 
                     int baseId = atoi(dataVector.at(counter).c_str());
                     counter++;

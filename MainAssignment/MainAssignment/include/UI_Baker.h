@@ -17,7 +17,7 @@ class UI_Baker
         virtual ~UI_Baker();
         void startUI();
         void seeChangeActiveOrders();
-        void seeBakedOrders();
+        void seeAllOrders();
         void printOutOrders(vector<Order> validOrders);
     protected:
     private:

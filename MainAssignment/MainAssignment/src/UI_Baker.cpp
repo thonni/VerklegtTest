@@ -57,7 +57,7 @@ void UI_Baker::startUI()
         cout << "Welcome Baker" << endl << endl;
 
         cout << "Choose A to see/change Active orders" << endl;
-        cout << "Choose B to see Baked orders" << endl;
+        cout << "Choose O to see all Orders" << endl;
         cout << "Choose Q to Quit" << endl;
         cout << ": ";
         cin >> choice;
@@ -67,9 +67,9 @@ void UI_Baker::startUI()
         {
             this->seeChangeActiveOrders();
         }
-        else if(toupper(choice) == 'B')
+        else if(toupper(choice) == 'O')
         {
-            //this->seeBakedOrders();
+            this->seeAllOrders();
         }
 
     } while(toupper(choice) != 'Q');
@@ -172,6 +172,27 @@ void UI_Baker::seeChangeActiveOrders()
 }
 
 
+void UI_Baker::seeAllOrders()
+{
+    char choice;
+
+
+    do
+    {
+        //Clear the screen
+        cout << string(50, '\n');
+
+        //Print out all orders from file using a function in OrderService.
+        orderService.printOutAllOrders();
+
+        cout << endl << "Choose B to go Back" << endl;
+        cout << ": ";
+        cin >> choice;
+
+    } while(toupper(choice) != 'B');
+}
+
+
 void UI_Baker::printOutOrders(vector<Order> validOrders)
 {
     Order tempOrder;
@@ -185,7 +206,6 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
     //Loops through all orders, if there are any.
     if(validOrders.size() > 0)
     {
-        cout << "Hnegg" << endl;
         for(unsigned int i = 0; i < validOrders.size(); i++)
         {
             //Stores the current order in a temporary order variable.

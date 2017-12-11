@@ -71,6 +71,8 @@ ostream& operator << (ostream& out, const Order& order)
 
         out << tempPizza.getName() << ",";
 
+        out << (int)tempPizza.getSize() << ",";
+
         out << tempPizza.getBase().getId() << ",";
 
         //Write out the number of toppings on the current pizza.
