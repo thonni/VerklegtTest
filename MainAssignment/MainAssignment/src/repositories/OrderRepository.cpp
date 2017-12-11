@@ -19,6 +19,7 @@ void OrderRepository::addOrder(const Order& order)
 
 void OrderRepository::reAddOrders(vector<Order> orders)
 {
+    Order tempOrder;
     //Create an instance of ofstream.
     ofstream fout;
 
@@ -28,8 +29,10 @@ void OrderRepository::reAddOrders(vector<Order> orders)
     //Loop through all the orders in the vector.
     for(unsigned int i = 0; i < orders.size(); i++)
     {
+        //Store the current order in a temporary Order variable.
+        tempOrder = orders.at(i);
         //Write the pizza data using the Pizza ostream overloader.
-        fout << orders.at(i);
+        fout << tempOrder;
     }
 
     //Close the file
@@ -91,10 +94,8 @@ vector<Order> OrderRepository::getOrders()
                         tempData += data[i];
                     }
                 }
-                tempData = "";
                 dataVector.push_back(tempData);
-
-                cout << dataVector.size() << endl;
+                tempData = "";
 
                 Order tempOrder;
                 Location tempLocation;
@@ -161,6 +162,7 @@ vector<Order> OrderRepository::getOrders()
                     tempExtra.setType((Extra::Type)atoi(dataVector.at(counter).c_str()));
                     counter++;
                     tempExtra.setPrice((float)atoi(dataVector.at(counter).c_str()));
+                    counter++;
                     tempOrder.addExtra(tempExtra);
                 }
 

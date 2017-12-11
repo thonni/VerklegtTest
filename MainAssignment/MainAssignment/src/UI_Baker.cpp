@@ -87,7 +87,7 @@ void UI_Baker::seeChangeActiveOrders()
     vector<Order> validOrders;
     Order tempOrder;
 
-    //Count the amount of orders for the chosen location
+    //Count the amount of orders for the chosen location and in a valid state,
     //and store those orders in the validOrders vector.
     numberOfOrders = 0;
     for(unsigned int i = 0; i < allOrders.size(); i++)
@@ -95,7 +95,8 @@ void UI_Baker::seeChangeActiveOrders()
         //Stores the current order in a temporary order variable.
         tempOrder = allOrders.at(i);
 
-        if(tempOrder.getLocation().getId() == this->bakerLocation.getId())
+        //Check if the current order is at the chosen location and in a valid state for the baker.
+        if(tempOrder.getLocation().getId() == this->bakerLocation.getId() && (int)tempOrder.getState() < 3)
         {
             validOrders.push_back(tempOrder);
             numberOfOrders++;
@@ -115,6 +116,7 @@ void UI_Baker::seeChangeActiveOrders()
         if(numberOfOrders > 0)
         {
             cout << "Select an order to move to the next state" << endl;
+            cout << "RECEIVED->PREP->IN OVEN->READY" << endl;
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
@@ -125,7 +127,23 @@ void UI_Baker::seeChangeActiveOrders()
             //Check if the choice was in range of validOrders
             if(choiceToInt < numberOfOrders)
             {
+                //Store the chosen order in a temporary Order variable.
+                tempOrder = validOrders.at(choiceToInt);
+                //Change the order state depending on what it is.
+                if(tempOrder.getState() == Order::Received)
+                {
+                    orderService.setOrderState(tempOrder.getId(), Order::Prep);
+                }
+                else if(tempOrder.getState() == Order::Prep)
+                {
+                    orderService.setOrderState(tempOrder.getId(), Order::InOven);
+                }
+                else if(tempOrder.getState() == Order::InOven)
+                {
+                    orderService.setOrderState(tempOrder.getId(), Order::Ready);
+                }
 
+                validInput = true;
             }
             else if(toupper(choice) == 'B')
             {
@@ -134,8 +152,12 @@ void UI_Baker::seeChangeActiveOrders()
         }
         else
         {
+            //If there are no orders waiting this message comes up.
             do
             {
+                //Clear the screen
+                cout << string(50, '\n');
+
                 cout << "Nothing here!" << endl << endl;
                 cout << "----------------------------------------" << endl;
                 cout << "Choose B to go Back" << endl;
@@ -183,7 +205,21 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             }
 
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
-            cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes" << endl;
+            cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes ";
+            //Print out the state of the order.
+            if(tempOrder.getState() == Order::Received)
+            {
+                cout << " RECEIVED" << endl;
+            }
+            else if(tempOrder.getState() == Order::Prep)
+            {
+                cout << " PREP" << endl;
+            }
+            else if(tempOrder.getState() == Order::InOven)
+            {
+                cout << "IN OVEN" << endl;
+            }
+
             //Loop through all the pizzas if there are any.
             if(amountOfPizzas > 0)
             {
