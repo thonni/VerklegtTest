@@ -13,6 +13,7 @@
 #include "Extra.h"
 #include "Order.h"
 #include <iomanip>
+#include <algorithm>
 
 
 class UI_Salesman
@@ -30,6 +31,7 @@ class UI_Salesman
 
         void printOutOrder(Order order);
         void viewOrders();
+        bool checkMenu(Pizza pizza);
 
     protected:
 

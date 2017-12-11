@@ -41,6 +41,34 @@ ostream& operator << (ostream& out, const Topping& topping)
 }
 
 
+
+bool operator < (const Topping& toppingA, const Topping& toppingB)
+{
+    for(int i = 0; i < 32; i++)
+    {
+        if(toppingA.getName()[i] < toppingB.getName()[i])
+        {
+            return true;
+        }
+        else if(toppingA.getName()[i] < toppingB.getName()[i])
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+
+bool operator == (const Topping& ToppingA, const Topping& toppingB)
+{
+    if(ToppingA.getName() == toppingB.getName())
+    {
+        return true;
+    }
+    return false;
+}
+
+
 double Topping::getPrice() const
 {
     return this->price;
