@@ -1,7 +1,4 @@
 #include "UI_Manager.h"
-#include "DataManager.h"
-
-using namespace std;
 
 
 void UI_Manager::startUI (){
@@ -60,6 +57,7 @@ void UI_Manager::addToppingToMenu()
     Topping tempTopping;
     vector<Topping> availableToppings;
     Topping toppingToAdd;
+    bool validInput;
 
     do
     {
@@ -78,12 +76,43 @@ void UI_Manager::addToppingToMenu()
         }
         cout << endl;
 
-        //Ask the user for a name and price for the new topping.
-        cout << "Please enter the name of the topping to add: ";
-        cin.ignore();
-        getline(cin, name);
-        cout << "Please enter the price of the topping: ";
-        cin >> price;
+        name = "";
+        do
+        {
+            validInput = false;
+
+            //Ask the user for a name for the new topping.
+            cout << "Please enter the name of the topping to add: ";
+            cin.ignore();
+            getline(cin, name);
+
+            //Check if the input had any characters in it.
+            if(name.length() > 0)
+            {
+                validInput = true;
+            }
+
+        } while(!validInput);
+
+        do
+        {
+            validInput = true;
+
+            //Ask the user for a price for the new topping.
+            cout << "Please enter the price of the topping: ";
+            cin >> price;
+
+            //Check if the input was valid.
+            if(cin.fail())
+            {
+                //Flush the cin buffer.
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                validInput = false;
+            }
+
+        } while(!validInput);
+
 
         //Create a temporary instance of Topping.
         toppingToAdd = Topping(name, price);
