@@ -44,18 +44,16 @@ ostream& operator << (ostream& out, const Topping& topping)
 
 bool operator < (const Topping& toppingA, const Topping& toppingB)
 {
-    for(int i = 0; i < 32; i++)
+    string nameA = toppingA.getName();
+    string nameB = toppingB.getName();
+    if(nameA < nameB)
     {
-        if(toppingA.getName()[i] < toppingB.getName()[i])
-        {
-            return true;
-        }
-        else if(toppingA.getName()[i] < toppingB.getName()[i])
-        {
-            return false;
-        }
+        return true;
     }
-    return false;
+    else if(nameB < nameA)
+    {
+        return false;
+    }
 }
 
 

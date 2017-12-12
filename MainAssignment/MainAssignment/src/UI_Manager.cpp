@@ -157,6 +157,7 @@ void UI_Manager::addPizzaToMenu()
     unsigned int selectionAsInt = 0;
     Pizza tempPizza;
     vector<Pizza> availablePizzas;
+    vector<Topping> tempToppings;
 
     //Clear the screen.
     cout << string(50, '\n');
@@ -211,10 +212,9 @@ void UI_Manager::addPizzaToMenu()
 
         //Loop trough toppings on pizza and print them on screen.
         cout << "****TOPPINGS ON "<< newPizza.getName() << "****" << endl;
-        for(unsigned int i = 0; i < newPizza.getToppingCount(); i++)
+        for(unsigned int i = 0; i < tempToppings.size(); i++)
         {
-            tempTopp = newPizza.getToppings().at(i);
-            cout << i << " - Name: " << tempTopp.getName() << endl;
+            cout << i << " - Name: " << tempToppings[i].getName() << endl;
         }
         cout << endl;
 
@@ -229,7 +229,7 @@ void UI_Manager::addPizzaToMenu()
         if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
         {
             //Add the topping to the pizza.
-            newPizza.addTopping(availableToppings[selectionAsInt]);
+            tempToppings.push_back(availableToppings[selectionAsInt]);
         }
         //If it is not in range, it checks if you entered the letter e or E.
         else if(toupper(selection) != 'E')
@@ -243,6 +243,11 @@ void UI_Manager::addPizzaToMenu()
     cout << string(50, '\n');
 
     //Make the pizza calculate the price of it self.
+    sort(tempToppings.begin(), tempToppings.end());
+    for(unsigned int i = 0; i < tempToppings.size(); i++)
+    {
+        newPizza.addTopping(tempToppings[i]);
+    }
     newPizza.generatePrice();
 
     //Tell the user all the information about the pizza he/she created
