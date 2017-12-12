@@ -17,6 +17,8 @@ class UI_Delivery
         void deliveryMenu();
         void printOutOrders(vector<Order> validOrders);
         void seeOrdersToBeDelivered();
+        void changeDeliveryOrder(Order tempOrder);
+        void printOutOrder(Order order);
 
     protected:
     private:

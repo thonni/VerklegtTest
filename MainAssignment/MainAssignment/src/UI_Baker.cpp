@@ -260,7 +260,7 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             amountOfSideDishes = tempOrder.getAmountOfSideDishes();
 
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
-            cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes ";
+            cout << "#" << i << " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes;
             //Print out the state of the order.
             if(tempOrder.getState() == Order::Received)
             {

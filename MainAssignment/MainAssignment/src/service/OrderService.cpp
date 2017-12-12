@@ -80,7 +80,7 @@ void OrderService::printOutAllOrders()
         amountOfExtras = tempOrder.getExtras().size();
 
         //Print out the order info: Id, amount of pizzas, and amount of extras.
-        cout << "ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfExtras << " Extras - Status: ";
+        cout << "ID: " << tempOrder.getId() << " - Pizzas: " << amountOfPizzas << ", Extras: " << amountOfExtras << " - Status: ";
 
         //Print out the state of the order.
         if(tempOrder.getState() == Order::Received)
