@@ -19,6 +19,7 @@ class UI_Delivery
         void seeOrdersToBeDelivered();
         void changeDeliveryOrder(Order tempOrder);
         void printOutOrder(Order order);
+        void seeAllOrders();
 
     protected:
     private:
