@@ -279,3 +279,20 @@ void Order::setLocation(Location location)
 {
     this->location = location;
 }
+
+int Order::getAmountOfSideDishes()
+{
+    int amountOfSideDishes = 0;
+    Extra tempExtra;
+
+    for(unsigned int i = 0; i < this->extras.size(); i++)
+    {
+        tempExtra = this->extras.at(i);
+        if(tempExtra.getType() == Extra::SideDish)
+        {
+            amountOfSideDishes++;
+        }
+    }
+
+    return amountOfSideDishes;
+}

@@ -34,13 +34,17 @@ void UI_Baker::startUI()
 
             cout << i << " - " << this->bakerLocation.getAddress() << "  " << this->bakerLocation.getCity() << endl;
         }
+        cout << "Choose B to go Back" << endl;
         cout << "Please choose the location you work at: ";
         cin >> choice;
 
         //Change the choice to int and store in another variable
         choiceToInt = (unsigned int)(choice - '0');
-
-        if(choiceToInt < availableLocations.size())
+        if(toupper(choice) == 'B')
+        {
+            validInput = true;
+        }
+        else if(choiceToInt < availableLocations.size())
         {
             this->bakerLocation = availableLocations.at(choiceToInt);
             validInput = true;
@@ -48,36 +52,38 @@ void UI_Baker::startUI()
 
     } while(!validInput);
 
-
-    do
+    if(toupper(choice) != 'B')
     {
-        //Clear the screen
-        cout << string(50, '\n');
-
-        cout << "Welcome Baker" << endl << endl;
-
-        cout << "Choose A to see/change Active orders" << endl;
-        cout << "Choose O to see all Orders" << endl;
-        cout << "Choose Q to Quit" << endl;
-        cout << ": ";
-        cin >> choice;
-
-
-        if(toupper(choice) == 'A')
+        do
         {
-            this->seeChangeActiveOrders();
-        }
-        else if(toupper(choice) == 'O')
-        {
-            this->seeAllOrders();
-        }
+            //Clear the screen
+            cout << string(50, '\n');
 
-    } while(toupper(choice) != 'Q');
+            cout << "Welcome Baker" << endl << endl;
+
+            cout << "Choose A to see/change Active orders" << endl;
+            cout << "Choose O to see all Orders" << endl;
+            cout << "Choose Q to Quit" << endl;
+            cout << ": ";
+            cin >> choice;
+
+
+            if(toupper(choice) == 'A')
+            {
+                this->seeActiveOrders();
+            }
+            else if(toupper(choice) == 'O')
+            {
+                this->seeAllOrders();
+            }
+
+        } while(toupper(choice) != 'Q');
+    }
 
 }
 
 
-void UI_Baker::seeChangeActiveOrders()
+void UI_Baker::seeActiveOrders()
 {
     char choice;
     unsigned int choiceToInt;
@@ -110,13 +116,12 @@ void UI_Baker::seeChangeActiveOrders()
         //Clear the screen
         cout << string(50, '\n');
         //Use printOutOrders to print out all the orders on the screen
-        //in a nice fashion, and store the number of orders that it returns.
+        //in a nice fashion.
         this->printOutOrders(validOrders);
 
         if(numberOfOrders > 0)
         {
-            cout << "Select an order to move to the next state" << endl;
-            cout << "RECEIVED->PREP->IN OVEN->READY" << endl;
+            cout << "Select an order to view" << endl;
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
@@ -127,21 +132,11 @@ void UI_Baker::seeChangeActiveOrders()
             //Check if the choice was in range of validOrders
             if(choiceToInt < numberOfOrders)
             {
-                //Store the chosen order in a temporary Order variable.
+
+                //Store the chosen order in a temporary Order variable and use it
+                //as an argument in this->changeActiveOrder.
                 tempOrder = validOrders.at(choiceToInt);
-                //Change the order state depending on what it is.
-                if(tempOrder.getState() == Order::Received)
-                {
-                    orderService.setOrderState(tempOrder.getId(), Order::Prep);
-                }
-                else if(tempOrder.getState() == Order::Prep)
-                {
-                    orderService.setOrderState(tempOrder.getId(), Order::InOven);
-                }
-                else if(tempOrder.getState() == Order::InOven)
-                {
-                    orderService.setOrderState(tempOrder.getId(), Order::Ready);
-                }
+                this->changeActiveOrder(tempOrder);
 
                 validInput = true;
             }
@@ -169,6 +164,53 @@ void UI_Baker::seeChangeActiveOrders()
 
     } while(!validInput);
 
+}
+
+
+void UI_Baker::changeActiveOrder(Order order)
+{
+    char choice;
+    bool validInput;
+
+
+    do
+    {
+        //Clear the screen
+        cout << string(50, '\n');
+
+        this->printOutOrder(order);
+
+        cout << endl;
+        cout << "Choose M to Move the order to the next state" << endl;
+        cout << "RECEIVED->PREP->IN OVEN->READY" << endl;
+        cout << "Or choose B to go Back" << endl;
+        cout << ": ";
+        cin >> choice;
+
+        if(toupper(choice) == 'M')
+        {
+            //Change the order state depending on what it is.
+            if(order.getState() == Order::Received)
+            {
+                orderService.setOrderState(order.getId(), Order::Prep);
+            }
+            else if(order.getState() == Order::Prep)
+            {
+                orderService.setOrderState(order.getId(), Order::InOven);
+            }
+            else if(order.getState() == Order::InOven)
+            {
+                orderService.setOrderState(order.getId(), Order::Ready);
+            }
+
+            validInput = true;
+        }
+        else if(toupper(choice) == 'B')
+        {
+            validInput = true;
+        }
+
+    } while(!validInput);
 }
 
 
@@ -215,14 +257,7 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             amountOfPizzas = tempOrder.getPizzas().size();
 
             //Gets the amount of sideDishes.
-            for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-            {
-                tempExtra = tempOrder.getExtras().at(j);
-                if(tempExtra.getType() == Extra::SideDish)
-                {
-                    amountOfSideDishes++;
-                }
-            }
+            amountOfSideDishes = tempOrder.getAmountOfSideDishes();
 
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
             cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes ";
@@ -240,73 +275,104 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
                 cout << "IN OVEN" << endl;
             }
 
-            //Loop through all the pizzas if there are any.
-            if(amountOfPizzas > 0)
-            {
-                cout << " PIZZAS: " << endl;
-                for(unsigned int y = 0; y < tempOrder.getPizzas().size(); y++)
-                {
-                    //Store the current pizza in a temporary pizza variable.
-                    tempPizza = tempOrder.getPizzas().at(y);
-
-                    //Prints out the current pizza name.
-                    cout << "  *" << tempPizza.getName() << " - ";
-                    //Prints out the current pizza size.
-                    if(tempPizza.getSize() == Pizza::Small)
-                    {
-                        cout << "Small, ";
-                    }
-                    else if(tempPizza.getSize() == Pizza::Medium)
-                    {
-                        cout << "Medium, ";
-                    }
-                    else if(tempPizza.getSize() == Pizza::Large)
-                    {
-                        cout << "Large, ";
-                    }
-                    //Prints out the current pizza base.
-                    cout << tempPizza.getBase().getName() << endl;
-
-                    //Check if the current pizza is a custom pizza, and if so it prints out its toppings.
-                    if(tempPizza.getName() == "Custom Pizza")
-                    {
-                        cout << "   -Toppings - ";
-                        //Loop through all the toppings on the current pizza.
-                        for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
-                        {
-                            //Store the current topping in a temporary topping variable.
-                            tempTopping = tempPizza.getToppings().at(j);
-
-                            cout << tempTopping.getName();
-
-                            if(j != tempPizza.getToppings().size() - 1)
-                            {
-                                cout << ", ";
-                            }
-                        }
-                        cout << endl;
-                    }
-                }
-            }
-
-            //Loop through all the side dishes if there are any.
-            if(amountOfSideDishes > 0)
-            {
-                cout << " SIDE DISHES:" << endl;
-                for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-                {
-                    //Store the current extra in a temporary extra variable.
-                    tempExtra = tempOrder.getExtras().at(j);
-
-                    //If the extra is a side dish, it prints out the name of it.
-                    if(tempExtra.getType() == Extra::SideDish)
-                    {
-                        cout << "  *" << tempExtra.getName() << endl;
-                    }
-                }
-            }
-
             cout << "----------------------------------------" << endl;
         }
     }
+}
+
+
+void UI_Baker::printOutOrder(Order order)
+{
+    int amountOfPizzas = 0;
+    int amountOfSideDishes = 0;
+    Pizza tempPizza;
+    Topping tempTopping;
+    Extra tempExtra;
+
+    //Gets the amount of pizzas.
+    amountOfPizzas = order.getPizzas().size();
+
+    //Gets the amount of sideDishes.
+    amountOfSideDishes = order.getAmountOfSideDishes();
+
+    //Print out the order ID, amount of pizzas and amount of side dishes.
+    cout << "ID: " << order.getId() << ", Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes;
+    //Print out the state of the order.
+    if(order.getState() == Order::Received)
+    {
+        cout << " RECEIVED" << endl;
+    }
+    else if(order.getState() == Order::Prep)
+    {
+        cout << " PREP" << endl;
+    }
+    else if(order.getState() == Order::InOven)
+    {
+        cout << " IN OVEN" << endl;
+    }
+
+    //Loop through all the pizzas if there are any.
+    if(amountOfPizzas > 0)
+    {
+        cout << " PIZZAS: " << endl;
+        for(unsigned int i = 0; i < order.getPizzas().size(); i++)
+        {
+            //Store the current pizza in a temporary pizza variable.
+            tempPizza = order.getPizzas().at(i);
+
+            //Prints out the current pizza name.
+            cout << "  *" << tempPizza.getName() << " - ";
+            //Prints out the current pizza size.
+            if(tempPizza.getSize() == Pizza::Small)
+            {
+                cout << "Small, ";
+            }
+            else if(tempPizza.getSize() == Pizza::Medium)
+            {
+                cout << "Medium, ";
+            }
+            else if(tempPizza.getSize() == Pizza::Large)
+            {
+                cout << "Large, ";
+            }
+            //Prints out the current pizza base.
+            cout << tempPizza.getBase().getName() << endl;
+
+            cout << "   -Toppings - ";
+            //Loop through all the toppings on the current pizza.
+            for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
+            {
+                //Store the current topping in a temporary topping variable.
+                tempTopping = tempPizza.getToppings().at(j);
+
+                cout << tempTopping.getName();
+
+                //Print out a comma if the current topping is not the last topping.
+                if(j != tempPizza.getToppings().size() - 1)
+                {
+                    cout << ", ";
+                }
+            }
+            cout << endl;
+        }
+    }
+
+    //Loop through all the side dishes if there are any.
+    if(amountOfSideDishes > 0)
+    {
+        cout << " SIDE DISHES:" << endl;
+        for(unsigned int j = 0; j < order.getExtras().size(); j++)
+        {
+            //Store the current extra in a temporary extra variable.
+            tempExtra = order.getExtras().at(j);
+
+            //If the extra is a side dish, it prints out the name of it.
+            if(tempExtra.getType() == Extra::SideDish)
+            {
+                cout << "  *" << tempExtra.getName() << endl;
+            }
+        }
+    }
+
+    cout << "----------------------------------------" << endl;
 }

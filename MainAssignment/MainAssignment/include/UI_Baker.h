@@ -16,9 +16,11 @@ class UI_Baker
         UI_Baker();
         virtual ~UI_Baker();
         void startUI();
-        void seeChangeActiveOrders();
+        void seeActiveOrders();
+        void changeActiveOrder(Order order);
         void seeAllOrders();
         void printOutOrders(vector<Order> validOrders);
+        void printOutOrder(Order order);
     protected:
     private:
         OrderService orderService;

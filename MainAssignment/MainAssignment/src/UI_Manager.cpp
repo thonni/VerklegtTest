@@ -153,7 +153,7 @@ void UI_Manager::addPizzaToMenu()
     Topping tempTopp;
     vector<Topping> availableToppings;
     vector<Base> availableBases;
-    char selection = '0';
+    string selection = "0";
     unsigned int selectionAsInt = 0;
     Pizza tempPizza;
     vector<Pizza> availablePizzas;
@@ -223,7 +223,12 @@ void UI_Manager::addPizzaToMenu()
         cin >> selection;
 
         //Change the char selection to int.
-        selectionAsInt = (int)(selection - '0');
+        selectionAsInt = 0;
+        for(unsigned int i = 0; i < selection.length(); i++)
+        {
+            selectionAsInt *= 10;
+            selectionAsInt += (int)selection[i] - '0';
+        }
 
         //Check if the selection is in the correct range.
         if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
@@ -232,12 +237,12 @@ void UI_Manager::addPizzaToMenu()
             tempToppings.push_back(availableToppings[selectionAsInt]);
         }
         //If it is not in range, it checks if you entered the letter e or E.
-        else if(toupper(selection) != 'E')
+        else if(toupper(selection[0]) != 'E')
         {
             /// \TODO: Make error message here.
         }
 
-    } while(toupper(selection) != 'E');
+    } while(toupper(selection[0]) != 'E');
 
     //Clear the screen.
     cout << string(50, '\n');
