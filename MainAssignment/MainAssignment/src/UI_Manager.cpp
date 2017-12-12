@@ -81,11 +81,12 @@ void UI_Manager::addToppingToMenu()
         {
             validInput = false;
 
-            //Ask the user for a name and price for the new topping.
+            //Ask the user for a name for the new topping.
             cout << "Please enter the name of the topping to add: ";
             cin.ignore();
             getline(cin, name);
 
+            //Check if the input had any characters in it.
             if(name.length() > 0)
             {
                 validInput = true;
@@ -97,11 +98,14 @@ void UI_Manager::addToppingToMenu()
         {
             validInput = true;
 
+            //Ask the user for a price for the new topping.
             cout << "Please enter the price of the topping: ";
             cin >> price;
 
+            //Check if the input was valid.
             if(cin.fail())
             {
+                //Flush the cin buffer.
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 validInput = false;
