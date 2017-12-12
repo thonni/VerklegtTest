@@ -408,7 +408,7 @@ void UI_Manager::addLocation()
         cout << "***AVAILABLE LOCATIONS***" << endl;
         for(unsigned int i = 0; i < locations.size(); i++)
         {
-            cout << (i + 1) << ": " << locations.at(i).getAddress() << ", " << locations.at(i).getCity() << endl;
+            cout << i << ": " << locations.at(i).getAddress() << ", " << locations.at(i).getCity() << endl;
         }
         cout << endl;
 
