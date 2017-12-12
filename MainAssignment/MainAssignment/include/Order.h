@@ -50,6 +50,7 @@ class Order
         void setId(int id);
         Location getLocation() const;
         void setLocation(Location location);
+        int getAmountOfSideDishes();
 
 
         friend ostream& operator << (ostream& out, const Order& order);

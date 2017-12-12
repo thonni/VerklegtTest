@@ -468,36 +468,115 @@ bool UI_Salesman::finishUpOrder(Order* order)
     //Ask LocationService for all saved locations.
     availableLocations = locationService.getLocations();
 
-    do
+    //Check if there are any items in the order before continuing.
+    if(order->getPizzas().size() > 0 || order->getExtras().size() > 0)
     {
-        //Clear the screen.
-        cout << string(50, '\n');
 
-        //Print out everything in the order using printOutOrder
-        this->printOutOrder(*order);
-
-        //Ask the user if he/she wants the order home delivered.
-        cout << endl << "Do you want your order to be delivered to your home? (Y/N) " << endl;
-        cout << "Choose B to go back." << endl;
-        cin >> choice;
-
-        //Check the answer, if it is y it sets homeDelivery to true,
-        //else it sets it to false.
-        if(toupper(choice) == 'Y')
+        do
         {
-            order->setHomeDelivery(true);
-            validInput = true;
-        }
-        else if(toupper(choice) == 'N')
+            //Clear the screen.
+            cout << string(50, '\n');
+
+            //Print out everything in the order using printOutOrder
+            this->printOutOrder(*order);
+
+            //Ask the user if he/she wants the order home delivered.
+            cout << endl << "Do you want your order to be delivered to your home? (Y/N) " << endl;
+            cout << "Choose B to go back." << endl;
+            cin >> choice;
+
+            //Check the answer, if it is y it sets homeDelivery to true,
+            //else it sets it to false.
+            if(toupper(choice) == 'Y')
+            {
+                order->setHomeDelivery(true);
+                validInput = true;
+            }
+            else if(toupper(choice) == 'N')
+            {
+                order->setHomeDelivery(false);
+                validInput = true;
+            }
+
+        } while(!validInput && toupper(choice) != 'B');
+
+        if (toupper(choice) != 'B')
         {
-            order->setHomeDelivery(false);
-            validInput = true;
+            do
+            {
+                validInput = false;
+
+                //Clear the screen.
+                cout << string(50, '\n');
+
+                //Print out everything in the order using printOutOrder
+                //this->printOutOrder(*order);
+
+                //Print out all available locations.
+                for(unsigned int i = 0; i < availableLocations.size(); i++)
+                {
+                    tempLocation = availableLocations.at(i);
+
+                    cout << i << " - " << tempLocation.getAddress() << " " << tempLocation.getCity() << endl;
+                }
+
+                //Ask the user if he/she wants the order home delivered.
+                cout << endl << "Please choose the id of the location you want your pizza to be made: ";
+                cin >> choice;
+
+                //Change the char selection to int.
+                selectionAsInt = (int)(choice - '0');
+
+                //Check if the input was valid.
+                if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
+                {
+                    order->setLocation(availableLocations.at(selectionAsInt));
+                    validInput = true;
+                }
+            } while(!validInput);
+
+            validInput = false;
+            //Clear the screen.
+            cout << string(50, '\n');
+            cout << "Do you wish to pay for the order now? (Y/N)" << endl;
+            cin >> choice;
+            if(toupper(choice) == 'Y')
+            {
+                char paymentMethod;
+                cout << "Do you wish to pay with card or cash?" << endl;
+                cout << "Choose 1 to pay with card" << endl;
+                cout << "Choose 2 to pay with cash" << endl;
+                cin >> paymentMethod;
+                order->setPaidFor(true);
+                validInput = true;
+            }
+            else if(toupper(choice) == 'N')
+            {
+                order->setPaidFor(false);
+                validInput = true;
+            }
+
+
+            //Check if there are any pizzas or side dishes for the baker to bake,
+            //if there are none the order goes straight to the Ready state.
+            if(order->getPizzas().size() == 0 && order->getAmountOfSideDishes() == 0)
+            {
+                order->setState(Order::Ready);
+            }
+
+            //Save the order to file.
+            orderService.addOrder(*order);
+
+            return true;
         }
-
-    } while(!validInput && toupper(choice) != 'B');
-
-    if (toupper(choice) != 'B')
+        else
+        {
+            return false;
+        }
+    }
+    else
     {
+        //If there are no items in the order, it goes into this else.
         do
         {
             validInput = false;
@@ -505,60 +584,18 @@ bool UI_Salesman::finishUpOrder(Order* order)
             //Clear the screen.
             cout << string(50, '\n');
 
-            //Print out everything in the order using printOutOrder
-            //this->printOutOrder(*order);
-
-            //Print out all available locations.
-            for(unsigned int i = 0; i < availableLocations.size(); i++)
-            {
-                tempLocation = availableLocations.at(i);
-
-                cout << i << " - " << tempLocation.getAddress() << " " << tempLocation.getCity() << endl;
-            }
-
-            //Ask the user if he/she wants the order home delivered.
-            cout << endl << "Please choose the id of the location you want your pizza to be made: ";
+            cout << "There is nothing in the order!" << endl;
+            cout << "Choose B to go Back" << endl;
+            cout << ": ";
             cin >> choice;
 
-            //Change the char selection to int.
-            selectionAsInt = (int)(choice - '0');
-
-            //Check if the input was valid.
-            if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
+            if(toupper(choice) == 'B')
             {
-                order->setLocation(availableLocations.at(selectionAsInt));
                 validInput = true;
             }
+
         } while(!validInput);
 
-        validInput = false;
-        //Clear the screen.
-        cout << string(50, '\n');
-        cout << "Do you wish to pay for the order now? (Y/N)" << endl;
-        cin >> choice;
-        if(toupper(choice) == 'Y')
-        {
-            char paymentMethod;
-            cout << "Do you wish to pay with card or cash?" << endl;
-            cout << "Choose 1 to pay with card" << endl;
-            cout << "Choose 2 to pay with cash" << endl;
-            cin >> paymentMethod;
-            order->setPaidFor(true);
-            validInput = true;
-        }
-        else if(toupper(choice) == 'N')
-        {
-            order->setPaidFor(false);
-            validInput = true;
-        }
-
-        //Save the order to file.
-        orderService.addOrder(*order);
-
-        return true;
-    }
-    else
-    {
         return false;
     }
 
