@@ -280,7 +280,6 @@ void UI_Manager::addPizzaToMenu()
     sort(tempToppings.begin(), tempToppings.end());
     for(unsigned int i = 0; i < tempToppings.size(); i++)
     {
-        cout << "";
         newPizza.addTopping(tempToppings[i]);
     }
     newPizza.generatePrice();
