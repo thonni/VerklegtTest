@@ -14,7 +14,7 @@ UI_Baker::~UI_Baker()
 
 void UI_Baker::startUI()
 {
-    char choice;
+    string choice;
     unsigned int choiceToInt;
     bool validInput;
     vector<Location> availableLocations = locationService.getLocations();
@@ -39,8 +39,13 @@ void UI_Baker::startUI()
         cin >> choice;
 
         //Change the choice to int and store in another variable
-        choiceToInt = (unsigned int)(choice - '0');
-        if(toupper(choice) == 'B')
+        choiceToInt = 0;
+        for(unsigned int i = 0; i < choice.length(); i++)
+        {
+            choiceToInt *= 10;
+            choiceToInt += (int)choice[i] - '0';
+        }
+        if(toupper(choice[0]) == 'B')
         {
             validInput = true;
         }
@@ -52,7 +57,7 @@ void UI_Baker::startUI()
 
     } while(!validInput);
 
-    if(toupper(choice) != 'B')
+    if(toupper(choice[0]) != 'B')
     {
         do
         {
@@ -68,16 +73,16 @@ void UI_Baker::startUI()
             cin >> choice;
 
 
-            if(toupper(choice) == 'A')
+            if(toupper(choice[0]) == 'A')
             {
                 this->seeActiveOrders();
             }
-            else if(toupper(choice) == 'O')
+            else if(toupper(choice[0]) == 'O')
             {
                 this->seeAllOrders();
             }
 
-        } while(toupper(choice) != 'Q');
+        } while(toupper(choice[0]) != 'Q');
     }
 
 }
@@ -85,7 +90,7 @@ void UI_Baker::startUI()
 
 void UI_Baker::seeActiveOrders()
 {
-    char choice;
+    string choice;
     unsigned int choiceToInt;
     bool validInput;
     unsigned int numberOfOrders;
@@ -127,7 +132,12 @@ void UI_Baker::seeActiveOrders()
             cin >> choice;
 
             //Change the choice character to int and store in choiceToInt.
-            choiceToInt = (unsigned int)(choice - '0');
+            choiceToInt = 0;
+            for(unsigned int i = 0; i < choice.length(); i++)
+            {
+                choiceToInt *= 10;
+                choiceToInt += (int)choice[i] - '0';
+            }
 
             //Check if the choice was in range of validOrders
             if(choiceToInt < numberOfOrders)
@@ -140,7 +150,7 @@ void UI_Baker::seeActiveOrders()
 
                 validInput = true;
             }
-            else if(toupper(choice) == 'B')
+            else if(toupper(choice[0]) == 'B')
             {
                 validInput = true;
             }
@@ -158,7 +168,7 @@ void UI_Baker::seeActiveOrders()
                 cout << "Choose B to go Back" << endl;
                 cout << ": ";
                 cin >> choice;
-            } while(toupper(choice) != 'B');
+            } while(toupper(choice[0]) != 'B');
             validInput = true;
         }
 
