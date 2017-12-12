@@ -253,6 +253,7 @@ Pizza UI_Salesman::makePizza()
 
     //Ask toppingService for a vector of all toppings that are on the menu.
     availableToppings = toppingService.getToppings();
+    sort(availableToppings.begin(), availableToppings.end());
     //Ask baseService for a vector of all bases that are on the menu.
     availableBases = baseService.getBases();
 
@@ -731,11 +732,18 @@ void UI_Salesman::viewOrders()
             this->printOutOrder(tempOrder);
         }
     }
-    cout << "Please select which order you wish to mark as paid for: ";
-    cin >> choice;
+    if(counter == 0)
+    {
 
-    choiceToInt = (unsigned int)(choice - '0');
-    orderService.setOrderPaid(orders[numbers[choiceToInt]].getId());
+    }
+    else
+    {
+        cout << "Please select which order you wish to mark as paid for: ";
+        cin >> choice;
+
+        choiceToInt = (unsigned int)(choice - '0');
+        orderService.setOrderPaid(orders[numbers[choiceToInt]].getId());
+    }
 }
 
 
@@ -748,7 +756,6 @@ bool UI_Salesman::checkMenu(Pizza pizza)
     for(unsigned int i = 0; i < pizzas.size(); i++)
     {
         tempToppings = pizzas[i].getToppings();
-        sort(tempToppings.begin(), tempToppings.end());
         if(tempToppings == inToppings)
         {
             return true;

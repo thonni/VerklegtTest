@@ -15,7 +15,7 @@ void UI_Delivery::deliveryMenu()
     char location;
     int orderID;
     char orderMark;
-    bool noID = false, goBack = false;
+    bool noID = false;
     unsigned int choiceToInt;
     bool validInput = false;
     vector<Location> availableLocations = locationService.getLocations();
@@ -48,7 +48,7 @@ void UI_Delivery::deliveryMenu()
 
         if(toupper(location) == 'B')
         {
-            goBack = true;
+            validInput = true;
         }
     } while(validInput != true);
     //while(location < 0 || location > locSize);
@@ -57,7 +57,7 @@ void UI_Delivery::deliveryMenu()
     /// Here the user inputs their location and the program will print out the orders for that location and their status
     /// The orders will be sorted by their status.
 
-    if(!goBack)
+    if(toupper(location) != 'B')
     {
         //orderService.getOrders();
         this->seeOrdersToBeDelivered();
@@ -162,7 +162,11 @@ void UI_Delivery::seeOrdersToBeDelivered()
             choiceToInt = (unsigned int)(choice - '0');
 
             //Check if the choice was in range of validOrders
-            if(choiceToInt < numberOfOrders)
+            if(toupper(choice) == 'B')
+            {
+                validInput = true;
+            }
+            else if(choiceToInt < numberOfOrders)
             {
                 //Store the chosen order in a temporary Order variable.
                 tempOrder = validOrders.at(choiceToInt);
@@ -177,10 +181,7 @@ void UI_Delivery::seeOrdersToBeDelivered()
                 }
                 validInput = true;
             }
-            else if(toupper(choice) == 'B')
-            {
-                validInput = true;
-            }
+
         }
         else
         {
