@@ -121,7 +121,7 @@ Pizza UI_Salesman::choosePizzaFromMenu()
     Base tempBase;
     vector<Pizza> availablePizzas;
     vector<Base> availableBases;
-    char selection = '0';
+    string selection = "0";
     unsigned int selectionAsInt = 0;
     Pizza newPizza("N/A", Pizza::Small);
 
@@ -158,13 +158,18 @@ Pizza UI_Salesman::choosePizzaFromMenu()
         cin >> selection;
 
         //Store the selection as int in another variable.
-        selectionAsInt = (int)(selection - '0');
+        selectionAsInt = 0;
+        for(unsigned int i = 0; i < selection.length(); i++)
+        {
+            selectionAsInt *= 10;
+            selectionAsInt += (int)selection[i] - '0';
+        }
 
     //Loop if selection is out of range and is not c or C for cancel.
-    } while(!((selectionAsInt >= 0 && selectionAsInt < availablePizzas.size()) || toupper(selection) == 'C'));
+    } while(!((selectionAsInt >= 0 && selectionAsInt < availablePizzas.size()) || toupper(selection[0]) == 'C'));
 
 
-    if(toupper(selection) != 'C')
+    if(toupper(selection[0]) != 'C')
     {
         //Set newPizza to the selected pizza if the selection was not canceled.
         newPizza = availablePizzas.at(selectionAsInt);
@@ -180,28 +185,28 @@ Pizza UI_Salesman::choosePizzaFromMenu()
             cout << "Choose M for Medium" << endl;
             cout << "Choose L for Large" << endl;
             cout << ": ";
-            cin >> selection;
+            cin >> selection[0];
 
             //Set the size of the pizza depending on the user input.
-            if(toupper(selection) == 'S')
+            if(toupper(selection[0]) == 'S')
             {
                 newPizza.setSize(Pizza::Small);
             }
-            else if(toupper(selection) == 'M')
+            else if(toupper(selection[0]) == 'M')
             {
                 newPizza.setSize(Pizza::Medium);
             }
-            else if(toupper(selection) == 'L')
+            else if(toupper(selection[0]) == 'L')
             {
                 newPizza.setSize(Pizza::Large);
             }
             else
             {
-                selection = '0';
+                selection[0] = '0';
             }
 
           //Loop until a valid input is entered.
-        } while(selection == '0');
+        } while(selection[0] == '0');
 
         do
         {
@@ -219,18 +224,23 @@ Pizza UI_Salesman::choosePizzaFromMenu()
 
 
             //Store the selection as int in another variable.
-            selectionAsInt = (int)(selection - '0');
+            selectionAsInt = 0;
+            for(unsigned int i = 0; i < selection.length(); i++)
+            {
+                selectionAsInt *= 10;
+                selectionAsInt += (int)selection[i] - '0';
+            }
 
             //Check if the selection is in the correct range.
             if((selectionAsInt >= 0 && selectionAsInt < availableBases.size()))
             {
                 //Set the base to the selected base
                 newPizza.setBase(availableBases.at(selectionAsInt));
-                selection = '/';
+                selection[0] = '/';
             }
 
           //Loop until a valid input is entered.
-        } while(selection != '/');
+        } while(selection[0] != '/');
     }
 
     //Return the pizza.
@@ -245,7 +255,7 @@ Pizza UI_Salesman::makePizza()
     Base tempBase;
     vector<Topping> availableToppings;
     vector<Base> availableBases;
-    char selection = '0';
+    string selection = "0";
     unsigned int selectionAsInt = 0;
 
     //Clear the screen.
@@ -294,7 +304,12 @@ Pizza UI_Salesman::makePizza()
         cin >> selection;
 
         //Store the selection as int in another variable.
-        selectionAsInt = (int)(selection - '0');
+        selectionAsInt = 0;
+        for(unsigned int i = 0; i < selection.length(); i++)
+        {
+            selectionAsInt *= 10;
+            selectionAsInt += (int)selection[i] - '0';
+        }
 
         //Check if the selection is in the correct range.
         if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
@@ -303,10 +318,10 @@ Pizza UI_Salesman::makePizza()
             newPizza.addTopping(availableToppings[selectionAsInt]);
         }
 
-    } while(toupper(selection) != 'E' && toupper(selection) != 'C');
+    } while(toupper(selection[0]) != 'E' && toupper(selection[0]) != 'C');
 
     //Check if the order was canceled.
-    if(toupper(selection) != 'C')
+    if(toupper(selection[0]) != 'C')
     {
         //Change the name of the pizza to indicate
         //that the order was not canceled.
@@ -322,26 +337,26 @@ Pizza UI_Salesman::makePizza()
             cout << "Choose M for Medium" << endl;
             cout << "Choose L for Large" << endl;
             cout << ": ";
-            cin >> selection;
+            cin >> selection[0];
 
-            if(toupper(selection) == 'S')
+            if(toupper(selection[0]) == 'S')
             {
                 newPizza.setSize(Pizza::Small);
             }
-            else if(toupper(selection) == 'M')
+            else if(toupper(selection[0]) == 'M')
             {
                 newPizza.setSize(Pizza::Medium);
             }
-            else if(toupper(selection) == 'L')
+            else if(toupper(selection[0]) == 'L')
             {
                 newPizza.setSize(Pizza::Large);
             }
             else
             {
-                selection = '0';
+                selection[0] = '0';
             }
 
-        } while(selection == '0');
+        } while(selection[0] == '0');
 
 
         do
@@ -360,18 +375,23 @@ Pizza UI_Salesman::makePizza()
 
 
             //Store the selection as int in another variable.
-            selectionAsInt = (int)(selection - '0');
+            selectionAsInt = 0;
+            for(unsigned int i = 0; i < selection.length(); i++)
+            {
+                selectionAsInt *= 10;
+                selectionAsInt += (int)selection[i] - '0';
+            }
 
             //Check if the selection is in the correct range.
             if((selectionAsInt >= 0 && selectionAsInt < availableBases.size()))
             {
                 //Set the base to the selected base
                 newPizza.setBase(availableBases.at(selectionAsInt));
-                selection = '/';
+                selection[0] = '/';
             }
 
 
-        } while(selection != '/');
+        } while(selection[0] != '/');
 
 
         //Make the pizza calculate the price of it self (And add extra for making a custom pizza).
@@ -395,7 +415,7 @@ Pizza UI_Salesman::makePizza()
 
         //Ask the user if everything is OK.
         cout << "Is this OK? (Y/N): ";
-        cin >> selection;
+        cin >> selection[0];
     }
 
 
@@ -408,7 +428,7 @@ Extra UI_Salesman::chooseExtraFromMenu()
     Extra tempExtra;
     Topping tempTopping;
     vector<Extra> availableExtras;
-    char selection = '0';
+    string selection = "0";
     unsigned int selectionAsInt = 0;
     Extra newExtra("N/A", Extra::Drink, 0);
 
@@ -434,13 +454,18 @@ Extra UI_Salesman::chooseExtraFromMenu()
         cin >> selection;
 
         //Store the selection as int in another variable.
-        selectionAsInt = (int)(selection - '0');
+        selectionAsInt = 0;
+        for(unsigned int i = 0; i < selection.length(); i++)
+        {
+            selectionAsInt *= 10;
+            selectionAsInt += (int)selection[i] - '0';
+        }
 
     //Loop if selection is out of range and is not c or C for cancel.
-    } while(!((selectionAsInt >= 0U && selectionAsInt < availableExtras.size()) || toupper(selection) == 'C'));
+    } while(!((selectionAsInt >= 0U && selectionAsInt < availableExtras.size()) || toupper(selection[0]) == 'C'));
 
     //Set newExtra to the selected extra if the selection was not canceled.
-    if(toupper(selection) != 'C')
+    if(toupper(selection[0]) != 'C')
     {
         newExtra = availableExtras.at(selectionAsInt);
     }
@@ -460,7 +485,7 @@ void UI_Salesman::removeFromOrder(Order* order)
 
 bool UI_Salesman::finishUpOrder(Order* order)
 {
-    char choice;
+    string choice;
     unsigned int selectionAsInt;
     bool validInput = false;
     vector<Location> availableLocations;
@@ -484,20 +509,20 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
         //Check the answer, if it is y it sets homeDelivery to true,
         //else it sets it to false.
-        if(toupper(choice) == 'Y')
+        if(toupper(choice[0]) == 'Y')
         {
             order->setHomeDelivery(true);
             validInput = true;
         }
-        else if(toupper(choice) == 'N')
+        else if(toupper(choice[0]) == 'N')
         {
             order->setHomeDelivery(false);
             validInput = true;
         }
 
-    } while(!validInput && toupper(choice) != 'B');
+    } while(!validInput && toupper(choice[0]) != 'B');
 
-    if (toupper(choice) != 'B')
+    if (toupper(choice[0]) != 'B')
     {
         do
         {
@@ -522,7 +547,12 @@ bool UI_Salesman::finishUpOrder(Order* order)
             cin >> choice;
 
             //Change the char selection to int.
-            selectionAsInt = (int)(choice - '0');
+            selectionAsInt = 0;
+            for(unsigned int i = 0; i < choice.length(); i++)
+            {
+                selectionAsInt *= 10;
+                selectionAsInt += (int)choice[i] - '0';
+            }
 
             //Check if the input was valid.
             if(selectionAsInt >= 0 && selectionAsInt < availableLocations.size())
@@ -537,7 +567,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
         cout << string(50, '\n');
         cout << "Do you wish to pay for the order now? (Y/N)" << endl;
         cin >> choice;
-        if(toupper(choice) == 'Y')
+        if(toupper(choice[0]) == 'Y')
         {
             char paymentMethod;
             cout << "Do you wish to pay with card or cash?" << endl;
@@ -547,7 +577,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
             order->setPaidFor(true);
             validInput = true;
         }
-        else if(toupper(choice) == 'N')
+        else if(toupper(choice[0]) == 'N')
         {
             order->setPaidFor(false);
             validInput = true;
@@ -646,8 +676,8 @@ void UI_Salesman::printOutOrder(Order order)
 
 void UI_Salesman::viewOrders()
 {
-    char choice;
-    unsigned int choiceToInt;
+    string choice;
+    unsigned int choiceToInt = 0;
     int counter = 0;
     bool validInput;
     vector<Order> orders;
@@ -674,7 +704,12 @@ void UI_Salesman::viewOrders()
         cin >> choice;
 
         //Change the choice to int and store in another variable
-        choiceToInt = (unsigned int)(choice - '0');
+        for(unsigned int i = 0; i < choice.length(); i++)
+        {
+            choiceToInt *= 10;
+            choiceToInt += (int)choice[i] - '0';
+        }
+        //choiceToInt = (unsigned int)(choice - '0');
 
         if(choiceToInt < availableLocations.size())
         {
@@ -695,6 +730,7 @@ void UI_Salesman::viewOrders()
             this->printOutOrder(tempOrder);
         }
     }
+    choiceToInt = 0;
     if(counter == 0)
     {
 
@@ -704,7 +740,11 @@ void UI_Salesman::viewOrders()
         cout << "Please select which order you wish to mark as paid for: ";
         cin >> choice;
 
-        choiceToInt = (unsigned int)(choice - '0');
+        for(unsigned int i = 0; i < choice.length(); i++)
+        {
+            choiceToInt *= 10;
+            choiceToInt += (int)choice[i] - '0';
+        }
         orderService.setOrderPaid(orders[numbers[choiceToInt]].getId());
     }
 }
