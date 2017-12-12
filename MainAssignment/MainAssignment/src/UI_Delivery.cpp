@@ -19,13 +19,15 @@ void UI_Delivery::deliveryMenu()
     unsigned int choiceToInt;
     bool validInput = false;
     vector<Location> availableLocations = locationService.getLocations();
-    cout << string(50, '\n');
     int locSize = locations.size();
+
+
+
 
     do
     {
-        //cout << "Please choose your location." << endl;
-        //cout << "Choose 0 to go back." << endl;
+        //Clear the screen
+        cout << string(50, '\n');
 
         for(unsigned int i = 0; i < availableLocations.size(); i++)
         {
@@ -51,7 +53,6 @@ void UI_Delivery::deliveryMenu()
             validInput = true;
         }
     } while(validInput != true);
-    //while(location < 0 || location > locSize);
 
 
     /// Here the user inputs their location and the program will print out the orders for that location and their status

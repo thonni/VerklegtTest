@@ -257,14 +257,7 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             amountOfPizzas = tempOrder.getPizzas().size();
 
             //Gets the amount of sideDishes.
-            for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-            {
-                tempExtra = tempOrder.getExtras().at(j);
-                if(tempExtra.getType() == Extra::SideDish)
-                {
-                    amountOfSideDishes++;
-                }
-            }
+            amountOfSideDishes = tempOrder.getAmountOfSideDishes();
 
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
             cout << i << " - ID: " << tempOrder.getId() << " - " << amountOfPizzas << " Pizzas and " << amountOfSideDishes << " Side dishes ";
@@ -300,14 +293,7 @@ void UI_Baker::printOutOrder(Order order)
     amountOfPizzas = order.getPizzas().size();
 
     //Gets the amount of sideDishes.
-    for(unsigned int j = 0; j < order.getExtras().size(); j++)
-    {
-        tempExtra = order.getExtras().at(j);
-        if(tempExtra.getType() == Extra::SideDish)
-        {
-            amountOfSideDishes++;
-        }
-    }
+    amountOfSideDishes = order.getAmountOfSideDishes();
 
     //Print out the order ID, amount of pizzas and amount of side dishes.
     cout << "ID: " << order.getId() << ", Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes;
