@@ -19,7 +19,8 @@
 #include "Order.h"
 #include "Location.h"
 #include "Base.h"
-
+#include "DataManager.h"
+#include "limits"
 using namespace std;
 
 class UI_Manager

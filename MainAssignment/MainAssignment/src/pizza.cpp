@@ -67,6 +67,11 @@ void Pizza::generatePrice(double extraCost = 0.0)
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
     Topping tempTopping;
+/*
+    out << pizza.name << "," << pizza.price << ",";
+
+    out <<*/
+
 
     //Goes through the name input and replaces all ' ' with '~'.
     string savedName = "";
