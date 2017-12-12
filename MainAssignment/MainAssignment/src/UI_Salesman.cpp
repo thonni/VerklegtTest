@@ -253,6 +253,7 @@ Pizza UI_Salesman::makePizza()
 
     //Ask toppingService for a vector of all toppings that are on the menu.
     availableToppings = toppingService.getToppings();
+    sort(availableToppings.begin(), availableToppings.end());
     //Ask baseService for a vector of all bases that are on the menu.
     availableBases = baseService.getBases();
 
@@ -296,7 +297,6 @@ Pizza UI_Salesman::makePizza()
         selectionAsInt = (int)(selection - '0');
 
         //Check if the selection is in the correct range.
-        sort(availableToppings.begin(), availableToppings.end());
         if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
         {
             //Add the topping to the pizza.
