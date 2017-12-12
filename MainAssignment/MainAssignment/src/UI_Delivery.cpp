@@ -21,9 +21,6 @@ void UI_Delivery::deliveryMenu()
     vector<Location> availableLocations = locationService.getLocations();
     int locSize = locations.size();
 
-
-
-
     do
     {
         //Clear the screen
@@ -42,6 +39,7 @@ void UI_Delivery::deliveryMenu()
         //Change the choice to int and store in another variable
         choiceToInt = (unsigned int)(location - '0');
 
+
         if(choiceToInt < availableLocations.size())
         {
                 this->deliveryLocation = availableLocations.at(choiceToInt);
@@ -52,18 +50,27 @@ void UI_Delivery::deliveryMenu()
         {
             validInput = true;
         }
-    } while(validInput != true);
+        /// Here the program prints out all orders to be delivered
+
+        //orderService.getOrders();
+
+        if (toupper(location) != 'B')
+        {
+                this->seeOrdersToBeDelivered();
+        }
+
+    } while(validInput != true );
 
 
-    /// Here the user inputs their location and the program will print out the orders for that location and their status
-    /// The orders will be sorted by their status.
 
-    if(toupper(location) != 'B')
+    /// Here the program prints out all orders to be delivered
+
+    /*if (toupper(location) != 'B');
     {
         //orderService.getOrders();
         this->seeOrdersToBeDelivered();
 
-        /*cout << "Input the ID of an order to deliver." << endl;
+        cout << "Input the ID of an order to deliver." << endl;
         cin >> orderID;
         //orderID = locations[orderID-1].getId();
         try
@@ -111,9 +118,11 @@ void UI_Delivery::deliveryMenu()
                 // Error message
                 cout << "Invalid input!" << endl;
             }
-        }*/
-    }
+        }
+    }*/
+
 }
+
 
 void UI_Delivery::seeOrdersToBeDelivered()
 {
