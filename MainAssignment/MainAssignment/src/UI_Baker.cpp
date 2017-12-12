@@ -347,6 +347,7 @@ void UI_Baker::printOutOrder(Order order)
 
                 cout << tempTopping.getName();
 
+                //Print out a comma if the current topping is not the last topping.
                 if(j != tempPizza.getToppings().size() - 1)
                 {
                     cout << ", ";

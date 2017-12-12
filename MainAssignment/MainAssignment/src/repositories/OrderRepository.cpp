@@ -54,17 +54,19 @@ vector<Order> OrderRepository::getOrders()
 {
     //Create an instance of ifstream.
     ifstream fin;
-    //Create a vector for the orders.
+
     vector<Location> availableLocations = locationService.getLocations();
     vector<Base> availableBases = baseService.getBases();
     vector<Order> returnVector;
-    //Create an empty instance of order.
-    Order tempOrder;
+    vector<string> dataVector;
     string data;
     string tempData = "";
-    vector<string> dataVector;
+    Order tempOrder;
     Location tempLocation;
     Base tempBase;
+
+    int extraCount;
+    int counter;
 
     //Open the activeOrders file.
     fin.open("activeOrders.txt");
@@ -99,78 +101,116 @@ vector<Order> OrderRepository::getOrders()
 
                 Order tempOrder;
                 Location tempLocation;
+                counter = 0;
 
-                tempOrder.setId(atoi(dataVector.at(0).c_str()));
-                tempOrder.setPaidFor(atoi(dataVector.at(1).c_str()));
+                //Get the order id.
+                tempOrder.setId(atoi(dataVector.at(counter).c_str()));
+                counter++;
+                //Get the paidFor bool.
+                tempOrder.setPaidFor(atoi(dataVector.at(counter).c_str()));
+                counter++;
 
-                int locationId = atoi(dataVector.at(2).c_str());
+                //Get the order location id.
+                int locationId = atoi(dataVector.at(counter).c_str());
+                counter++;
+                //Loop through all available locations from file and match the id with the order id.
                 for(unsigned int i = 0; i < availableLocations.size(); i++)
                 {
                     tempLocation = availableLocations.at(i);
                     if(tempLocation.getId() == locationId)
                     {
+                        //Set the location with the same id into the order.
                         tempOrder.setLocation(tempLocation);
                     }
                 }
 
-                tempOrder.setState((Order::State)atoi(dataVector.at(3).c_str()));
-                tempOrder.setHomeDelivery((bool)atoi(dataVector.at(4).c_str()));
+                //Get the state of the order.
+                tempOrder.setState((Order::State)atoi(dataVector.at(counter).c_str()));
+                counter++;
+                //Get the HomeDelivery bool.
+                tempOrder.setHomeDelivery((bool)atoi(dataVector.at(counter).c_str()));
+                counter++;
 
-                int counter = 6;
-                int pizzaCount = atoi(dataVector.at(5).c_str());
+                //Get the pizza count.
+                int pizzaCount = atoi(dataVector.at(counter).c_str());
+                counter++;
+                //Loop through all the pizzas if there are any.
                 if(pizzaCount > 0)
                 {
                     for(int i = 0; i < pizzaCount; i++)
                     {
                         Pizza tempPizza;
+
+                        //Get the pizza name.
                         tempPizza.setName(dataVector.at(counter));
                         counter++;
+                        //Get the pizza size.
                         tempPizza.setSize((Pizza::Size)atoi(dataVector.at(counter).c_str()));
                         counter++;
 
+                        //Get the base id for the current pizza.
                         int baseId = atoi(dataVector.at(counter).c_str());
                         counter++;
+                        //Loop through all available bases from file and match the id with the order id.
                         for(unsigned int j = 0; j < availableBases.size(); j++)
                         {
                             tempBase = availableBases.at(j);
                             if(tempBase.getId() == baseId)
                             {
+                                //Set the base with the same id into the order.
                                 tempPizza.setBase(tempBase);
                             }
                         }
 
+                        //Get the amount of toppings for the current pizza.
                         int toppingCount = atoi(dataVector.at(counter).c_str());
                         counter++;
-                        for(int j = 0; j < toppingCount; j++)
+                        //Loop through all the toppings if there are any.
+                        if(toppingCount > 0)
                         {
-                            string tempToppingName = dataVector.at(counter);
-                            counter++;
-                            float tempToppingPrice = (float)atoi(dataVector.at(counter).c_str());
-                            counter++;
-                            Topping tempTopping;
-                            tempTopping.setName(tempToppingName);
-                            tempTopping.setPrice(tempToppingPrice);
-                            tempPizza.addTopping(tempTopping);
+                            for(int j = 0; j < toppingCount; j++)
+                            {
+                                //Get the topping name.
+                                string tempToppingName = dataVector.at(counter);
+                                counter++;
+                                //Get the topping price.
+                                float tempToppingPrice = (float)atoi(dataVector.at(counter).c_str());
+                                counter++;
+                                //Create a temporary instance of topping, add the name and price to it,
+                                //and add the topping to the temporary pizza.
+                                Topping tempTopping;
+                                tempTopping.setName(tempToppingName);
+                                tempTopping.setPrice(tempToppingPrice);
+                                tempPizza.addTopping(tempTopping);
+                            }
                         }
 
+                        //Add the temporary pizza to the order.
                         tempOrder.addPizza(tempPizza);
                     }
                 }
 
-
-                int extraCount = atoi(dataVector.at(counter).c_str());
+                //Get the amount of extras.
+                extraCount = atoi(dataVector.at(counter).c_str());
                 counter++;
+                //Loop through all the extras if there are any.
                 if(extraCount > 0)
                 {
                     for(int i = 0; i < extraCount; i++)
                     {
+                        //Create a temporary instance of extra
                         Extra tempExtra;
+                        //Get and add the name to the temp extra.
                         tempExtra.setName(dataVector.at(counter));
                         counter++;
+                        //Get and add the type to the temp extra.
                         tempExtra.setType((Extra::Type)atoi(dataVector.at(counter).c_str()));
                         counter++;
+                        //Get and add the price to the temp extra.
                         tempExtra.setPrice((float)atoi(dataVector.at(counter).c_str()));
                         counter++;
+
+                        //Add the temporary extra to the order.
                         tempOrder.addExtra(tempExtra);
                     }
                 }
