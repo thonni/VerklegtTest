@@ -226,22 +226,91 @@ void UI_Baker::changeActiveOrder(Order order)
 
 void UI_Baker::seeAllOrders()
 {
-    char choice;
+    string choice;
+    unsigned int choiceToInt;
+    bool validInput;
+    unsigned int numberOfOrders;
+    vector<Order> allOrders = orderService.getOrders();
+    vector<Order> validOrders;
+    Order tempOrder;
+    vector<int> numbers;
 
+    //Count the amount of orders for the chosen location and in a valid state,
+    //and store those orders in the validOrders vector.
+    numberOfOrders = 0;
+    for(unsigned int i = 0; i < allOrders.size(); i++)
+    {
+        //Stores the current order in a temporary order variable.
+        tempOrder = allOrders.at(i);
+
+        //Check if the current order is at the chosen location and in a valid state for the baker.
+        if(tempOrder.getLocation().getId() == this->bakerLocation.getId())
+        {
+            validOrders.push_back(tempOrder);
+            numberOfOrders++;
+            numbers.push_back(i);
+        }
+    }
 
     do
     {
+        validInput = false;
+
         //Clear the screen
         cout << string(50, '\n');
+        //Use printOutOrders to print out all the orders on the screen
+        //in a nice fashion.
+        this->printOutOrders(validOrders);
 
-        //Print out all orders from file using a function in OrderService.
-        orderService.printOutAllOrders();
+        if(numberOfOrders > 0)
+        {
+            cout << "Select an order to view" << endl;
+            cout << "Or choose B to go Back" << endl;
+            cout << ": ";
+            cin >> choice;
 
-        cout << endl << "Choose B to go Back" << endl;
-        cout << ": ";
-        cin >> choice;
+            //Change the choice character to int and store in choiceToInt.
+            choiceToInt = 0;
+            for(unsigned int i = 0; i < choice.length(); i++)
+            {
+                choiceToInt *= 10;
+                choiceToInt += (int)choice[i] - '0';
+            }
 
-    } while(toupper(choice) != 'B');
+            //Check if the choice was in range of validOrders
+            if(choiceToInt < numberOfOrders)
+            {
+
+                //Store the chosen order in a temporary Order variable and use it
+                //as an argument in this->changeActiveOrder.
+                tempOrder = validOrders.at(choiceToInt);
+                this->printOutOrder(allOrders[numbers[choiceToInt]]);
+
+                validInput = true;
+            }
+            else if(toupper(choice[0]) == 'B')
+            {
+                validInput = true;
+            }
+        }
+        else
+        {
+            //If there are no orders waiting this message comes up.
+            do
+            {
+                //Clear the screen
+                cout << string(50, '\n');
+
+                cout << "Nothing here!" << endl << endl;
+                cout << "----------------------------------------" << endl;
+                cout << "Choose B to go Back" << endl;
+                cout << ": ";
+                cin >> choice;
+            } while(toupper(choice[0]) != 'B');
+            validInput = true;
+        }
+
+    } while(!validInput);
 }
 
 
@@ -282,7 +351,19 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             }
             else if(tempOrder.getState() == Order::InOven)
             {
-                cout << "IN OVEN" << endl;
+                cout << " IN OVEN" << endl;
+            }
+            else if(tempOrder.getState() == Order::Ready)
+            {
+                cout << " READY" << endl;
+            }
+            else if(tempOrder.getState() == Order::OnItsWay)
+            {
+                cout << " ON ITS WAY" << endl;
+            }
+            else if(tempOrder.getState() == Order::Delivered)
+            {
+                cout << " DELIVERED" << endl;
             }
 
             cout << "----------------------------------------" << endl;
@@ -319,6 +400,18 @@ void UI_Baker::printOutOrder(Order order)
     else if(order.getState() == Order::InOven)
     {
         cout << " IN OVEN" << endl;
+    }
+    else if(order.getState() == Order::Ready)
+    {
+        cout << " READY" << endl;
+    }
+    else if(order.getState() == Order::OnItsWay)
+    {
+        cout << " ON ITS WAY" << endl;
+    }
+    else if(order.getState() == Order::Delivered)
+    {
+        cout << " DELIVERED" << endl;
     }
 
     //Loop through all the pizzas if there are any.
