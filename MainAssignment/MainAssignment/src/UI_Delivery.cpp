@@ -68,8 +68,8 @@ void UI_Delivery::deliveryMenu()
 
             cout << "Welcome Delivery person" << endl << endl;
 
-            cout << "Choose R to see orders Ready to be delivered" << endl;
-            cout << "Choose O to see all Orders" << endl;
+            cout << "Choose R to see orders Ready to be delivered or being delivered" << endl;
+            cout << "Choose O to see all Orders for this location" << endl;
             cout << "Choose Q to Quit" << endl;
             cout << ": ";
             cin >> choice;
