@@ -176,10 +176,9 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
     {
         //Clear the screen
         cout << string(50, '\n');
-        cout << tempOrder.getState() << endl;
 
         this->printOutOrder(tempOrder);
-        if(tempOrder.getState() == Order::OnItsWay && !tempOrder.getPaidFor())
+        if(tempOrder.getState() == Order::Delivered && !tempOrder.getPaidFor())
         {
             char paymentMethod;
             cout << "Do you wish to pay with card or cash?" << endl;
