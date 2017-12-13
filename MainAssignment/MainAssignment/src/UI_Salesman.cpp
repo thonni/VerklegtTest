@@ -404,7 +404,14 @@ Pizza UI_Salesman::makePizza()
 
 
         //Make the pizza calculate the price of it self (And add extra for making a custom pizza).
-        newPizza.generatePrice(300.0);
+        if(checkMenu(newPizza))
+        {
+            newPizza.generatePrice();
+        }
+        else
+        {
+            newPizza.generatePrice(300.0);
+        }
 
         //Clear the screen.
         cout << string(50, '\n');
