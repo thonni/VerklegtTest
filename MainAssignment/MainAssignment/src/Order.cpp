@@ -32,15 +32,13 @@ void Order::clearExtras()
 
 void Order::removePizza(int i)
 {
-    this->pizzas.at(i) = this->pizzas.back();
-    this->pizzas.pop_back();
+    this->pizzas.erase(this->pizzas.begin() + i);
 }
 
 
 void Order::removeExtra(int i)
 {
-    this->extras.at(i - 1) = this->extras.back();
-    this->extras.pop_back();
+    this->extras.erase(this->extras.begin() + i);
 }
 
 
