@@ -23,8 +23,11 @@ vector<Pizza> PizzaRepository::getPizzas()
     ifstream fin;
     //Create a vector for the pizzas.
     vector<Pizza> returnVector;
-    //Create an empty instance of Pizza.
-    Pizza tempPizza;
+    vector<string> dataVector;
+    string data;
+    string tempData;
+    int counter;
+    int numberOfToppings;
 
     //Open the pizzaMenu file.
     fin.open("pizzaMenu.txt");
@@ -32,13 +35,61 @@ vector<Pizza> PizzaRepository::getPizzas()
     //Check if the file was opened (check if it exists).
     if(fin.is_open())
     {
-        //Loop until the end of file and fetch data using the Pizza istream overloader.
-        while(fin >> tempPizza)
+        while(!fin.eof())
         {
-            //Put the pizza into the vector
-            returnVector.push_back(tempPizza);
-            //Clear the toppings vector.
-            tempPizza.clearToppings();
+            data = "";
+            getline(fin, data);
+
+            //Check if the data has any characters, and if so loop through each character
+            //and separate the data into a string vector.
+            if(data.length() > 0)
+            {
+                for(unsigned int i = 0; i < data.length(); i++)
+                {
+                    if(data[i] == '^' && data[i+1] == '~')
+                    {
+                        dataVector.push_back(tempData);
+                        tempData = "";
+                        i++;
+                    }
+                    else
+                    {
+                        tempData += data[i];
+                    }
+                }
+                dataVector.push_back(tempData);
+                tempData = "";
+
+
+                Pizza tempPizza;
+                Topping tempTopping;
+                counter = 0;
+                numberOfToppings = 0;
+
+                //Get the pizza name
+                tempPizza.setName(dataVector.at(counter));
+                counter++;
+
+                //Get the number of toppings on the pizza.
+                numberOfToppings = atoi(dataVector.at(counter).c_str());
+                counter++;
+                for(int i = 0; i < numberOfToppings; i++)
+                {
+                    tempTopping.setName(dataVector.at(counter));
+                    counter++;
+                    tempTopping.setPrice((float)atoi(dataVector.at(counter).c_str()));
+                    counter++;
+                }
+
+                //Clear the dataVector for the next order;
+                dataVector.clear();
+
+                //Put the pizza into the returnVector.
+                returnVector.push_back(tempPizza);
+
+                //Clear the toppings in tempPizza.
+                tempPizza.clearToppings();
+            }
         }
     }
     else

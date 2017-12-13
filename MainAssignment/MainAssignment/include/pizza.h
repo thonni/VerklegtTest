@@ -33,14 +33,14 @@ class Pizza
         friend istream& operator >> (istream& in, Pizza& pizza);
 
         ///Getters and setters.
-        int getToppingCount();
-        double getPrice();
-        string getName();
+        int getToppingCount() const;
+        double getPrice() const;
+        string getName() const;
         void setName(string name);
-        vector<Topping> getToppings();
-        Pizza::Size getSize();
+        vector<Topping> getToppings() const;
+        Pizza::Size getSize() const;
         void setSize(Pizza::Size pizzaSize);
-        Base getBase();
+        Base getBase() const;
         void setBase(Base base);
 
     protected:

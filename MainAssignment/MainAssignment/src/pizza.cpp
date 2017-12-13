@@ -67,44 +67,28 @@ void Pizza::generatePrice(double extraCost = 0.0)
 ostream& operator << (ostream& out, const Pizza& pizza)
 {
     Topping tempTopping;
-/*
-    out << pizza.name << "," << pizza.price << ",";
 
-    out <<*/
+    out << pizza.name << "^~";
 
-
-    //Goes through the name input and replaces all ' ' with '~'.
-    string savedName = "";
-    for(int i = 0; i < 32; i++)
+    out << pizza.getToppingCount() << "^~";
+    for(int i = 0; i < pizza.getToppingCount(); i++)
     {
-        if(pizza.name[i] == ' ')
+        tempTopping = pizza.getToppings().at(i);
+
+        out << tempTopping.getName() << "^~" << tempTopping.getPrice();
+        if(i < pizza.getToppings().size() - 1)
         {
-            savedName += '~';
-        }
-        else if(pizza.name[i] == '\0')
-        {
-            break;
-        }
-        else
-        {
-            savedName += pizza.name[i];
+            out << "^~";
         }
     }
 
-    out << savedName << " " << pizza.price << " ";
-    out << pizza.toppings.size() << " ";
-    for(unsigned int i = 0; i < pizza.toppings.size(); i++)
-    {
-        tempTopping = pizza.toppings.at(i);
-        out << tempTopping.getName() << " " << tempTopping.getPrice() << " ";
-    }
     out << endl;
 
     return out;
 }
 
 
-istream& operator >> (istream& in, Pizza& pizza)
+/*istream& operator >> (istream& in, Pizza& pizza)
 {
     unsigned int toppingsCount = 0;
     string toppingName;
@@ -137,16 +121,16 @@ istream& operator >> (istream& in, Pizza& pizza)
     }
 
     return in;
-}
+}*/
 
 
 ///Getters and setters.
-int Pizza::getToppingCount()
+int Pizza::getToppingCount() const
 {
     return (int)this->toppings.size();
 }
 
-double Pizza::getPrice()
+double Pizza::getPrice() const
 {
     //Returns a different price depending on the pizza size.
     if(this->pizzaSize == this->Small)
@@ -167,7 +151,7 @@ double Pizza::getPrice()
     }
 }
 
-string Pizza::getName()
+string Pizza::getName() const
 {
     //Convert char array name to string and store in return string
     string returnString = string(this->name);
@@ -189,13 +173,13 @@ void Pizza::setName(string name)
 }
 
 
-vector<Topping> Pizza::getToppings()
+vector<Topping> Pizza::getToppings() const
 {
     return this->toppings;
 }
 
 
-Pizza::Size Pizza::getSize()
+Pizza::Size Pizza::getSize() const
 {
     return this->pizzaSize;
 }
@@ -211,7 +195,7 @@ void Pizza::setBase(Base base)
     this->base = base;
 }
 
-Base Pizza::getBase()
+Base Pizza::getBase() const
 {
     return this->base;
 }
