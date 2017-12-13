@@ -13,13 +13,9 @@ UI_Delivery::~UI_Delivery()
 void UI_Delivery::deliveryMenu()
 {
     string location;
-    int orderID;
-    char orderMark;
-    bool noID = false;
     unsigned int choiceToInt;
     bool validInput = false;
     vector<Location> availableLocations = locationService.getLocations();
-    int locSize = locations.size();
     string choice;
 
     do
@@ -83,68 +79,6 @@ void UI_Delivery::deliveryMenu()
             }
         } while(toupper(choice[0]) != 'Q');
     }
-
-
-
-
-    /// Here the program prints out all orders to be delivered
-
-    /*if (toupper(location) != 'B');
-    {
-        //orderService.getOrders();
-        this->seeOrdersToBeDelivered();
-
-        cout << "Input the ID of an order to deliver." << endl;
-        cin >> orderID;
-        //orderID = locations[orderID-1].getId();
-        try
-        {
-            order = orderService.getOrder(orderID);
-        }
-        catch(int e)
-        {
-            if(e == 0)
-            {
-                cout << "No Such ID could be found...";
-                noID = true;
-            }
-        }
-        while(toupper(orderMark) != 'B')
-        {
-            if(noID)
-            {
-                cin >> orderMark;
-                break;
-            }
-
-            /// Here it would be kind of cool to get the "O" option only if the order is to be home delivered. If it's picked up, only the D option would show.
-            /// Also, if it's picked up, they payment method choice would appear first, but if it's home delivered, that option would appear after the order is market "on its way"
-            cout << "Please choose a payment method." << endl;
-            // card or cash.
-
-            cout << "Please mark the order appropriately." << endl;
-            cout << "Input O when the order is on its way" << endl;
-            cout << "Input D when the order is delivered." << endl;
-            cout << "Choose B to go back." << endl;
-            cin >> orderMark;
-            if (toupper(orderMark) == 'O')
-            {
-                // The number of order they choose gets marked "on its way" in the file.
-                orderService.setOrderState(order.getId(), Order::OnItsWay);
-            }
-            else if (toupper(orderMark) == 'D')
-            {
-                // The number of order they choose gets marked "delivered" in the file.
-                orderService.setOrderState(order.getId(), Order::Delivered);
-            }
-            else
-            {
-                // Error message
-                cout << "Invalid input!" << endl;
-            }
-        }
-    }*/
-
 }
 
 
@@ -167,7 +101,7 @@ void UI_Delivery::seeOrdersToBeDelivered()
         tempOrder = allOrders.at(i);
 
         //Check if the current order is at the chosen location and in a valid state for the baker.
-        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 )
+        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 && tempOrder.getHomeDelivery())
         {
             validOrders.push_back(tempOrder);
             numberOfOrders++;
@@ -213,37 +147,6 @@ void UI_Delivery::seeOrdersToBeDelivered()
             {
                 validInput = true;
             }
-
-            /*cout << "Select an order to move to the next delivery state" << endl;
-            cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
-            cout << "Or choose B to go Back" << endl;
-            cout << ": ";
-            cin >> choice;
-
-            //Change the choice character to int and store in choiceToInt.
-            choiceToInt = (unsigned int)(choice - '0');
-
-            //Check if the choice was in range of validOrders
-            if(toupper(choice) == 'B')
-            {
-                validInput = true;
-            }
-            else if(choiceToInt < numberOfOrders)
-            {
-                //Store the chosen order in a temporary Order variable.
-                tempOrder = validOrders.at(choiceToInt);
-                //Change the order state depending on what it is.
-                if(tempOrder.getState() == Order::Ready)
-                {
-                    orderService.setOrderState(tempOrder.getId(), Order::OnItsWay);
-                }
-                else if(tempOrder.getState() == Order::OnItsWay)
-                {
-                    orderService.setOrderState(tempOrder.getId(), Order::Delivered);
-                }
-                validInput = true;
-            }*/
-
         }
         else
         {
@@ -269,19 +172,31 @@ void UI_Delivery::seeOrdersToBeDelivered()
 void UI_Delivery::changeDeliveryOrder(Order tempOrder)
 {
     char choice;
-    bool validInput;
     do
     {
         //Clear the screen
         cout << string(50, '\n');
 
         this->printOutOrder(tempOrder);
-
-        cout << "Choose M to Move the order to the next state" << endl;
-        cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
-        cout << "Or choose B to go Back" << endl;
-        cout << ": ";
-        cin >> choice;
+        if(tempOrder.getState() == Order::Delivered && !tempOrder.getPaidFor())
+        {
+            char paymentMethod;
+            cout << "Do you wish to pay with card or cash?" << endl;
+            cout << "Choose 1 to pay with card" << endl;
+            cout << "Choose 2 to pay with cash" << endl;
+            cin >> paymentMethod;
+            orderService.setOrderPaid(tempOrder.getId());
+            tempOrder.setPaidFor(true);
+            choice = 'M';
+        }
+        else
+        {
+            cout << "Choose M to Move the order to the next state" << endl;
+            cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
+            cout << "Or choose B to go Back" << endl;
+            cout << ": ";
+            cin >> choice;
+        }
 
         //Check if the choice was in range of validOrders
         if(toupper(choice) == 'M')
@@ -290,12 +205,13 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
             if(tempOrder.getState() == Order::Ready)
             {
                 orderService.setOrderState(tempOrder.getId(), Order::OnItsWay);
+                tempOrder.setState(Order::OnItsWay);
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
                 orderService.setOrderState(tempOrder.getId(), Order::Delivered);
+                tempOrder.setState(Order::Delivered);
             }
-            validInput = true;
         }
     } while(toupper(choice) != 'B');
 }
@@ -344,9 +260,13 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
             cout << "#" << i <</* " - ID: " << tempOrder.getId() <<*/ " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << ", Drinks: "  << amountOfDrinks << ", Sauces: " << amountOfSauces << ", " ;
             //Print out the state of the order.
-            if(tempOrder.getState() == Order::Ready)
+            if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
             {
                 cout << " READY TO DELIVER,";
+            }
+            else if(tempOrder.getState() == Order::Ready)
+            {
+                cout << " READY,";
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
@@ -364,104 +284,6 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             {
                 cout << " NOT PAID" << endl;
             }
-/*
-            //Loop through all the pizzas if there are any.
-            if(amountOfPizzas > 0)
-            {
-                cout << " PIZZAS: " << endl;
-                for(unsigned int y = 0; y < tempOrder.getPizzas().size(); y++)
-                {
-                    //Store the current pizza in a temporary pizza variable.
-                    tempPizza = tempOrder.getPizzas().at(y);
-
-                    //Prints out the current pizza name.
-                    cout << "  *" << tempPizza.getName() << " - ";
-                    //Prints out the current pizza size.
-                    if(tempPizza.getSize() == Pizza::Small)
-                    {
-                        cout << "Small, ";
-                    }
-                    else if(tempPizza.getSize() == Pizza::Medium)
-                    {
-                        cout << "Medium, ";
-                    }
-                    else if(tempPizza.getSize() == Pizza::Large)
-                    {
-                        cout << "Large, ";
-                    }
-                    //Prints out the current pizza base.
-                    cout << tempPizza.getBase().getName() << endl;
-
-                    //Check if the current pizza is a custom pizza, and if so it prints out its toppings.
-                    if(tempPizza.getName() == "Custom Pizza")
-                    {
-                        cout << "   -Toppings - ";
-                        //Loop through all the toppings on the current pizza.
-                        for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
-                        {
-                            //Store the current topping in a temporary topping variable.
-                            tempTopping = tempPizza.getToppings().at(j);
-
-                            cout << tempTopping.getName();
-
-                            if(j != tempPizza.getToppings().size() - 1)
-                            {
-                                cout << ", ";
-                            }
-                        }
-                        cout << endl;
-                    }
-                }
-            }
-
-            //Loop through all the side dishes if there are any.
-            if(amountOfSideDishes > 0)
-            {
-                cout << " SIDE DISHES:" << endl;
-                for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-                {
-                    //Store the current extra in a temporary extra variable.
-                    tempExtra = tempOrder.getExtras().at(j);
-
-                    //If the extra is a side dish, it prints out the name of it.
-                    if(tempExtra.getType() == Extra::SideDish)
-                    {
-                        cout << "  *" << tempExtra.getName() << endl;
-                    }
-                }
-            }
-            if(amountOfDrinks > 0)
-            {
-                cout << " DRINKS:" << endl;
-                for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-                {
-                    //Store the current extra in a temporary extra variable.
-                    tempExtra = tempOrder.getExtras().at(j);
-
-                    //If the extra is a side dish, it prints out the name of it.
-                    if(tempExtra.getType() == Extra::Drink)
-                    {
-                        cout << "  *" << tempExtra.getName() << endl;
-                    }
-                }
-            }
-            if(amountOfSauces > 0)
-            {
-                cout << " SAUCES:" << endl;
-                for(unsigned int j = 0; j < tempOrder.getExtras().size(); j++)
-                {
-                    //Store the current extra in a temporary extra variable.
-                    tempExtra = tempOrder.getExtras().at(j);
-
-                    //If the extra is a side dish, it prints out the name of it.
-                    if(tempExtra.getType() == Extra::Sauce)
-                    {
-                        cout << "  *" << tempExtra.getName() << endl;
-                    }
-                }
-            }
-
-            cout << "----------------------------------------" << endl;*/
         }
     }
 }
@@ -500,9 +322,13 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     //Print out the order info: Id, amount of pizzas, and amount of side dishes.
     cout << "ID: " << tempOrder.getId() << " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << ", Drinks: "  << amountOfDrinks << ", Sauces: " << amountOfSauces << ", " ;
     //Print out the state of the order.
-    if(tempOrder.getState() == Order::Ready)
+    if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
     {
         cout << " READY TO DELIVER,";
+    }
+    else if(tempOrder.getState() == Order::Ready)
+    {
+        cout << " READY,";
     }
     else if(tempOrder.getState() == Order::OnItsWay)
     {
@@ -700,9 +526,13 @@ void UI_Delivery::seeAllOrders()
                 {
                     cout << " IN OVEN,";
                 }
-                else if(tempOrder.getState() == Order::Ready)
+                else if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
                 {
                     cout << " READY TO DELIVER,";
+                }
+                else if(tempOrder.getState() == Order::Ready)
+                {
+                    cout << " READY,";
                 }
                 else if(tempOrder.getState() == Order::OnItsWay)
                 {
