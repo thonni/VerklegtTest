@@ -60,7 +60,7 @@ ostream& operator << (ostream& out, const Order& order)
 
     //Write out the order id, paidFor boolean, location id, order state, and home delivery boolean.
     out << order.id << "^~" << order.paidFor << "^~" << order.getLocation().getId() << "^~";
-    out << (int)order.state << "^~" << order.homeDelivery << "," << order.deliveryAddress << "^~";
+    out << (int)order.state << "^~" << order.homeDelivery << "^~" << order.deliveryAddress << "^~";
 
     //Write out the number of pizzas in the order
     out << order.pizzas.size() << "^~";
