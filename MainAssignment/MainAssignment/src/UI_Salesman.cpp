@@ -300,7 +300,15 @@ Pizza UI_Salesman::makePizza()
 
 
         //Ask the user to select a topping.
-        cout << "Please select the id of the topping to add: ";
+        if(newPizza.getToppingCount() < 16)
+        {
+            cout << "Please select the id of the topping to add: " << endl;
+        }
+        else
+        {
+            cout << "Topping limit reached!" << endl;
+        }
+        cout << ": ";
         cin >> selection;
 
         //Store the selection as int in another variable.
@@ -311,8 +319,9 @@ Pizza UI_Salesman::makePizza()
             selectionAsInt += (int)selection[i] - '0';
         }
 
-        //Check if the selection is in the correct range.
-        if((selectionAsInt >= 0 && selectionAsInt < availableToppings.size()))
+        //Check if the selection is in the correct range, and if the topping limit
+        //has not been reached.
+        if(selectionAsInt >= 0 && selectionAsInt < availableToppings.size() && newPizza.getToppingCount() < 16)
         {
             //Add the topping to the pizza.
             newPizza.addTopping(availableToppings[selectionAsInt]);
@@ -477,8 +486,95 @@ Extra UI_Salesman::chooseExtraFromMenu()
 
 void UI_Salesman::removeFromOrder(Order* order)
 {
-    /// \TODO: print out all items that are currently in the order and make the user select
-    ///        something to remove (Or select something to cancel).
+    bool backInput;
+    Pizza tempPizza;
+    Extra tempExtra;
+    unsigned int numberOfOrderedItems;
+    string choice;
+    int choiceAsInt;
+
+    do
+    {
+        backInput = false;
+
+        //Clear the screen.
+        cout << string(50, '\n');
+
+        //Get the number of Pizzas and extras combined.
+        numberOfOrderedItems = (order->getExtras().size() + order->getPizzas().size());
+
+        if(numberOfOrderedItems > 0)
+        {
+
+            //Loop through and print out all the pizzas and then all the extras (In the same loop).
+            for(unsigned int i = 0; i < numberOfOrderedItems; i++)
+            {
+                //Prints the pizzas.
+                if(i < order->getPizzas().size())
+                {
+                    tempPizza = order->getPizzas().at(i);
+
+                    if(i == 0)
+                    {
+                        cout << "Pizzas:" << endl;
+                    }
+
+                    cout << "#" << i << " - Name: " << tempPizza.getName() << " - Price: " << tempPizza.getPrice() << " Kr" << endl;
+
+                }
+                //Prints the extras.
+                else
+                {
+                    tempExtra = order->getExtras().at(i - order->getPizzas().size());
+
+                    if(i == order->getPizzas().size())
+                    {
+                        cout << "Extras:" << endl;
+                    }
+
+                    cout << "#" << i << " - Name: " << tempExtra.getName() << " - Price: " << tempExtra.getPrice() << " Kr" << endl;
+
+                }
+            }
+
+            cout << "B - Back" << endl << endl;
+
+            cout << "Please select an item to remove from the order" << endl;
+            cout << ": ";
+            cin >> choice;
+
+            choiceAsInt = atoi(choice.c_str());
+
+            if(toupper(choice[0]) == 'B')
+            {
+                backInput = true;
+            }
+            else if(choiceAsInt >= 0 && choiceAsInt < (int)numberOfOrderedItems)
+            {
+                if(choiceAsInt < (int)order->getPizzas().size())
+                {
+                    order->removePizza(choiceAsInt);
+                }
+                else
+                {
+                    order->removeExtra(choiceAsInt);
+                }
+            }
+        }
+        else
+        {
+            cout << "Nothing here!" << endl;
+            cout << "Choose B to back" << endl;
+            cout << ": ";
+            cin >> choice;
+
+            if(toupper(choice[0]) == 'B')
+            {
+                backInput = true;
+            }
+        }
+
+    } while(!backInput);
 
 }
 

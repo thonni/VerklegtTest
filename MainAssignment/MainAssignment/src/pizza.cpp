@@ -143,7 +143,7 @@ istream& operator >> (istream& in, Pizza& pizza)
 ///Getters and setters.
 int Pizza::getToppingCount()
 {
-    return this->toppings.size();
+    return (int)this->toppings.size();
 }
 
 double Pizza::getPrice()
