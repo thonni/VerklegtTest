@@ -67,7 +67,7 @@ void UI_Baker::startUI()
             cout << "Welcome Baker" << endl << endl;
 
             cout << "Choose A to see/change Active orders" << endl;
-            cout << "Choose O to see all Orders" << endl;
+            cout << "Choose O to see all Orders for this location" << endl;
             cout << "Choose Q to Quit" << endl;
             cout << ": ";
             cin >> choice;
@@ -182,7 +182,6 @@ void UI_Baker::changeActiveOrder(Order order)
     char choice;
     bool validInput;
 
-
     do
     {
         //Clear the screen
@@ -197,30 +196,33 @@ void UI_Baker::changeActiveOrder(Order order)
         cout << ": ";
         cin >> choice;
 
+
         if(toupper(choice) == 'M')
         {
             //Change the order state depending on what it is.
             if(order.getState() == Order::Received)
             {
                 orderService.setOrderState(order.getId(), Order::Prep);
+                order.setState(Order::Prep);
             }
             else if(order.getState() == Order::Prep)
             {
                 orderService.setOrderState(order.getId(), Order::InOven);
+                order.setState(Order::InOven);
             }
             else if(order.getState() == Order::InOven)
             {
                 orderService.setOrderState(order.getId(), Order::Ready);
+                order.setState(Order::Ready);
             }
-
-            validInput = true;
+            //validInput = true;
         }
-        else if(toupper(choice) == 'B')
+        /*else if(toupper(choice) == 'B')
         {
             validInput = true;
-        }
+        }*/
 
-    } while(!validInput);
+    } while(toupper(choice) != 'B' && (int)order.getState() < 3);
 }
 
 
@@ -339,7 +341,7 @@ void UI_Baker::printOutOrders(vector<Order> validOrders)
             amountOfSideDishes = tempOrder.getAmountOfSideDishes();
 
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
-            cout << "#" << i << " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes;
+            cout << "#" << i << " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << " -";
             //Print out the state of the order.
             if(tempOrder.getState() == Order::Received)
             {
@@ -387,31 +389,31 @@ void UI_Baker::printOutOrder(Order order)
     amountOfSideDishes = order.getAmountOfSideDishes();
 
     //Print out the order ID, amount of pizzas and amount of side dishes.
-    cout << "ID: " << order.getId() << ", Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes;
+    cout << "ID: " << order.getId() << ", Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << " - " ;
     //Print out the state of the order.
     if(order.getState() == Order::Received)
     {
-        cout << " RECEIVED" << endl;
+        cout << "RECEIVED" << endl;
     }
     else if(order.getState() == Order::Prep)
     {
-        cout << " PREP" << endl;
+        cout << "PREP" << endl;
     }
     else if(order.getState() == Order::InOven)
     {
-        cout << " IN OVEN" << endl;
+        cout << "IN OVEN" << endl;
     }
     else if(order.getState() == Order::Ready)
     {
-        cout << " READY" << endl;
+        cout << "READY" << endl;
     }
     else if(order.getState() == Order::OnItsWay)
     {
-        cout << " ON ITS WAY" << endl;
+        cout << "ON ITS WAY" << endl;
     }
     else if(order.getState() == Order::Delivered)
     {
-        cout << " DELIVERED" << endl;
+        cout << "DELIVERED" << endl;
     }
 
     //Loop through all the pizzas if there are any.
