@@ -346,6 +346,7 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     {
         cout << " NOT PAID" << endl;
     }
+    cout << "Comment: " << tempOrder.getComment() << endl;
 
     //Loop through all the pizzas if there are any.
     if(amountOfPizzas > 0)
