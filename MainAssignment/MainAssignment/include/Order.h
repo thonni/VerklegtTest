@@ -51,6 +51,10 @@ class Order
         Location getLocation() const;
         void setLocation(Location location);
         int getAmountOfSideDishes();
+        string getDeliveryAddress();
+        void setDeliveryAddress(string deliveryAddress);
+        string getComment();
+        void setComment(string comment);
 
 
         friend ostream& operator << (ostream& out, const Order& order);
@@ -65,6 +69,8 @@ class Order
         double totalPrice;
         bool paidFor;
         bool homeDelivery;
+        string deliveryAddress;
+        string comment;
         IdService idService;
         BaseService baseService;
         LocationService locationService;

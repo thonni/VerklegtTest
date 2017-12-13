@@ -4,6 +4,9 @@
 Order::Order()
 {
     this->paidFor = false;
+    this->homeDelivery = false;
+    this->deliveryAddress = "";
+    this->comment = "";
 }
 
 
@@ -56,10 +59,11 @@ ostream& operator << (ostream& out, const Order& order)
     Extra tempExtra;
 
     //Write out the order id, paidFor boolean, location id, order state, and home delivery boolean.
-    out << order.id << "," << order.paidFor << "," << order.getLocation().getId() << "," << (int)order.state << "," << order.homeDelivery << ",";
+    out << order.id << "^~" << order.paidFor << "^~" << order.getLocation().getId() << "^~";
+    out << (int)order.state << "^~" << order.homeDelivery << "," << order.deliveryAddress << "^~";
 
     //Write out the number of pizzas in the order
-    out << order.pizzas.size() << ",";
+    out << order.pizzas.size() << "^~";
     //Loop trough all the pizzas in the order
     for(unsigned int i = 0; i < order.pizzas.size(); i++)
     {
@@ -67,14 +71,14 @@ ostream& operator << (ostream& out, const Order& order)
         tempPizza = order.pizzas.at(i);
 
 
-        out << tempPizza.getName() << ",";
+        out << tempPizza.getName() << "^~";
 
-        out << (int)tempPizza.getSize() << ",";
+        out << (int)tempPizza.getSize() << "^~";
 
-        out << tempPizza.getBase().getId() << ",";
+        out << tempPizza.getBase().getId() << "^~";
 
         //Write out the number of toppings on the current pizza.
-        out << tempPizza.getToppings().size() << ",";
+        out << tempPizza.getToppings().size() << "^~";
         //Loops through the toppings in the order.
         for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
         {
@@ -83,109 +87,26 @@ ostream& operator << (ostream& out, const Order& order)
 
 
             //Writes out the current topping name and price.
-            out << tempTopping.getName() << "," << tempTopping.getPrice() << ",";
+            out << tempTopping.getName() << "^~" << tempTopping.getPrice() << "^~";
         }
     }
 
     //Writes out the number of extras in the order.
-    out << order.extras.size() << ",";
+    out << order.extras.size() << "^~";
     //Loops through all the extras in the order.
     for(unsigned int i = 0; i < order.extras.size(); i++)
     {
         //Store the current extra in a temporary Extra variable.
         tempExtra = order.extras.at(i);
         //Writes out the current topping name, price and type.
-        out << tempExtra.getName() << "," << (int)(tempExtra.getType()) << "," << tempExtra.getPrice();
-        if(i < order.extras.size()-1)
-        {
-            out << ",";
-        }
+        out << tempExtra.getName() << "^~" << (int)(tempExtra.getType()) << "^~" << tempExtra.getPrice() << "^~";
     }
+
+    out << order.comment;
 
     out << endl;
 
     return out;
-
-    /*Pizza tempPizza;
-    Topping tempTopping;
-    Extra tempExtra;
-
-    //Write out the order id, paidFor boolean, location id, order state, and home delivery boolean.
-    out << order.id << " " << order.paidFor << " " << order.getLocation().getId() << " " << (int)order.state << " " << order.homeDelivery << " ";
-
-    //Write out the number of pizzas in the order
-    out << order.pizzas.size() << " ";
-    //Loop trough all the pizzas in the order
-    for(unsigned int i = 0; i < order.pizzas.size(); i++)
-    {
-        //Store the current pizza in a temporary Pizza variable.
-        tempPizza = order.pizzas.at(i);
-
-        //Goes through the pizza name and replaces all ' ' with '~' and writes that.
-        string tempName = "";
-        for(int i = 0; i < 32; i++)
-        {
-            if(tempPizza.getName()[i] == ' ')
-            {
-                tempName += '~';
-            }
-            else if(tempPizza.getName()[i] == '\0')
-            {
-                break;
-            }
-            else
-            {
-                tempName += tempPizza.getName()[i];
-            }
-        }
-        out << tempName << " ";
-
-        out << tempPizza.getBase().getId() << " ";
-
-        //Write out the number of toppings on the current pizza.
-        out << tempPizza.getToppings().size() << " ";
-        //Loops through the toppings in the order.
-        for(unsigned int j = 0; j < tempPizza.getToppings().size(); j++)
-        {
-            //Store the current topping in a temporary Topping variable.
-            tempTopping = tempPizza.getToppings().at(j);
-
-            //Goes through the topping name and replaces all ' ' with '~' and saves that.
-            tempName = "";
-            for(int i = 0; i < 32; i++)
-            {
-                if(tempTopping.getName()[i] == ' ')
-                {
-                    tempName += '~';
-                }
-                else if(tempTopping.getName()[i] == '\0')
-                {
-                    break;
-                }
-                else
-                {
-                    tempName += tempTopping.getName()[i];
-                }
-            }
-            //Writes out the current topping price.
-            out << tempName << " " << tempTopping.getPrice() << " ";
-        }
-    }
-
-    //Writes out the number of extras in the order.
-    out << order.extras.size() << " ";
-    //Loops through all the extras in the order.
-    for(unsigned int i = 0; i < order.extras.size(); i++)
-    {
-        //Store the current extra in a temporary Extra variable.
-        tempExtra = order.extras.at(i);
-        //Writes out the current topping name, price and type.
-        out << tempExtra.getName() << " " << (int)(tempExtra.getType()) << " " << tempExtra.getPrice() << " ";
-    }
-
-    out << endl;
-
-    return out;*/
 }
 
 
@@ -293,4 +214,24 @@ int Order::getAmountOfSideDishes()
     }
 
     return amountOfSideDishes;
+}
+
+string Order::getDeliveryAddress()
+{
+    return this->deliveryAddress;
+}
+
+void Order::setDeliveryAddress(string deliveryAddress)
+{
+    this->deliveryAddress = deliveryAddress;
+}
+
+string Order::getComment()
+{
+    return this->comment;
+}
+
+void Order::setComment(string comment)
+{
+    this->comment = comment;
 }

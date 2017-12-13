@@ -623,15 +623,42 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
         if (toupper(choice[0]) != 'B')
         {
+
+            if(order->getHomeDelivery())
+            {
+                do
+                {
+                    validInput = false;
+                    choice = "";
+
+                    //Clear the screen.
+                    cout << string(50, '\n');
+
+                    cout << "Where do you want your pizza delivered?" << endl;
+                    cout << ": ";
+                    cin.ignore();
+                    getline(cin, choice);
+
+                    if(choice != "")
+                    {
+                        validInput = true;
+                        order->setDeliveryAddress(choice);
+                    }
+
+                } while(!validInput);
+            }
+            else
+            {
+                order->setDeliveryAddress("N/A");
+            }
+
+
             do
             {
                 validInput = false;
 
                 //Clear the screen.
                 cout << string(50, '\n');
-
-                //Print out everything in the order using printOutOrder
-                //this->printOutOrder(*order);
 
                 //Print out all available locations.
                 for(unsigned int i = 0; i < availableLocations.size(); i++)
@@ -659,15 +686,20 @@ bool UI_Salesman::finishUpOrder(Order* order)
                     order->setLocation(availableLocations.at(selectionAsInt));
                     validInput = true;
                 }
+
             } while(!validInput);
 
             validInput = false;
+
             //Clear the screen.
             cout << string(50, '\n');
+
+            //Ask the user if he/she wants to pay for the order now.
             cout << "Do you wish to pay for the order now? (Y/N)" << endl;
             cin >> choice;
             if(toupper(choice[0]) == 'Y')
             {
+                //Ask the user for a payment method.
                 char paymentMethod;
                 cout << "Do you wish to pay with card or cash?" << endl;
                 cout << "Choose 1 to pay with card" << endl;
@@ -681,6 +713,48 @@ bool UI_Salesman::finishUpOrder(Order* order)
                 order->setPaidFor(false);
                 validInput = true;
             }
+
+
+            do
+            {
+                validInput = false;
+
+                //Clear the screen.
+                cout << string(50, '\n');
+
+                cout << "Add a comment? (Y/N): ";
+                //cin.ignore();
+                getline(cin, choice);
+
+                if(toupper(choice[0]) == 'Y')
+                {
+                    do
+                    {
+                        choice = "";
+
+                        //Clear the screen.
+                        cout << string(50, '\n');
+
+                        cout << "Comment: ";
+                        //cin.ignore();
+                        getline(cin, choice);
+
+                        if(choice != "")
+                        {
+                            order->setComment(choice);
+                            validInput = true;
+                        }
+
+                    } while(!validInput);
+                }
+                else if(toupper(choice[0]) == 'N')
+                {
+                    order->setComment("N/A");
+                    validInput = true;
+                }
+
+            } while(!validInput);
+
 
             //Check if there are any pizzas or side dishes for the baker to bake,
             //if there are none the order goes straight to the Ready state.

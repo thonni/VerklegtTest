@@ -86,10 +86,11 @@ vector<Order> OrderRepository::getOrders()
             {
                 for(unsigned int i = 0; i < data.length(); i++)
                 {
-                    if(data[i] == ',')
+                    if(data[i] == '^' && data[i+1] == '~')
                     {
                         dataVector.push_back(tempData);
                         tempData = "";
+                        i++;
                     }
                     else
                     {
@@ -129,6 +130,9 @@ vector<Order> OrderRepository::getOrders()
                 counter++;
                 //Get the HomeDelivery bool.
                 tempOrder.setHomeDelivery((bool)atoi(dataVector.at(counter).c_str()));
+                counter++;
+                //Get the delivery address.
+                tempOrder.setDeliveryAddress(dataVector.at(counter));
                 counter++;
 
                 //Get the pizza count.
@@ -214,6 +218,10 @@ vector<Order> OrderRepository::getOrders()
                         tempOrder.addExtra(tempExtra);
                     }
                 }
+
+                //Get the delivery address.
+                tempOrder.setComment(dataVector.at(counter));
+                counter++;
 
                 //Clear the dataVector for the next order;
                 dataVector.clear();
