@@ -252,13 +252,14 @@ void UI_Baker::seeAllOrders()
             numbers.push_back(i);
         }
     }
+    cout << string(50, '\n');
 
     do
     {
         validInput = false;
 
         //Clear the screen
-        cout << string(50, '\n');
+
         //Use printOutOrders to print out all the orders on the screen
         //in a nice fashion.
         this->printOutOrders(validOrders);
@@ -269,6 +270,7 @@ void UI_Baker::seeAllOrders()
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
+            cout << string(50, '\n');
 
             //Change the choice character to int and store in choiceToInt.
             choiceToInt = 0;
@@ -286,8 +288,6 @@ void UI_Baker::seeAllOrders()
                 //as an argument in this->changeActiveOrder.
                 tempOrder = validOrders.at(choiceToInt);
                 this->printOutOrder(allOrders[numbers[choiceToInt]]);
-
-                validInput = true;
             }
             else if(toupper(choice[0]) == 'B')
             {
