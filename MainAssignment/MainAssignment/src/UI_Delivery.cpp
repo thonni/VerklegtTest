@@ -269,19 +269,31 @@ void UI_Delivery::seeOrdersToBeDelivered()
 void UI_Delivery::changeDeliveryOrder(Order tempOrder)
 {
     char choice;
-    bool validInput;
     do
     {
         //Clear the screen
         cout << string(50, '\n');
+        cout << tempOrder.getState() << endl;
 
         this->printOutOrder(tempOrder);
-
-        cout << "Choose M to Move the order to the next state" << endl;
-        cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
-        cout << "Or choose B to go Back" << endl;
-        cout << ": ";
-        cin >> choice;
+        if(tempOrder.getState() == Order::OnItsWay && !tempOrder.getPaidFor())
+        {
+            char paymentMethod;
+            cout << "Do you wish to pay with card or cash?" << endl;
+            cout << "Choose 1 to pay with card" << endl;
+            cout << "Choose 2 to pay with cash" << endl;
+            cin >> paymentMethod;
+            orderService.setOrderPaid(tempOrder.getId());
+            choice = 'M';
+        }
+        else
+        {
+            cout << "Choose M to Move the order to the next state" << endl;
+            cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
+            cout << "Or choose B to go Back" << endl;
+            cout << ": ";
+            cin >> choice;
+        }
 
         //Check if the choice was in range of validOrders
         if(toupper(choice) == 'M')
@@ -290,12 +302,13 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
             if(tempOrder.getState() == Order::Ready)
             {
                 orderService.setOrderState(tempOrder.getId(), Order::OnItsWay);
+                tempOrder.setState(Order::OnItsWay);
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
                 orderService.setOrderState(tempOrder.getId(), Order::Delivered);
+                tempOrder.setState(Order::Delivered);
             }
-            validInput = true;
         }
     } while(toupper(choice) != 'B');
 }
