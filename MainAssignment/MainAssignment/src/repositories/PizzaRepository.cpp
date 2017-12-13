@@ -24,6 +24,7 @@ vector<Pizza> PizzaRepository::getPizzas()
     //Create a vector for the pizzas.
     vector<Pizza> returnVector;
     vector<string> dataVector;
+    vector<Base> availableBases = baseService.getBases();
     string data;
     string tempData;
     int counter;
@@ -79,10 +80,17 @@ vector<Pizza> PizzaRepository::getPizzas()
                     counter++;
                     tempTopping.setPrice((float)atoi(dataVector.at(counter).c_str()));
                     counter++;
+
+                    tempPizza.addTopping(tempTopping);
                 }
+
+                //Set the base to the first base on file (Default base).
+                tempPizza.setBase(availableBases.at(0));
 
                 //Clear the dataVector for the next order;
                 dataVector.clear();
+
+                tempPizza.generatePrice();
 
                 //Put the pizza into the returnVector.
                 returnVector.push_back(tempPizza);

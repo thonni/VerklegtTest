@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "pizza.h"
+#include "BaseService.h"
 
 class PizzaRepository
 {
@@ -17,6 +18,8 @@ class PizzaRepository
     protected:
 
     private:
+        BaseService baseService;
+
 };
 
 #endif // PIZZAREPOSITORY_H
