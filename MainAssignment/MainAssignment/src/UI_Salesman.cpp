@@ -623,7 +623,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
         if (toupper(choice[0]) != 'B')
         {
-
+            //Check if the user wants the pizza home delivered.
             if(order->getHomeDelivery())
             {
                 do
@@ -634,11 +634,13 @@ bool UI_Salesman::finishUpOrder(Order* order)
                     //Clear the screen.
                     cout << string(50, '\n');
 
+                    //Ask for the delivery address.
                     cout << "Where do you want your pizza delivered?" << endl;
                     cout << ": ";
                     cin.ignore();
                     getline(cin, choice);
 
+                    //Check if the address was not an empty string.
                     if(choice != "")
                     {
                         validInput = true;
@@ -647,6 +649,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
                 } while(!validInput);
             }
+            //If the order is not home delivered it sets the address to "N/A".
             else
             {
                 order->setDeliveryAddress("N/A");
@@ -722,8 +725,8 @@ bool UI_Salesman::finishUpOrder(Order* order)
                 //Clear the screen.
                 cout << string(50, '\n');
 
+                //Ask if the user wants to leave a comment.
                 cout << "Add a comment? (Y/N): ";
-                //cin.ignore();
                 getline(cin, choice);
 
                 if(toupper(choice[0]) == 'Y')
@@ -735,10 +738,11 @@ bool UI_Salesman::finishUpOrder(Order* order)
                         //Clear the screen.
                         cout << string(50, '\n');
 
+                        //Ask for the comment.
                         cout << "Comment: ";
-                        //cin.ignore();
                         getline(cin, choice);
 
+                        //Check if the comment was not nothing.
                         if(choice != "")
                         {
                             order->setComment(choice);
@@ -747,6 +751,7 @@ bool UI_Salesman::finishUpOrder(Order* order)
 
                     } while(!validInput);
                 }
+                //If the user didnt't didnt want to leave a comment it sets the comment to "N/A".
                 else if(toupper(choice[0]) == 'N')
                 {
                     order->setComment("N/A");
