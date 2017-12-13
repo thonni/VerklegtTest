@@ -101,7 +101,7 @@ void UI_Delivery::seeOrdersToBeDelivered()
         tempOrder = allOrders.at(i);
 
         //Check if the current order is at the chosen location and in a valid state for the baker.
-        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 )
+        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 && tempOrder.getHomeDelivery())
         {
             validOrders.push_back(tempOrder);
             numberOfOrders++;
@@ -261,9 +261,13 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             //Print out the order info: Id, amount of pizzas, and amount of side dishes.
             cout << "#" << i <</* " - ID: " << tempOrder.getId() <<*/ " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << ", Drinks: "  << amountOfDrinks << ", Sauces: " << amountOfSauces << ", " ;
             //Print out the state of the order.
-            if(tempOrder.getState() == Order::Ready)
+            if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
             {
                 cout << " READY TO DELIVER,";
+            }
+            else if(tempOrder.getState() == Order::Ready)
+            {
+                cout << " READY,";
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
@@ -319,9 +323,13 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     //Print out the order info: Id, amount of pizzas, and amount of side dishes.
     cout << "ID: " << tempOrder.getId() << " - " << "Pizzas: " << amountOfPizzas << ", Side dishes: " << amountOfSideDishes << ", Drinks: "  << amountOfDrinks << ", Sauces: " << amountOfSauces << ", " ;
     //Print out the state of the order.
-    if(tempOrder.getState() == Order::Ready)
+    if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
     {
         cout << " READY TO DELIVER,";
+    }
+    else if(tempOrder.getState() == Order::Ready)
+    {
+        cout << " READY,";
     }
     else if(tempOrder.getState() == Order::OnItsWay)
     {
@@ -519,9 +527,13 @@ void UI_Delivery::seeAllOrders()
                 {
                     cout << " IN OVEN,";
                 }
-                else if(tempOrder.getState() == Order::Ready)
+                else if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
                 {
                     cout << " READY TO DELIVER,";
+                }
+                else if(tempOrder.getState() == Order::Ready)
+                {
+                    cout << " READY,";
                 }
                 else if(tempOrder.getState() == Order::OnItsWay)
                 {
