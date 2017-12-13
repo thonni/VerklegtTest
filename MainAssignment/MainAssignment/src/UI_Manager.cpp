@@ -53,7 +53,7 @@ void UI_Manager::addToppingToMenu()
 {
     string name;
     double price;
-    char continueToAdd = '\0';
+    string continueToAdd;
     Topping tempTopping;
     vector<Topping> availableToppings;
     Topping toppingToAdd;
@@ -119,12 +119,19 @@ void UI_Manager::addToppingToMenu()
 
         //Ask the Topping service to save the Topping.
         toppingService.addTopping(toppingToAdd);
+        do
+        {
+            validInput = false;
+            //Ask the user if he/she wants to add another topping.
+            cout << "Add another topping? (Y/N): ";
+            cin >> continueToAdd;
+            if(continueToAdd == "Y" || continueToAdd == "y"|| continueToAdd == "N" || continueToAdd == "n")
+            {
+                validInput = true;
+            }
+        } while (!validInput);
 
-        //Ask the user if he/she wants to add another topping.
-        cout << "Add another topping? (Y/N): ";
-        cin >> continueToAdd;
-
-    } while(toupper(continueToAdd) == 'Y');
+    } while(continueToAdd == "Y" || continueToAdd == "y");
 }
 
 //This function creates new bases using user input
@@ -133,7 +140,7 @@ void UI_Manager::addBaseToMenu()
 {
     string name;
     double price;
-    char continueToAdd = '\0';
+    string continueToAdd;
     Base tempBase;
     vector<Base> availableBases;
 
@@ -168,10 +175,15 @@ void UI_Manager::addBaseToMenu()
         baseService.addBase(baseToAdd);
 
         //Ask the user if he/she wants to add another Base.
-        cout << "Add another base? (Y/N): ";
-        cin >> continueToAdd;
 
-    } while(toupper(continueToAdd) == 'Y');
+        do
+        {
+            //Ask the user if he/she wants to add another base.
+            cout << "Add another base? (Y/N): ";
+            cin >> continueToAdd;
+        } while (continueToAdd != "Y" && continueToAdd != "y" && continueToAdd != "N" && continueToAdd != "n");
+
+    } while(continueToAdd == "Y" || continueToAdd == "y");
 }
 
 
