@@ -346,15 +346,23 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             //Print out the state of the order.
             if(tempOrder.getState() == Order::Ready)
             {
-                cout << " READY TO DELIVER" << endl;
+                cout << " READY TO DELIVER,";
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
-                cout << " ON ITS WAY" << endl;
+                cout << " ON ITS WAY,";
             }
             else if(tempOrder.getState() == Order::Delivered)
             {
-                cout << "DELIVERED" << endl;
+                cout << " DELIVERED,";
+            }
+            if(tempOrder.getPaidFor())
+            {
+                cout << " PAID" << endl;
+            }
+            else
+            {
+                cout << " NOT PAID" << endl;
             }
 /*
             //Loop through all the pizzas if there are any.
@@ -494,15 +502,23 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     //Print out the state of the order.
     if(tempOrder.getState() == Order::Ready)
     {
-        cout << " READY TO DELIVER" << endl;
+        cout << " READY TO DELIVER,";
     }
     else if(tempOrder.getState() == Order::OnItsWay)
     {
-        cout << " ON ITS WAY" << endl;
+        cout << " ON ITS WAY,";
     }
     else if(tempOrder.getState() == Order::Delivered)
     {
-        cout << "DELIVERED" << endl;
+        cout << " DELIVERED,";
+    }
+    if(tempOrder.getPaidFor())
+    {
+        cout << " PAID" << endl;
+    }
+    else
+    {
+        cout << " NOT PAID" << endl;
     }
 
     //Loop through all the pizzas if there are any.
@@ -674,27 +690,35 @@ void UI_Delivery::seeAllOrders()
                 //Print out the state of the order.
                 if(tempOrder.getState() == Order::Received)
                 {
-                    cout << " RECEIVED" << endl;
+                    cout << " RECEIVED,";
                 }
                 else if(tempOrder.getState() == Order::Prep)
                 {
-                    cout << " PREP" << endl;
+                    cout << " PREP,";
                 }
                 else if(tempOrder.getState() == Order::InOven)
                 {
-                    cout << " IN OVEN" << endl;
+                    cout << " IN OVEN,";
                 }
                 else if(tempOrder.getState() == Order::Ready)
                 {
-                    cout << " READY TO DELIVER" << endl;
+                    cout << " READY TO DELIVER,";
                 }
                 else if(tempOrder.getState() == Order::OnItsWay)
                 {
-                    cout << " ON ITS WAY" << endl;
+                    cout << " ON ITS WAY,";
                 }
                 else if(tempOrder.getState() == Order::Delivered)
                 {
-                    cout << "DELIVERED" << endl;
+                    cout << "DELIVERED,";
+                }
+                if(tempOrder.getPaidFor())
+                {
+                    cout << " PAID" << endl;
+                }
+                else
+                {
+                    cout << " NOT PAID" << endl;
                 }
             }
         }

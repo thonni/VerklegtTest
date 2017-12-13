@@ -184,6 +184,7 @@ void UI_Manager::addPizzaToMenu()
     vector<Base> availableBases;
     string selection = "0";
     unsigned int selectionAsInt = 0;
+    int counter = 0;
     Pizza tempPizza;
     vector<Pizza> availablePizzas;
     vector<Topping> tempToppings;
@@ -250,7 +251,7 @@ void UI_Manager::addPizzaToMenu()
         //Ask the user to select a topping.
         cout << "Please select the id of the topping to add: ";
         cin >> selection;
-
+        counter++;
         //Change the char selection to int.
         selectionAsInt = 0;
         for(unsigned int i = 0; i < selection.length(); i++)
@@ -271,7 +272,7 @@ void UI_Manager::addPizzaToMenu()
             /// \TODO: Make error message here.
         }
 
-    } while(toupper(selection[0]) != 'E');
+    } while(toupper(selection[0]) != 'E' && counter < 16);
 
     //Clear the screen.
     cout << string(50, '\n');
