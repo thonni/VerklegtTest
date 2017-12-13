@@ -180,7 +180,6 @@ void UI_Baker::seeActiveOrders()
 void UI_Baker::changeActiveOrder(Order order)
 {
     char choice;
-    bool validInput;
 
     do
     {

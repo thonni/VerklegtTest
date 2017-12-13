@@ -13,13 +13,9 @@ UI_Delivery::~UI_Delivery()
 void UI_Delivery::deliveryMenu()
 {
     string location;
-    int orderID;
-    char orderMark;
-    bool noID = false;
     unsigned int choiceToInt;
     bool validInput = false;
     vector<Location> availableLocations = locationService.getLocations();
-    int locSize = locations.size();
     string choice;
 
     do
@@ -284,6 +280,7 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
             cout << "Choose 2 to pay with cash" << endl;
             cin >> paymentMethod;
             orderService.setOrderPaid(tempOrder.getId());
+            tempOrder.setPaidFor(true);
             choice = 'M';
         }
         else
