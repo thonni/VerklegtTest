@@ -284,6 +284,8 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             {
                 cout << " NOT PAID" << endl;
             }
+
+            cout << "--------------------------------------------------------------------------------" << endl;
         }
     }
 }
@@ -443,7 +445,7 @@ void UI_Delivery::printOutOrder(Order tempOrder)
             }
         }
     }
-    cout << "----------------------------------------" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
 }
 
 void UI_Delivery::seeAllOrders()
