@@ -323,7 +323,7 @@ void UI_Manager::addExtraToMenu()
 {
     string name;
     double price;
-    char charType;
+    string typeInput;
     Extra::Type type;
     bool validType;
     bool wrongInputEntered;
@@ -410,22 +410,22 @@ void UI_Manager::addExtraToMenu()
             cout << "Choose S for Sauce" << endl;
             cout << "Choose I for SideDish" << endl;
             cout << ": ";
-            cin >> charType;
+            cin >> typeInput;
 
             //Check if the input was valid, if it is it sets
             //the type into the variable type and sets validType
             //to true to get out of the do-while loop.
-            if(toupper(charType) == 'D')
+            if(typeInput == "d" || typeInput == "D")
             {
                 type = Extra::Drink;
                 validType = true;
             }
-            else if(toupper(charType) == 'S')
+            else if(typeInput == "s" || typeInput == "S")
             {
                 type = Extra::Sauce;
                 validType = true;
             }
-            else if(toupper(charType) == 'I')
+            else if(typeInput == "i" || typeInput == "I")
             {
                 type = Extra::SideDish;
                 validType = true;
