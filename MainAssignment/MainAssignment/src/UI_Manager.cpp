@@ -326,6 +326,7 @@ void UI_Manager::addExtraToMenu()
     char charType;
     Extra::Type type;
     bool validType;
+    bool wrongInputEntered;
     char continueToAdd = '\0';
     Extra tempExtra;
     vector<Extra> availableExtras;
@@ -348,21 +349,59 @@ void UI_Manager::addExtraToMenu()
         }
         cout << endl;
 
-        //Ask the user for a name and price for the new extra.
-        cout << "Please enter the name of the extra to add to menu: ";
-        cin.ignore();
-        getline(cin, name);
+        //Ask the user for a name for the new extra.
         do
         {
-            validType = false;
-        cout << "Please enter the price of the extra: ";
-        cin >> price;
+            validType = true;
+            name = "";
+
+            cout << "Please enter the name of the extra to add to menu: ";
+            cin.ignore();
+            getline(cin, name);
+
+            if(name == "")
+            {
+                validType = false;
+                cout << "Invalid input!" << endl;
+            }
+
         } while(!validType);
 
+
+        //Ask the user for a price for the new extra.
+        do
+        {
+            validType = true;
+            cout << "Please enter the price of the extra: ";
+            cin >> price;
+
+            if(cin.fail())
+            {
+                //Flush the cin buffer.
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                validType = false;
+                cout << "Invalid input!" << endl;
+            }
+
+        } while(!validType);
+
+
+        //Set wrongInputEntered to false.
+        wrongInputEntered = false;
         do
         {
             //Set valid type to false;
             validType = false;
+
+
+            //Clear the screen.
+            cout << string(50, '\n');
+
+            if(wrongInputEntered)
+            {
+                cout << "Invalid input!" << endl;
+            }
 
             //Ask the user what type this extra is.
             cout << endl;
@@ -390,6 +429,10 @@ void UI_Manager::addExtraToMenu()
             {
                 type = Extra::SideDish;
                 validType = true;
+            }
+            else
+            {
+                wrongInputEntered = true;
             }
 
         //Loop if the input was invalid.
@@ -424,7 +467,6 @@ void UI_Manager::addLocation()
 
         //Print out available locations.
         locations = locationService.getLocations();
-        int locSize = locations.size();
         cout << "***AVAILABLE LOCATIONS***" << endl;
         for(unsigned int i = 0; i < locations.size(); i++)
         {
