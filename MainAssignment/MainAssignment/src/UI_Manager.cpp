@@ -327,7 +327,7 @@ void UI_Manager::addExtraToMenu()
     Extra::Type type;
     bool validType;
     bool wrongInputEntered;
-    char continueToAdd = '\0';
+    string continueToAdd;
     Extra tempExtra;
     vector<Extra> availableExtras;
     //Ask extraService for a vector of all extras that are on the menu.
@@ -445,10 +445,18 @@ void UI_Manager::addExtraToMenu()
         extraService.addExtra(extraToAdd);
 
         //Ask the user if he/she wants to add another extra.
-        cout << "Add another extra? (Y/N): ";
-        cin >> continueToAdd;
+        do {
+            cout << "Add another extra? (Y/N): ";
+            cin >> continueToAdd;
+            if (continueToAdd != "Y" && continueToAdd != "N" && continueToAdd != "y" && continueToAdd != "n")
+            {
+                cout << endl;
+                cout << "Invalid input! Please input only Y or N." << endl;
+            }
+        } while(continueToAdd != "Y" && continueToAdd != "N" && continueToAdd != "y" && continueToAdd != "n");
 
-    } while(toupper(continueToAdd) == 'Y');
+    } while(continueToAdd == "Y" || continueToAdd == "y");
+
 }
 
 //This function creates new locations using user input
