@@ -15,6 +15,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <stdlib.h>
+#include "limits"
 
 
 class UI_Salesman
