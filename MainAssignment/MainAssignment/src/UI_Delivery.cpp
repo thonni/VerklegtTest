@@ -555,6 +555,13 @@ void UI_Delivery::seeAllOrders()
                 }
             }
         }
+        if(numberOfOrders == 0)
+        {
+            cout << string(50, '\n');
+
+            cout << "Nothing here!" << endl << endl;
+            cout << "----------------------------------------";
+        }
         cout << endl << "Choose B to go Back" << endl;
         cout << ": ";
         cin >> choice;
