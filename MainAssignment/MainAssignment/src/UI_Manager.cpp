@@ -349,8 +349,12 @@ void UI_Manager::addExtraToMenu()
         cout << "Please enter the name of the extra to add to menu: ";
         cin.ignore();
         getline(cin, name);
+        do
+        {
+            validType = false;
         cout << "Please enter the price of the extra: ";
         cin >> price;
+        } while(!validType)
 
         do
         {
