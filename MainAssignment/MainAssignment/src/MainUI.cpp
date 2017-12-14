@@ -11,13 +11,13 @@ void MainUI::startUI()
         //Clear the screen.
         cout << string(50, '\n');
 
-        cout << "Welcome to Pizza hut" << endl;
+        cout << "Welcome to Prime Pizzeria" << endl;
         cout << "Please tell us who you are:" << endl;
-        cout << "Choose M for manager" << endl;
-        cout << "Choose S for salesman" << endl;
-        cout << "Choose B for baker" << endl;
-        cout << "Choose D for delivery" << endl;
-        cout << "Choose Q to quit" << endl;
+        cout << "Choose M for Manager" << endl;
+        cout << "Choose S for Salesman" << endl;
+        cout << "Choose B for Baker" << endl;
+        cout << "Choose D for Delivery" << endl;
+        cout << "Choose Q to Quit" << endl;
         cout << ": ";
 
         //Asks the user who he/she is.
