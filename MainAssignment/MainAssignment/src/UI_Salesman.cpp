@@ -926,7 +926,6 @@ void UI_Salesman::viewOrders()
             choiceToInt *= 10;
             choiceToInt += (int)choice[i] - '0';
         }
-        //choiceToInt = (unsigned int)(choice - '0');
 
         if(choiceToInt < availableLocations.size())
         {
@@ -950,10 +949,22 @@ void UI_Salesman::viewOrders()
     choiceToInt = 0;
     if(counter == 0)
     {
-        cout << string(50, '\n');
-        cout << "No orders were found at the location that you selected." << endl;
-        cout << "Please enter anything to return to main salesman menu." << endl;
-        cin >> choice;
+        do
+        {
+            validInput = false;
+
+            //Clear the screen.
+            cout << string(50, '\n');
+            cout << "No orders were found at the location that you selected." << endl;
+            cout << "Choose B to go back." << endl;
+            cin >> choice;
+
+            if(choice == "b" || choice == "B")
+            {
+                validInput = true;
+            }
+
+        } while(!validInput);
     }
     else
     {
