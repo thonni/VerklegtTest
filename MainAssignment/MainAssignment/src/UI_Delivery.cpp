@@ -66,7 +66,7 @@ void UI_Delivery::deliveryMenu()
 
             cout << "Choose R to see orders Ready to be delivered or being delivered" << endl;
             cout << "Choose O to see all Orders for this location" << endl;
-            cout << "Choose Q to Quit" << endl;
+            cout << "Choose Q to Quit to main menu" << endl;
             cout << ": ";
             cin >> choice;
             if (toupper(choice[0]) == 'R')

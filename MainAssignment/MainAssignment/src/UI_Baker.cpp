@@ -68,7 +68,7 @@ void UI_Baker::startUI()
 
             cout << "Choose A to see/change Active orders" << endl;
             cout << "Choose O to see all Orders for this location" << endl;
-            cout << "Choose Q to Quit" << endl;
+            cout << "Choose Q to Quit to main menu" << endl;
             cout << ": ";
             cin >> choice;
 
