@@ -307,8 +307,18 @@ void UI_Manager::addPizzaToMenu()
     cout << endl << "Total price: " << newPizza.getPrice() << " ISK" << endl << endl;
 
     //Ask the user if everything is OK.
-    cout << "Is this OK? (Y/N): ";
-    cin >> selection;
+    /*cout << "Add pizza to menu? (Y/N): ";
+    cin >> selection;*/
+    do
+    {
+        cout << "Add pizza to menu? (Y/N): ";
+        cin >> selection;
+        if (selection != "Y" && selection != "N" && selection != "y" && selection != "n")
+        {
+            cout << endl;
+            cout << "Invalid input! Please input only Y or N." << endl;
+        }
+    } while(selection != "Y" && selection != "y" &&  selection != "N" && selection != "n");
 
 
     //Use pizzaService to save the new pizza to file.
