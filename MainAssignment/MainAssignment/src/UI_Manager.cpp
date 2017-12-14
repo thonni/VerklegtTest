@@ -357,7 +357,7 @@ void UI_Manager::addExtraToMenu()
             validType = false;
         cout << "Please enter the price of the extra: ";
         cin >> price;
-        } while(!validType)
+        } while(!validType);
 
         do
         {
@@ -414,7 +414,7 @@ void UI_Manager::addLocation()
 {
     string address;
     string city;
-    char continueToAdd = '\0';
+    string continueToAdd;
     vector<Location> locations;
 
     do
@@ -447,9 +447,16 @@ void UI_Manager::addLocation()
         locationService.addLocation(locationToAdd);
 
         //Ask the user if he/she wants to add another location.
-        cout << "Add another location? (Y/N): ";
-        cin >> continueToAdd;
+        do {
+            cout << "Add another location? (Y/N): ";
+            cin >> continueToAdd;
+            if (continueToAdd != "Y" && continueToAdd != "N" && continueToAdd != "y" && continueToAdd != "n")
+            {
+                cout << endl;
+                cout << "Invalid input! Please input only Y or N." << endl;
+            }
+        } while(continueToAdd != "Y" && continueToAdd != "N" && continueToAdd != "y" && continueToAdd != "n");
 
-    } while(toupper(continueToAdd) == 'Y');
+    } while(continueToAdd == "Y" || continueToAdd == "y");
 }
 
