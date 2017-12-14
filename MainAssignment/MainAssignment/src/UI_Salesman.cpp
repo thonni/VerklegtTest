@@ -950,7 +950,10 @@ void UI_Salesman::viewOrders()
     choiceToInt = 0;
     if(counter == 0)
     {
-
+        cout << string(50, '\n');
+        cout << "No orders were found at the location that you selected." << endl;
+        cout << "Please enter anything to return to main salesman menu." << endl;
+        cin >> choice;
     }
     else
     {
