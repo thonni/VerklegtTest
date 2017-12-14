@@ -312,7 +312,10 @@ void UI_Manager::addPizzaToMenu()
 
 
     //Use pizzaService to save the new pizza to file.
-    pizzaService.addPizza(newPizza);
+    if(toupper(selection[0]) == 'Y')
+    {
+        pizzaService.addPizza(newPizza);
+    }
 }
 
 
