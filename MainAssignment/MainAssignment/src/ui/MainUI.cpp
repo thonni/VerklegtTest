@@ -11,7 +11,13 @@ void MainUI::startUI()
         //Clear the screen.
         cout << string(50, '\n');
 
-        cout << "Welcome to Prime Pizzeria" << endl;
+        cout << "Welcome to" << endl;
+        cout << "______     _                 ______ _                  _       " << endl;
+        cout << "| ___ \\   (_)                | ___ (_)                (_)      " << endl;
+        cout << "| |_/ / __ _ _ __ ___   ___  | |_/ /_ ___________ _ __ _  __ _ " << endl;
+        cout << "|  __/ '__| | '_ ` _ \\ / _ \\ |  __/| |_  /_  / _ \\ '__| |/ _` |" << endl;
+        cout << "| |  | |  | | | | | | |  __/ | |   | |/ / / /  __/ |  | | (_| |" << endl;
+        cout << "\\_|  |_|  |_|_| |_| |_|\\___| \\_|   |_/___/___\\___|_|  |_|\\__,_|" << endl << endl;
         cout << "Please tell us who you are:" << endl;
         cout << "Choose M for Manager" << endl;
         cout << "Choose S for Salesman" << endl;
