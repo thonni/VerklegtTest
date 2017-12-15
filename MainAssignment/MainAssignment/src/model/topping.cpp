@@ -54,6 +54,10 @@ bool operator < (const Topping& toppingA, const Topping& toppingB)
     {
         return false;
     }
+    else
+    {
+        return true;
+    }
 }
 
 
