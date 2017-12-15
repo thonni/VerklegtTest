@@ -87,43 +87,6 @@ ostream& operator << (ostream& out, const Pizza& pizza)
     return out;
 }
 
-
-/*istream& operator >> (istream& in, Pizza& pizza)
-{
-    unsigned int toppingsCount = 0;
-    string toppingName;
-    double toppingPrice;
-    string savedName = "";
-
-    //Goes through the name input and replaces all '~' with ' '.
-    in >> savedName;
-    for(unsigned int i = 0; i < savedName.length(); i++)
-    {
-        if(savedName[i] == '~')
-        {
-            pizza.name[i] = ' ';
-        }
-        else
-        {
-            pizza.name[i] = savedName[i];
-        }
-        pizza.name[i+1] = '\0';
-    }
-
-    in >> pizza.price;
-    in >> toppingsCount;
-
-    for(unsigned int i = 0; i < toppingsCount; i++)
-    {
-        in >> toppingName >> toppingPrice;
-        Topping tempTopping(toppingName, toppingPrice);
-        pizza.addTopping(tempTopping);
-    }
-
-    return in;
-}*/
-
-
 ///Getters and setters.
 int Pizza::getToppingCount() const
 {
