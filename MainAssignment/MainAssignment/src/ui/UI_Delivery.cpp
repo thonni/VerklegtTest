@@ -297,7 +297,15 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             {
                 cout << " NOT PAID" << endl;
             }
-            cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
+            if (tempOrder.getHomeDelivery())
+            {
+                cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
+
+            }
+            else
+            {
+                cout << "Pick up" << endl;
+            }
 
             cout << "--------------------------------------------------------------------------------" << endl;
         }
@@ -362,8 +370,18 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     {
         cout << " NOT PAID" << endl;
     }
-    cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
-    cout << "Comment: " << tempOrder.getComment() << endl;
+    if (tempOrder.getHomeDelivery())
+    {
+        cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
+    }
+    else
+    {
+        cout << "Pick up" << endl;
+    }
+    if (tempOrder.getComment() != "N/A")
+    {
+        cout << "Comment: " << tempOrder.getComment() << endl;
+    }
 
     //Loop through all the pizzas if there are any.
     if(amountOfPizzas > 0)
@@ -568,7 +586,14 @@ void UI_Delivery::seeAllOrders()
                 {
                     cout << " NOT PAID" << endl;
                 }
-                cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
+                if (tempOrder.getHomeDelivery())
+                {
+                    cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
+                }
+                else
+                {
+                    cout << "Pick up" << endl;
+                }
             }
         }
         if(numberOfOrders == 0)
