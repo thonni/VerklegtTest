@@ -11,14 +11,12 @@
 #include "PizzaService.h"
 #include "ExtraService.h"
 #include "BaseService.h"
-#include "DataManager.h"
 #include "topping.h"
 #include "pizza.h"
 #include "Extra.h"
 #include "Order.h"
 #include "Location.h"
 #include "Base.h"
-#include "DataManager.h"
 #include "limits"
 using namespace std;
 
@@ -35,7 +33,6 @@ class UI_Manager
     protected:
 
     private:
-        DataManager data;
         ToppingService toppingService;
         PizzaService pizzaService;
         ExtraService extraService;

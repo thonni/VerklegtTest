@@ -1,6 +1,5 @@
-#ifndef UI_BAKER_H
-#define UI_BAKER_H
-#include "DataManager.h"
+#ifndef UI_DELIVERY_H
+#define UI_DELIVERY_H
 #include "topping.h"
 #include "pizza.h"
 #include "Extra.h"
@@ -9,25 +8,25 @@
 #include "Location.h"
 #include "LocationService.h"
 
-
-class UI_Baker
+class UI_Delivery
 {
     public:
-        UI_Baker();
-        virtual ~UI_Baker();
-        void startUI();
-        void seeActiveOrders();
-        void changeActiveOrder(Order order);
-        void seeAllOrders();
+        UI_Delivery();
+        virtual ~UI_Delivery();
+        void deliveryMenu();
         void printOutOrders(vector<Order> validOrders);
+        void seeOrdersToBeDelivered();
+        void changeDeliveryOrder(Order tempOrder);
         void printOutOrder(Order order);
+        void seeAllOrders();
+
     protected:
     private:
         OrderService orderService;
         Order order;
         LocationService locationService;
         vector<Location> locations;
-        Location bakerLocation;
+        Location deliveryLocation;
 };
 
-#endif // UI_BAKER_H
+#endif // UI_DELIVERY_H
