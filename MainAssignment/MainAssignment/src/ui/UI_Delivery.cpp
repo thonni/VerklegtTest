@@ -101,7 +101,7 @@ void UI_Delivery::seeOrdersToBeDelivered()
         tempOrder = allOrders.at(i);
 
         //Check if the current order is at the chosen location and in a valid state for the baker.
-        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5 && tempOrder.getHomeDelivery())
+        if(tempOrder.getLocation().getId() == this->deliveryLocation.getId() && (int)tempOrder.getState() >= 3 && (int)tempOrder.getState() < 5)
         {
             validOrders.push_back(tempOrder);
             numberOfOrders++;
@@ -189,10 +189,18 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
             tempOrder.setPaidFor(true);
             choice = 'M';
         }
-        else
+        else if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
         {
             cout << "Choose M to Move the order to the next state" << endl;
             cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
+            cout << "Or choose B to go Back" << endl;
+            cout << ": ";
+            cin >> choice;
+        }
+        else
+        {
+            cout << "Choose M to Move the order to the next state" << endl;
+            cout << "READY -> DELIVERED" << endl;
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
@@ -202,10 +210,15 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
         if(toupper(choice) == 'M')
         {
             //Change the order state depending on what it is.
-            if(tempOrder.getState() == Order::Ready)
+            if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
             {
                 orderService.setOrderState(tempOrder.getId(), Order::OnItsWay);
                 tempOrder.setState(Order::OnItsWay);
+            }
+            else if(tempOrder.getState() == Order::Ready)
+            {
+                orderService.setOrderState(tempOrder.getId(), Order::Delivered);
+                tempOrder.setState(Order::Delivered);
             }
             else if(tempOrder.getState() == Order::OnItsWay)
             {
