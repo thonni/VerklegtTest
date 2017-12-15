@@ -189,10 +189,10 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
             tempOrder.setPaidFor(true);
             choice = 'M';
         }
-        else if(tempOrder.getState() == Order::Ready && tempOrder.getHomeDelivery())
+        else if(tempOrder.getState() == Order::Ready && !tempOrder.getHomeDelivery())
         {
             cout << "Choose M to Move the order to the next state" << endl;
-            cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
+            cout << "READY -> DELIVERED" << endl;
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
@@ -200,7 +200,7 @@ void UI_Delivery::changeDeliveryOrder(Order tempOrder)
         else
         {
             cout << "Choose M to Move the order to the next state" << endl;
-            cout << "READY -> DELIVERED" << endl;
+            cout << "READY -> ON ITS WAY -> DELIVERED" << endl;
             cout << "Or choose B to go Back" << endl;
             cout << ": ";
             cin >> choice;
