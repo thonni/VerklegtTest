@@ -71,7 +71,7 @@ ostream& operator << (ostream& out, const Pizza& pizza)
     out << pizza.name << "^~";
 
     out << pizza.getToppingCount() << "^~";
-    for(unsigned int i = 0; i < (unsigned int)pizza.getToppingCount(); i++)
+    for(int i = 0; i < pizza.getToppingCount(); i++)
     {
         tempTopping = pizza.getToppings().at(i);
 

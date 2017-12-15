@@ -284,6 +284,7 @@ void UI_Delivery::printOutOrders(vector<Order> validOrders)
             {
                 cout << " NOT PAID" << endl;
             }
+            cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
 
             cout << "--------------------------------------------------------------------------------" << endl;
         }
@@ -348,6 +349,7 @@ void UI_Delivery::printOutOrder(Order tempOrder)
     {
         cout << " NOT PAID" << endl;
     }
+    cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
     cout << "Comment: " << tempOrder.getComment() << endl;
 
     //Loop through all the pizzas if there are any.
@@ -553,6 +555,7 @@ void UI_Delivery::seeAllOrders()
                 {
                     cout << " NOT PAID" << endl;
                 }
+                cout << "Delivery address: " << tempOrder.getDeliveryAddress() << endl;
             }
         }
         if(numberOfOrders == 0)
