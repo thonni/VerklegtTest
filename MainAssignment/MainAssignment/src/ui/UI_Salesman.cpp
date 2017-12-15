@@ -901,7 +901,7 @@ void UI_Salesman::viewOrders()
         orderS.printOutAllOrders();
         cout << "Enter B to go back" << endl;
         cin >> choice;
-    } while(toupper(choice != 'B'));
+    } while(toupper(choice) != 'B');
 }
 
 
