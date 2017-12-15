@@ -893,95 +893,15 @@ void UI_Salesman::printOutOrder(Order order)
 
 void UI_Salesman::viewOrders()
 {
-    string choice;
-    unsigned int choiceToInt = 0;
-    int counter = 0;
-    bool validInput;
-    vector<Order> orders;
-    vector<int> numbers;
-    Order tempOrder;
-    orders = orderService.getOrders();
-    vector<Location> availableLocations = locationService.getLocations();
-
+    char choice;
     do
     {
-        validInput = false;
-
-        //Clear the screen
         cout << string(50, '\n');
-
-        //Loop through and print out all available locations.
-        for(unsigned int i = 0; i < availableLocations.size(); i++)
-        {
-            this->salesmanLocation = availableLocations.at(i);
-
-            cout << i << " - " << this->salesmanLocation.getAddress() << "  " << this->salesmanLocation.getCity() << endl;
-        }
-        cout << "Please choose the location you work at: ";
+        OrderService orderS;
+        orderS.printOutAllOrders();
+        cout << "Enter B to go back" << endl;
         cin >> choice;
-
-        //Change the choice to int and store in another variable
-        for(unsigned int i = 0; i < choice.length(); i++)
-        {
-            choiceToInt *= 10;
-            choiceToInt += (int)choice[i] - '0';
-        }
-
-        if(choiceToInt < availableLocations.size())
-        {
-            this->salesmanLocation = availableLocations.at(choiceToInt);
-            validInput = true;
-        }
-
-    } while(!validInput);
-    cout << endl << endl;
-    for(unsigned int i = 0; i < orders.size(); i++)
-    {
-        if(orders[i].getLocation().getId() == salesmanLocation.getId() && !orders[i].getPaidFor())
-        {
-            tempOrder = orders[i];
-            cout << counter << " - ";
-            numbers.push_back(i);
-            counter++;
-            this->printOutOrder(tempOrder);
-        }
-    }
-    choiceToInt = 0;
-    if(counter == 0)
-    {
-
-        do
-        {
-            validInput = false;
-
-            //Clear the screen.
-            cout << string(50, '\n');
-
-            cout << "Nothing here!" << endl << endl;
-            cout << "----------------------------------------";
-            cout << endl << "Choose B to go Back" << endl;
-            cout << ": ";
-            cin >> choice;
-
-            if(choice == "b" || choice == "B")
-            {
-                validInput = true;
-            }
-
-        } while(!validInput);
-    }
-    else
-    {
-        cout << "Please select which order you wish to mark as paid for: ";
-        cin >> choice;
-
-        for(unsigned int i = 0; i < choice.length(); i++)
-        {
-            choiceToInt *= 10;
-            choiceToInt += (int)choice[i] - '0';
-        }
-        orderService.setOrderPaid(orders[numbers[choiceToInt]].getId());
-    }
+    } while(toupper(choice != 'B'));
 }
 
 
